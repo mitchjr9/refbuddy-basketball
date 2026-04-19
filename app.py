@@ -1638,16 +1638,14 @@ with st.sidebar:
     )
 
     st.markdown(
-        '<span class="pill-ok">✅ claude-sonnet-4-20250514</span>',
+        '<span class="pill-ok">✅ claude-sonnet</span>',
         unsafe_allow_html=True,
     )
-    st.caption("Powered by Anthropic · secrets.toml")
+    st.caption("Powered by Anthropic")
 
     st.markdown("---")
     st.markdown("**Knowledge Base**")
-    kb_w = len(CORE_KNOWLEDGE.split())
-    st.markdown(f'<span class="pill-ok">✅ Loaded — ~{kb_w:,} words</span>', unsafe_allow_html=True)
-    st.caption("NFHS Rules · MSHSL Mods · Shot Clock · Restricted Area · 3 seasons of notes")
+    st.caption("NFHS Rulebook; MSHSL modifications: shot clock, restricted area; other state-specific rules; multiple seasons of game notes from veteran varsity officials")
 
     st.markdown("---")
     st.markdown("**Upload Files** *(Home chat)*")
@@ -1682,12 +1680,6 @@ with st.sidebar:
         st.rerun()
 
     st.markdown("---")
-    st.markdown(
-        f'<div style="font-size:0.76rem;color:{MUTED};line-height:2.1;">'
-        '🟢 Legal &nbsp; 🔴 Foul &nbsp; 📏 Shot Clock<br>'
-        '🚩 Tech &nbsp; 🎬 Frame &nbsp; 📊 Grade &nbsp; 📝 Quiz'
-        '</div>', unsafe_allow_html=True,
-    )
 
 
 # =============================================================================
@@ -2792,7 +2784,8 @@ with tab_quiz:
 st.markdown(f"""
 <div class="rb-footer">
     Built for referees, by a referee 🏀 &nbsp;|&nbsp;
-    RefBuddy v1.0 &nbsp;|&nbsp; MN HS Basketball · Current NFHS Rules + 2024-26 Updates · MSHSL Mods · Shot Clock · Film · Quiz<br>
+    RefBuddy v1.0 &nbsp;|&nbsp; MN HS Basketball &nbsp;|&nbsp;
+    NFHS Rulebook; MSHSL modifications: shot clock, restricted area; other state-specific rules; multiple seasons of game notes from veteran varsity officials<br>
     <span style="font-size:0.72rem;">
     Always confirm rulings with your MSHSL assignor. Not official MSHSL interpretation.
     </span>
