@@ -853,48 +853,6 @@ BG_URL = "data:image/svg+xml," + urllib.parse.quote(_SVG)
 # ── Layer 1: Mandatory button + selectbox + sidebar + dark text ──────────────
 st.markdown("""
 <style>
-    /* ── Always-visible sidebar toggle chevron ──────────────────────────────
-       Covers BOTH legacy ([data-testid="collapsedControl"]) and modern
-       ([data-testid="stSidebarCollapsedControl"]) Streamlit DOM structures.
-       Forces visibility even if a parent (like <header>) is hidden. */
-    [data-testid="collapsedControl"],
-    [data-testid="stSidebarCollapsedControl"],
-    div[data-testid="stSidebarCollapsedControl"],
-    section[data-testid="stSidebar"] ~ div button[kind="header"] {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        position: fixed !important;
-        top: 0.5rem !important;
-        left: 0.5rem !important;
-        z-index: 999999 !important;
-        background: #F8FAFC !important;
-        border: 2px solid #1F2937 !important;
-        border-radius: 6px !important;
-        padding: 4px 6px !important;
-        min-width: 34px !important;
-        min-height: 34px !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-shadow: 0 2px 8px rgba(0,48,135,0.15) !important;
-        pointer-events: auto !important;
-    }
-    [data-testid="collapsedControl"] *,
-    [data-testid="stSidebarCollapsedControl"] * {
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-    [data-testid="collapsedControl"]:hover,
-    [data-testid="stSidebarCollapsedControl"]:hover {
-        background: #E2E8F0 !important;
-    }
-    [data-testid="collapsedControl"] svg,
-    [data-testid="stSidebarCollapsedControl"] svg {
-        fill: #1F2937 !important;
-        stroke: #1F2937 !important;
-        width: 18px !important;
-        height: 18px !important;
-    }
     /* Light bg, black border, black text on ALL buttons */
     .stButton button, button, .stButton>button {
         color: #1F2937 !important;
