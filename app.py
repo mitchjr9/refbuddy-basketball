@@ -1,3 +1,5 @@
+# Updated from Claude - April 19 2026 - Good Toggle added
+
 """
 RefBuddy — Your Minnesota HS Basketball Referee Assistant
 Version 1.0 — Hybrid CORE_KNOWLEDGE: 2023-2024_NFHS_Basketball_Rulebook.md baseline + 2023-2026 Changes
@@ -1137,136 +1139,80 @@ header[data-testid="stHeader"] {{
 """, unsafe_allow_html=True)
 
 
+
 # =============================================================================
 # CUSTOM SOCIAL / SHARE BAR
-# Replaces Streamlit's native toolbar buttons with X, LinkedIn, and a
-# Share dropdown that lets users share via text message, email, or copy link.
-# position: fixed keeps it pinned to the top-right on every tab.
+# No SVG — Streamlit's st.markdown sanitizer strips <svg>/<path> elements and
+# leaks raw path data as visible text.  We use Unicode characters for icons
+# and plain inline styles (no f-string) to keep this block simple and safe.
 # =============================================================================
 
-SHARE_URL   = "https://refbuddy-basketball.streamlit.app/"
-SHARE_TEXT  = "Check%20out%20RefBuddy%20Basketball%20%F0%9F%8F%80%20%E2%80%94%20your%20Minnesota%20HS%20basketball%20referee%20assistant%3A%20" + SHARE_URL
-SHARE_EMAIL_BODY = (
-    "Hey!%20Check%20out%20RefBuddy%20Basketball%20%F0%9F%8F%80%20%E2%80%94%20a%20"
-    "Minnesota%20HS%20basketball%20referee%20assistant%20with%20NFHS%20rules%2C%20"
-    "MSHSL%20mods%2C%20shot%20clock%2C%20and%20game%20film%20analysis%3A%0A%0A"
-    + SHARE_URL
-)
+st.markdown("""
+<div style="position:fixed;top:7px;right:10px;z-index:99998;display:flex;align-items:center;gap:5px;font-family:Inter,'Segoe UI',sans-serif;">
 
-st.markdown(f"""
-<style>
-.rb-topbar {{
-    position: fixed;
-    top: 7px;
-    right: 10px;
-    z-index: 99998;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-family: 'Inter','Segoe UI',sans-serif;
-}}
-.rb-icon-btn {{
-    background: {CARD};
-    border: 1.5px solid {BORDER};
-    border-radius: 7px;
-    width: 32px; height: 32px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: default;
-    padding: 0;
-    transition: background 0.15s;
-}}
-.rb-icon-btn:hover {{ background: #E2E8F0; }}
-.rb-share-btn {{
-    background: {CARD};
-    border: 1.5px solid {TEXT};
-    border-radius: 7px;
-    height: 32px;
-    padding: 0 11px;
-    display: flex; align-items: center; gap: 5px;
-    cursor: pointer;
-    font-weight: 600; font-size: 13px;
-    color: {TEXT};
-    font-family: 'Inter','Segoe UI',sans-serif;
-    transition: background 0.15s;
-}}
-.rb-share-btn:hover {{ background: #E2E8F0; }}
-.rb-share-menu {{
-    display: none;
-    position: absolute;
-    right: 0; top: 38px;
-    background: {CARD};
-    border: 1.5px solid {BORDER};
-    border-radius: 10px;
-    padding: 6px;
-    min-width: 195px;
-    box-shadow: 0 6px 20px rgba(0,48,135,0.13);
-    z-index: 99999;
-}}
-.rb-share-item {{
-    display: flex; align-items: center; gap: 8px;
-    padding: 8px 10px; border-radius: 7px;
-    text-decoration: none; color: {TEXT};
-    font-size: 13px; font-weight: 600;
-    font-family: 'Inter','Segoe UI',sans-serif;
-    cursor: pointer;
-    background: transparent; border: none; width: 100%; text-align: left;
-    transition: background 0.12s;
-}}
-.rb-share-item:hover {{ background: #EEF2FF; color: {TEXT}; }}
-.rb-share-divider {{ border: none; border-top: 1px solid {BORDER}; margin: 4px 2px; }}
-</style>
-
-<div class="rb-topbar">
-
-    <!-- X / Twitter — linked when ready -->
-    <button class="rb-icon-btn" title="X (Twitter)" onclick="return false;">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="{TEXT}">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
+    <!-- X / Twitter — no link yet -->
+    <button title="X (Twitter) — coming soon" onclick="return false;"
+        style="background:#F8FAFC;border:1.5px solid #DDE3F0;border-radius:7px;
+               width:32px;height:32px;display:flex;align-items:center;
+               justify-content:center;cursor:default;padding:0;
+               font-weight:900;font-size:15px;color:#1F2937;line-height:1;">
+        &#120143;
     </button>
 
-    <!-- LinkedIn — linked when ready -->
-    <button class="rb-icon-btn" title="LinkedIn" onclick="return false;">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="{TEXT}">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
+    <!-- LinkedIn — no link yet -->
+    <button title="LinkedIn — coming soon" onclick="return false;"
+        style="background:#0A66C2;border:1.5px solid #0A66C2;border-radius:7px;
+               width:32px;height:32px;display:flex;align-items:center;
+               justify-content:center;cursor:default;padding:0;
+               font-weight:800;font-size:11px;color:#FFFFFF;line-height:1;
+               letter-spacing:-0.5px;">
+        in
     </button>
 
     <!-- Share dropdown -->
     <div style="position:relative;">
-        <button class="rb-share-btn" id="rb-share-btn"
-            onclick="var m=document.getElementById('rb-share-menu');m.style.display=m.style.display==='block'?'none':'block';">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none"
-                 stroke="{TEXT}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
-                <polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>
-            </svg>
-            Share
+        <button id="rb-share-btn"
+            onclick="var m=document.getElementById('rb-sm');m.style.display=m.style.display==='block'?'none':'block';"
+            style="background:#F8FAFC;border:1.5px solid #1F2937;border-radius:7px;
+                   height:32px;padding:0 11px;display:flex;align-items:center;gap:5px;
+                   cursor:pointer;font-weight:600;font-size:13px;color:#1F2937;
+                   font-family:inherit;">
+            &#8679;&nbsp;Share
         </button>
-        <div class="rb-share-menu" id="rb-share-menu">
-            <a class="rb-share-item"
-               href="sms:?body={SHARE_TEXT}"
-               onclick="document.getElementById('rb-share-menu').style.display='none'">
-               📱&nbsp; Text Message
+        <div id="rb-sm"
+            style="display:none;position:absolute;right:0;top:38px;background:#FFFFFF;
+                   border:1.5px solid #DDE3F0;border-radius:10px;padding:6px;
+                   min-width:200px;box-shadow:0 6px 20px rgba(0,48,135,0.13);z-index:99999;">
+            <a href="sms:?body=Check%20out%20RefBuddy%20Basketball%20%F0%9F%8F%80%20%E2%80%94%20your%20Minnesota%20HS%20basketball%20referee%20assistant%3A%20https%3A%2F%2Frefbuddy-basketball.streamlit.app%2F"
+               onclick="document.getElementById('rb-sm').style.display='none'"
+               style="display:flex;align-items:center;gap:8px;padding:8px 10px;
+                      border-radius:7px;text-decoration:none;color:#1F2937;
+                      font-size:13px;font-weight:600;">
+                &#128241;&nbsp; Text Message
             </a>
-            <a class="rb-share-item"
-               href="mailto:?subject=RefBuddy%20Basketball%20%F0%9F%8F%80&body={SHARE_EMAIL_BODY}"
-               onclick="document.getElementById('rb-share-menu').style.display='none'">
-               ✉️&nbsp; Email
+            <a href="mailto:?subject=RefBuddy%20Basketball%20%F0%9F%8F%80&body=Check%20out%20RefBuddy%20Basketball%20%E2%80%94%20your%20Minnesota%20HS%20basketball%20referee%20assistant%20with%20NFHS%20rules%2C%20MSHSL%20mods%2C%20shot%20clock%2C%20and%20game%20film%20analysis%3A%0A%0Ahttps%3A%2F%2Frefbuddy-basketball.streamlit.app%2F"
+               onclick="document.getElementById('rb-sm').style.display='none'"
+               style="display:flex;align-items:center;gap:8px;padding:8px 10px;
+                      border-radius:7px;text-decoration:none;color:#1F2937;
+                      font-size:13px;font-weight:600;">
+                &#9993;&nbsp; Email
             </a>
-            <hr class="rb-share-divider">
-            <button class="rb-share-item" id="rb-copy-btn"
-                onclick="navigator.clipboard.writeText('{SHARE_URL}');
-                         document.getElementById('rb-copy-btn').innerHTML='✅&nbsp; Copied!';
-                         setTimeout(function(){{document.getElementById('rb-copy-btn').innerHTML='📋&nbsp; Copy Link';}},2000);
-                         document.getElementById('rb-share-menu').style.display='none';">
-                📋&nbsp; Copy Link
+            <hr style="border:none;border-top:1px solid #DDE3F0;margin:4px 2px;">
+            <button id="rb-copy-btn"
+                onclick="navigator.clipboard.writeText('https://refbuddy-basketball.streamlit.app/');document.getElementById('rb-copy-btn').textContent='Copied!';setTimeout(function(){document.getElementById('rb-copy-btn').textContent='Copy Link'},2000);document.getElementById('rb-sm').style.display='none';"
+                style="display:flex;align-items:center;gap:8px;padding:8px 10px;
+                       border-radius:7px;color:#1F2937;background:transparent;border:none;
+                       font-size:13px;font-weight:600;cursor:pointer;width:100%;text-align:left;
+                       font-family:inherit;">
+                &#128203;&nbsp; Copy Link
             </button>
         </div>
     </div>
 
 </div>
 """, unsafe_allow_html=True)
+
+# =============================================================================
 # SESSION STATE
 # =============================================================================
 
