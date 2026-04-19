@@ -1,5 +1,3 @@
-# Updated from Claude - April 19 2026 - Good Toggle added
-
 """
 RefBuddy — Your Minnesota HS Basketball Referee Assistant
 Version 1.0 — Hybrid CORE_KNOWLEDGE: 2023-2024_NFHS_Basketball_Rulebook.md baseline + 2023-2026 Changes
