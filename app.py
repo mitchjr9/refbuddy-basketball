@@ -853,6 +853,31 @@ BG_URL = "data:image/svg+xml," + urllib.parse.quote(_SVG)
 # ── Layer 1: Mandatory button + selectbox + sidebar + dark text ──────────────
 st.markdown("""
 <style>
+    /* ── Always-visible sidebar toggle chevron ──────────────────────────────
+       Streamlit hides [data-testid="collapsedControl"] when sidebar is open.
+       We force it visible at all times so users can re-open the sidebar after
+       collapsing it. The button sits fixed at the top-left of the viewport. */
+    [data-testid="collapsedControl"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed !important;
+        top: 0.6rem !important;
+        left: 0.6rem !important;
+        z-index: 999999 !important;
+        background: #F8FAFC !important;
+        border: 2px solid #1F2937 !important;
+        border-radius: 6px !important;
+        padding: 2px 4px !important;
+        box-shadow: 0 2px 6px rgba(0,48,135,0.10) !important;
+    }
+    [data-testid="collapsedControl"]:hover {
+        background: #E2E8F0 !important;
+    }
+    [data-testid="collapsedControl"] svg {
+        fill: #1F2937 !important;
+        stroke: #1F2937 !important;
+    }
     /* Light bg, black border, black text on ALL buttons */
     .stButton button, button, .stButton>button {
         color: #1F2937 !important;
