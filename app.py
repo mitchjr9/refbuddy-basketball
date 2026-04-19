@@ -1085,13 +1085,11 @@ html, body, [data-testid="stAppViewContainer"] {{
 }}
 #MainMenu {{ visibility: hidden; }}
 footer {{ visibility: hidden; }}
-/* Keep header visible so the sidebar toggle chevron stays clickable,
-   but hide the toolbar items we don't want (deploy, status, etc.) */
-header {{ background: transparent !important; }}
-[data-testid="stHeader"] {{ background: transparent !important; }}
-[data-testid="stToolbar"] {{ visibility: hidden; }}
-[data-testid="stDecoration"] {{ visibility: hidden; }}
-[data-testid="stStatusWidget"] {{ visibility: hidden; }}
+/* Intentionally do NOT hide [data-testid="stToolbar"], stDecoration, or
+   stStatusWidget — in current Streamlit versions the collapsed-sidebar
+   toggle chevron is rendered inside the toolbar area, and hiding the
+   toolbar also hides the toggle, leaving users unable to re-open the
+   sidebar after collapsing it. */
 [data-testid="stSlider"] .st-by {{ background: {BLUE} !important; }}
 [data-baseweb="select"] {{ background-color: {CARD} !important; }}
 .stAlert {{ border-radius: 8px !important; font-size: 0.88rem !important; }}
