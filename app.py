@@ -1,5 +1,3 @@
-#Roll back header
-
 """
 RefBuddy — Your Minnesota HS Basketball Referee Assistant
 Version 1.0 — Hybrid CORE_KNOWLEDGE: 2023-2024_NFHS_Basketball_Rulebook.md baseline + 2023-2026 Changes
@@ -1096,11 +1094,13 @@ header[data-testid="stHeader"] {{
     box-shadow: none !important;
 }}
 /* Hide native Streamlit toolbar action buttons (Share, GitHub, fork icons)
-   — replaced by the custom social/share bar injected below.
-   stToolbarActions is separate from the sidebar collapsed-control element
-   so the sidebar toggle remains fully functional. */
-[data-testid="stToolbarActions"] {{
-    display: none !important;
+   — replaced by the custom social/share bar below.
+   We target only the inner actions wrapper, not the toolbar root, so the
+   sidebar collapsed-control element is unaffected. */
+[data-testid="stToolbarActions"],
+[data-testid="stAppDeployButton"] {{
+    visibility: hidden !important;
+    pointer-events: none !important;
 }}
 [data-testid="stSlider"] .st-by {{ background: {BLUE} !important; }}
 [data-baseweb="select"] {{ background-color: {CARD} !important; }}
