@@ -1083,12 +1083,17 @@ html, body, [data-testid="stAppViewContainer"] {{
     border-left: 4px solid {BLUE}; border-radius: 0 8px 8px 0;
     padding: 0.9rem 1.1rem; font-size: 0.88rem; color: {TEXT};
 }}
-#MainMenu {{ visibility: hidden; }}
+#MainMenu {{ display: none !important; }}
+[data-testid="stMainMenu"] {{ display: none !important; }}
 footer {{ visibility: hidden; }}
 /* Transparent header — blends with cream page background, no black bar */
 [data-testid="stHeader"] {{ background: transparent !important; }}
 /* Hide the Deploy button and its container */
 [data-testid="stAppDeployButton"], .stAppDeployButton {{ display: none !important; }}
+/* Keep only the Share button — hide every sibling after the first one in the
+   toolbar actions area (GitHub source, fork/star, and kebab icons).
+   Share is always the first child so :nth-child(n+2) targets the rest. */
+[data-testid="stToolbarActions"] > *:nth-child(n+2) {{ display: none !important; }}
 [data-testid="stSlider"] .st-by {{ background: {BLUE} !important; }}
 [data-baseweb="select"] {{ background-color: {CARD} !important; }}
 .stAlert {{ border-radius: 8px !important; font-size: 0.88rem !important; }}
