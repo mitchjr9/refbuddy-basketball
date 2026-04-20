@@ -1,5 +1,3 @@
-#Fix
-
 """
 RefBuddy — Your Minnesota HS Basketball Referee Assistant
 Version 1.0 — Hybrid CORE_KNOWLEDGE: 2023-2024_NFHS_Basketball_Rulebook.md baseline + 2023-2026 Changes
@@ -1087,23 +1085,10 @@ html, body, [data-testid="stAppViewContainer"] {{
 }}
 #MainMenu {{ visibility: hidden; }}
 footer {{ visibility: hidden; }}
-/* Match header background to app cream so it blends seamlessly */
-[data-testid="stHeader"],
-header[data-testid="stHeader"] {{
-    background-color: {CREAM} !important;
-    background: {CREAM} !important;
-    border-bottom: 1px solid {BORDER} !important;
-    box-shadow: none !important;
-}}
-/* Hide native Streamlit toolbar action buttons (Share, GitHub, fork icons)
-   — replaced by the custom social/share bar below.
-   We target only the inner actions wrapper, not the toolbar root, so the
-   sidebar collapsed-control element is unaffected. */
-[data-testid="stToolbarActions"],
-[data-testid="stAppDeployButton"] {{
-    visibility: hidden !important;
-    pointer-events: none !important;
-}}
+/* Transparent header — blends with cream page background, no black bar */
+[data-testid="stHeader"] {{ background: transparent !important; }}
+/* Hide the Deploy button and its container */
+[data-testid="stAppDeployButton"], .stAppDeployButton {{ display: none !important; }}
 [data-testid="stSlider"] .st-by {{ background: {BLUE} !important; }}
 [data-baseweb="select"] {{ background-color: {CARD} !important; }}
 .stAlert {{ border-radius: 8px !important; font-size: 0.88rem !important; }}
@@ -1141,78 +1126,6 @@ header[data-testid="stHeader"] {{
 """, unsafe_allow_html=True)
 
 
-
-# =============================================================================
-# CUSTOM SOCIAL / SHARE BAR
-# No SVG — Streamlit's st.markdown sanitizer strips <svg>/<path> elements and
-# leaks raw path data as visible text.  We use Unicode characters for icons
-# and plain inline styles (no f-string) to keep this block simple and safe.
-# =============================================================================
-
-st.markdown("""
-<div style="position:fixed;top:7px;right:10px;z-index:99998;display:flex;align-items:center;gap:5px;font-family:Inter,'Segoe UI',sans-serif;">
-
-    <!-- X / Twitter — no link yet -->
-    <button title="X (Twitter) — coming soon" onclick="return false;"
-        style="background:#F8FAFC;border:1.5px solid #DDE3F0;border-radius:7px;
-               width:32px;height:32px;display:flex;align-items:center;
-               justify-content:center;cursor:default;padding:0;
-               font-weight:900;font-size:15px;color:#1F2937;line-height:1;">
-        &#120143;
-    </button>
-
-    <!-- LinkedIn — no link yet -->
-    <button title="LinkedIn — coming soon" onclick="return false;"
-        style="background:#0A66C2;border:1.5px solid #0A66C2;border-radius:7px;
-               width:32px;height:32px;display:flex;align-items:center;
-               justify-content:center;cursor:default;padding:0;
-               font-weight:800;font-size:11px;color:#FFFFFF;line-height:1;
-               letter-spacing:-0.5px;">
-        in
-    </button>
-
-    <!-- Share dropdown -->
-    <div style="position:relative;">
-        <button id="rb-share-btn"
-            onclick="var m=document.getElementById('rb-sm');m.style.display=m.style.display==='block'?'none':'block';"
-            style="background:#F8FAFC;border:1.5px solid #1F2937;border-radius:7px;
-                   height:32px;padding:0 11px;display:flex;align-items:center;gap:5px;
-                   cursor:pointer;font-weight:600;font-size:13px;color:#1F2937;
-                   font-family:inherit;">
-            &#8679;&nbsp;Share
-        </button>
-        <div id="rb-sm"
-            style="display:none;position:absolute;right:0;top:38px;background:#FFFFFF;
-                   border:1.5px solid #DDE3F0;border-radius:10px;padding:6px;
-                   min-width:200px;box-shadow:0 6px 20px rgba(0,48,135,0.13);z-index:99999;">
-            <a href="sms:?body=Check%20out%20RefBuddy%20Basketball%20%F0%9F%8F%80%20%E2%80%94%20your%20Minnesota%20HS%20basketball%20referee%20assistant%3A%20https%3A%2F%2Frefbuddy-basketball.streamlit.app%2F"
-               onclick="document.getElementById('rb-sm').style.display='none'"
-               style="display:flex;align-items:center;gap:8px;padding:8px 10px;
-                      border-radius:7px;text-decoration:none;color:#1F2937;
-                      font-size:13px;font-weight:600;">
-                &#128241;&nbsp; Text Message
-            </a>
-            <a href="mailto:?subject=RefBuddy%20Basketball%20%F0%9F%8F%80&body=Check%20out%20RefBuddy%20Basketball%20%E2%80%94%20your%20Minnesota%20HS%20basketball%20referee%20assistant%20with%20NFHS%20rules%2C%20MSHSL%20mods%2C%20shot%20clock%2C%20and%20game%20film%20analysis%3A%0A%0Ahttps%3A%2F%2Frefbuddy-basketball.streamlit.app%2F"
-               onclick="document.getElementById('rb-sm').style.display='none'"
-               style="display:flex;align-items:center;gap:8px;padding:8px 10px;
-                      border-radius:7px;text-decoration:none;color:#1F2937;
-                      font-size:13px;font-weight:600;">
-                &#9993;&nbsp; Email
-            </a>
-            <hr style="border:none;border-top:1px solid #DDE3F0;margin:4px 2px;">
-            <button id="rb-copy-btn"
-                onclick="navigator.clipboard.writeText('https://refbuddy-basketball.streamlit.app/');document.getElementById('rb-copy-btn').textContent='Copied!';setTimeout(function(){document.getElementById('rb-copy-btn').textContent='Copy Link'},2000);document.getElementById('rb-sm').style.display='none';"
-                style="display:flex;align-items:center;gap:8px;padding:8px 10px;
-                       border-radius:7px;color:#1F2937;background:transparent;border:none;
-                       font-size:13px;font-weight:600;cursor:pointer;width:100%;text-align:left;
-                       font-family:inherit;">
-                &#128203;&nbsp; Copy Link
-            </button>
-        </div>
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
 
 # =============================================================================
 # SESSION STATE
