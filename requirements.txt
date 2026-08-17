@@ -1,5 +1,6 @@
 anthropic
 streamlit
 opencv-python-headless
+numpy
 fpdf2
 python-docx

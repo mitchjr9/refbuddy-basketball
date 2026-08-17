@@ -1,6 +1,55 @@
-secrets.toml
-__pycache__/
-*.pyc
-.DS_Store
+# ─────────────────────────────────────────────────────────────────────────────
+# RefBuddy Hoops — .gitignore
+# Rename this file to exactly ".gitignore" (with the leading dot) in your repo.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── SECRETS — never commit ───────────────────────────────────────────────────
+.streamlit/secrets.toml
 .env
-*.log
+*.pem
+*.key
+
+# ── Source rulebooks and copyrighted material — never commit ─────────────────
+# CORE_KNOWLEDGE contains facts and citations, not rulebook text. The source
+# PDFs themselves are copyrighted works and must stay out of the repo.
+*.pdf
+NFHS*
+MSHSL*
+mshsl*
+
+# ── Game film and photos — never commit ──────────────────────────────────────
+*.mp4
+*.mov
+*.avi
+*.mkv
+film/
+clips/
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.Python
+build/
+dist/
+
+# ── Virtual environments ─────────────────────────────────────────────────────
+venv/
+venv*/
+env/
+.venv/
+
+# ── OS / editor cruft ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# ── NOT ignored (these must be committed) ────────────────────────────────────
+# app.py
+# requirements.txt
+# Claude.png                      ← sidebar logo; app falls back to text without it
+# DEPLOYMENT.md
+# .streamlit/config.toml          ← light-theme pin
+# .streamlit/secrets.toml.template
