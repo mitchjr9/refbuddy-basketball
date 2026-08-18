@@ -1212,6 +1212,47 @@ footer {{ visibility: hidden; }}
     background: linear-gradient(90deg, {BLUE} 0%, {BLUE_L} 100%);
     transition: width 0.4s ease;
 }}
+
+/* ── Multiselect tags (selected chips) ───────────────────────────────────────
+   Streamlit renders each selected multiselect option as a BaseWeb "tag" chip
+   whose background comes from primaryColor (navy). The earlier blanket rule
+   `[data-baseweb="select"] span, [data-baseweb="select"] div {{ color: #1F2937 }}`
+   also matches the text inside those chips, producing near-black text on a navy
+   chip — unreadable. These rules are declared last so they win on document
+   order, and use -webkit-text-fill-color because that property overrides
+   `color` in WebKit regardless of specificity. */
+[data-baseweb="tag"],
+.stMultiSelect [data-baseweb="tag"],
+.stMultiSelect span[data-baseweb="tag"] {{
+    background-color: {BLUE} !important;
+    border: 1px solid {BLUE} !important;
+    border-radius: 6px !important;
+}}
+[data-baseweb="tag"] span,
+[data-baseweb="tag"] div,
+[data-baseweb="tag"] *,
+.stMultiSelect [data-baseweb="tag"] span,
+.stMultiSelect [data-baseweb="tag"] div {{
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background-color: transparent !important;
+    font-weight: 600 !important;
+}}
+/* The little "x" delete control on each chip */
+[data-baseweb="tag"] svg,
+[data-baseweb="tag"] path,
+[data-baseweb="tag"] [role="presentation"] {{
+    fill: #FFFFFF !important;
+    stroke: #FFFFFF !important;
+    color: #FFFFFF !important;
+    opacity: 0.9;
+}}
+[data-baseweb="tag"] svg:hover,
+[data-baseweb="tag"] [role="presentation"]:hover {{
+    opacity: 1;
+    background-color: rgba(255,255,255,0.22) !important;
+    border-radius: 3px;
+}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -2524,12 +2565,7 @@ with tab_ah:
         pg_assignor_notes = st.text_area(
             "Assignor's Custom Notes / Emphasis",
             height=130,
-            placeholder=(
-                "Add anything you want to emphasize for THIS specific game or crew:\n\n"
-                "• 'This crew had timing issues last week — stress 5-second throw-in count'\n"
-                "• 'Host school has a shot clock — confirm operator has recall function'\n"
-                "• 'New official on crew (Trail) — walk through throw-in spot procedure'"
-            ),
+            placeholder="Add anything you want to emphasize for this game",
             key="pg_assignor_notes",
         )
 
