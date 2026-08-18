@@ -725,7 +725,7 @@ Single question JSON structure:
   "correct": "B",
   "explanation": "Thorough explanation: why correct answer is right, why each wrong answer is wrong, what the rule actually says.",
   "rule_citation": "Exact rule number or MSHSL Modification letter",
-  "personal_note": "From your MSHSL Season X notes: [specific situation] (empty string if not applicable)",
+  "personal_note": "The specific situation or interpretation from the knowledge base, stated directly with no prefix — do NOT begin with 'From your notes' or 'From your 2024-25 notes' etc., because the UI already prepends that label (empty string if not applicable)",
   "topic": "Rules|Mechanics|Shot Clock|Positioning|Signals|Game Situations|MSHSL Specific|2025-26 Changes"
 }}
 
@@ -1213,44 +1213,63 @@ footer {{ visibility: hidden; }}
     transition: width 0.4s ease;
 }}
 
-/* ── Multiselect tags (selected chips) ───────────────────────────────────────
-   Streamlit renders each selected multiselect option as a BaseWeb "tag" chip
-   whose background comes from primaryColor (navy). The earlier blanket rule
-   `[data-baseweb="select"] span, [data-baseweb="select"] div {{ color: #1F2937 }}`
-   also matches the text inside those chips, producing near-black text on a navy
-   chip — unreadable. These rules are declared last so they win on document
-   order, and use -webkit-text-fill-color because that property overrides
-   `color` in WebKit regardless of specificity. */
-[data-baseweb="tag"],
-.stMultiSelect [data-baseweb="tag"],
-.stMultiSelect span[data-baseweb="tag"] {{
+/* ── Multiselect chips (selected options) ────────────────────────────────────
+   Streamlit renders each selected multiselect option inside
+   [data-testid="stMultiSelectTagsContainer"] as an element carrying a bare
+   `data-tag` attribute, with the remove control labelled aria-label="Remove X".
+   It is NOT a BaseWeb [data-baseweb="tag"] element in this version — selectors
+   written against that name match nothing and silently do nothing.
+
+   The chip background comes from primaryColor (navy), while the earlier blanket
+   rule `[data-baseweb="select"] span, [data-baseweb="select"] div {{ color: #1F2937 }}`
+   also matches the text inside the chip — producing near-black text on navy.
+
+   These rules use a descendant pair, e.g.
+   [data-testid="stMultiSelectTagsContainer"] [data-tag] *  →  specificity (0,2,0),
+   which outranks the blanket rule's (0,1,1), and are declared last so document
+   order backs them up too. -webkit-text-fill-color is set alongside `color`
+   because in WebKit (Safari, Chrome on iOS) it overrides `color` regardless of
+   specificity, so setting `color` alone can silently fail on a phone. */
+
+/* The chip itself */
+[data-testid="stMultiSelectTagsContainer"] [data-tag],
+[data-testid="stMultiSelect"] [data-tag],
+[data-baseweb="tag"] {{
     background-color: {BLUE} !important;
     border: 1px solid {BLUE} !important;
     border-radius: 6px !important;
 }}
-[data-baseweb="tag"] span,
-[data-baseweb="tag"] div,
-[data-baseweb="tag"] *,
-.stMultiSelect [data-baseweb="tag"] span,
-.stMultiSelect [data-baseweb="tag"] div {{
+
+/* Chip label and every child element */
+[data-testid="stMultiSelectTagsContainer"] [data-tag],
+[data-testid="stMultiSelectTagsContainer"] [data-tag] *,
+[data-testid="stMultiSelect"] [data-tag],
+[data-testid="stMultiSelect"] [data-tag] *,
+[data-baseweb="tag"] * {{
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
     background-color: transparent !important;
+    background: transparent !important;
     font-weight: 600 !important;
 }}
-/* The little "x" delete control on each chip */
-[data-baseweb="tag"] svg,
-[data-baseweb="tag"] path,
-[data-baseweb="tag"] [role="presentation"] {{
+
+/* The "x" remove control on each chip */
+[data-testid="stMultiSelectTagsContainer"] [data-tag] [aria-label^="Remove"],
+[data-testid="stMultiSelectTagsContainer"] [data-tag] svg,
+[data-testid="stMultiSelectTagsContainer"] [data-tag] path,
+[data-testid="stMultiSelect"] [data-tag] [aria-label^="Remove"],
+[data-testid="stMultiSelect"] [data-tag] svg,
+[data-testid="stMultiSelect"] [data-tag] path {{
+    color: #FFFFFF !important;
     fill: #FFFFFF !important;
     stroke: #FFFFFF !important;
-    color: #FFFFFF !important;
-    opacity: 0.9;
+    background: transparent !important;
+    opacity: 0.85;
 }}
-[data-baseweb="tag"] svg:hover,
-[data-baseweb="tag"] [role="presentation"]:hover {{
+[data-testid="stMultiSelectTagsContainer"] [data-tag] [aria-label^="Remove"]:hover,
+[data-testid="stMultiSelect"] [data-tag] [aria-label^="Remove"]:hover {{
     opacity: 1;
-    background-color: rgba(255,255,255,0.22) !important;
+    background-color: rgba(255,255,255,0.25) !important;
     border-radius: 3px;
 }}
 </style>
@@ -1774,7 +1793,7 @@ def render_feedback(q: dict, user_answer: str) -> bool:
     explanation = q.get("explanation", "")
     rule_cite = q.get("rule_citation", "")
     personal = q.get("personal_note", "")
-    pnote = f'<br><strong>📋 From your notes:</strong> {personal}' if personal else ""
+    pnote = f'<br><strong>📋 From RefBuddy Knowledge Base:</strong> {personal}' if personal else ""
     st.markdown(f"""<div class="quiz-explanation">
     <strong>📖 Explanation</strong><br>{explanation}<br><br>
     <strong>📌 Citation:</strong> {rule_cite}{pnote}
@@ -2110,7 +2129,8 @@ with tab_home:
 
     # Chat input pinned to bottom
     user_in = st.chat_input(
-        "Ask RefBuddy a question",
+        "Ask RefBuddy a question, or upload pictures/videos using the "
+        "Upload section in the left sidebar",
     )
     if user_in:
         st.session_state.messages.append({
@@ -3064,7 +3084,7 @@ with tab_quiz:
                 </div>""", unsafe_allow_html=True)
                 with st.expander(f"📖 Explanation — Q{a['question_num']}", expanded=False):
                     p = qd.get("personal_note", "")
-                    pnote = f'<br><strong>📋 From your notes:</strong> {p}' if p else ""
+                    pnote = f'<br><strong>📋 From RefBuddy Knowledge Base:</strong> {p}' if p else ""
                     st.markdown(f"""<div class="quiz-explanation">
                     {qd.get("explanation","")}<br><br>
                     <strong>📌 Citation:</strong> {qd.get("rule_citation","")}{pnote}
