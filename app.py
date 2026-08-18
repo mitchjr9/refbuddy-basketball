@@ -1231,19 +1231,24 @@ footer {{ visibility: hidden; }}
    because in WebKit (Safari, Chrome on iOS) it overrides `color` regardless of
    specificity, so setting `color` alone can silently fail on a phone. */
 
-/* The chip itself */
+/* The chip itself — navy background AND white text set together here.
+   CRITICAL: the transparent-background rule below must NOT list the bare
+   [data-tag] selector. Both rules carry specificity (0,2,0), so if the chip
+   element appears in both, the later one wins and paints the chip transparent —
+   revealing the near-white container behind it, leaving white text on white. */
 [data-testid="stMultiSelectTagsContainer"] [data-tag],
 [data-testid="stMultiSelect"] [data-tag],
 [data-baseweb="tag"] {{
     background-color: {BLUE} !important;
     border: 1px solid {BLUE} !important;
     border-radius: 6px !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
 }}
 
-/* Chip label and every child element */
-[data-testid="stMultiSelectTagsContainer"] [data-tag],
+/* Chip DESCENDANTS only ( * ) — white text, and transparent backgrounds so the
+   inner label/button don't paint over the chip's navy. */
 [data-testid="stMultiSelectTagsContainer"] [data-tag] *,
-[data-testid="stMultiSelect"] [data-tag],
 [data-testid="stMultiSelect"] [data-tag] *,
 [data-baseweb="tag"] * {{
     color: #FFFFFF !important;
@@ -2129,7 +2134,7 @@ with tab_home:
 
     # Chat input pinned to bottom
     user_in = st.chat_input(
-        "Ask RefBuddy a question, or upload pictures/videos using the "
+        "Ask RefBuddy a question or upload files using the "
         "Upload section in the left sidebar",
     )
     if user_in:
