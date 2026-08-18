@@ -1,6 +1,6 @@
 # RefBuddy Hoops — Deployment Guide (v1.1)
 
-Target stack: **GitHub → Render → Cloudflare DNS → hoops.refbuddy.ai**
+Target stack: **GitHub → Render → Namecheap DNS → hoops.refbuddy.ai**
 
 This is a *second, independent* app alongside RefBuddy Football. Separate repo,
 separate Render service, separate password, shared domain via a subdomain.
@@ -9,9 +9,10 @@ separate Render service, separate password, shared domain via a subdomain.
 
 ## Why a subdomain, not a second domain
 
-You already own `refbuddy.ai` and it already lives on Cloudflare. Adding
-`hoops.refbuddy.ai` costs nothing, takes one DNS record, and inherits every
-Cloudflare setting you already tuned for football.
+You already own `refbuddy.ai`. Adding `hoops.refbuddy.ai` takes one CNAME record
+at Namecheap and nothing else. Subdomains are the easy case in DNS — no CNAME
+flattening, no ALIAS/ANAME workaround, no apex-record edge cases. Render issues
+and renews the TLS certificate automatically via Let's Encrypt.
 
 The alternative — running both apps behind one Render service — would require a
 reverse proxy in front of two Streamlit processes. That's real complexity for no
@@ -20,7 +21,7 @@ benefit, and it couples the two apps' uptime together.
 | Approach | Cost | Setup | Isolation |
 |----------|------|-------|-----------|
 | **`hoops.refbuddy.ai` subdomain** | $0 | 1 CNAME | Full — separate service, env vars, spend |
-| Second domain (`refbuddyhoops.ai`) | ~$15–60/yr | New Cloudflare zone + nameserver repoint | Full |
+| Second domain (`refbuddyhoops.ai`) | ~$15–60/yr | New registration + full DNS setup | Full |
 | Path routing (`refbuddy.ai/hoops`) | $0 | Reverse proxy, non-trivial | None — one crash takes both down |
 
 Separate Render services also means tournament-season load on hoops can't
@@ -160,43 +161,68 @@ cold start. A crew checking a rule between quarters won't wait. Starter stays wa
 
 ## Step 4 — Point hoops.refbuddy.ai at it
 
-Your nameservers are already on Cloudflare from the football setup, so skip
-straight to the records. **No Namecheap changes needed.**
+Namecheap DNS only. No Cloudflare involved.
 
-### 4a. Add the custom domain in Render
+### 4a. Add the custom domain in Render FIRST
 
-Render → `refbuddy-hoops` service → **Settings → Custom Domains** → add:
+Order matters — Render must be listening for the hostname before DNS points at it.
 
-- `hoops.refbuddy.ai`
+Render → `refbuddy-hoops` service → **Settings → Custom Domains** → **+ Add
+Custom Domain** → enter `hoops.refbuddy.ai`.
 
-Render shows you a target hostname to point at (something like
-`refbuddy-hoops-xxxx.onrender.com`).
+Render shows it as **Unverified** with the exact target hostname to point at,
+e.g. `refbuddy-hoops-xxxx.onrender.com`. **Copy that exact string** — it must be
+your specific service subdomain, not a generic Render address.
 
-### 4b. Create the DNS record in Cloudflare
+### 4b. Confirm Namecheap is serving your DNS
 
-Cloudflare → `refbuddy.ai` → DNS → Records → **Add record**:
+Namecheap → **Domain List** → **Manage** on `refbuddy.ai` → **Domain** tab →
+**Nameservers** section. It must read **Namecheap BasicDNS**.
 
-| Type | Name | Target | Proxy |
-|------|------|--------|-------|
-| CNAME | `hoops` | `refbuddy-hoops-xxxx.onrender.com` | Proxied (orange) |
+If it reads *Custom DNS* pointing elsewhere, anything you add under Advanced DNS
+is silently ignored. This is the most common reason a new subdomain never works.
 
-Name is just `hoops`, not the full domain — Cloudflare appends the zone.
+### 4c. Add the CNAME record
 
-Leave your existing football records (`@` and `www`) exactly as they are. This
-is purely additive.
+Namecheap → **Advanced DNS** tab → **Host Records** → **ADD NEW RECORD**:
 
-### 4c. Cloudflare settings
+| Field | Value |
+|-------|-------|
+| Type | `CNAME Record` |
+| Host | `hoops` |
+| Value | `refbuddy-hoops-xxxx.onrender.com` |
+| TTL | `Automatic` |
 
-Everything you set for football is zone-wide and already applies:
+Click the green **✓** to save.
 
-- **SSL/TLS → Full (strict)** — "Flexible" causes an infinite redirect loop
-- **Always Use HTTPS: On**
-- **Network → WebSockets: On** — Streamlit won't load without it
-- **Speed → Rocket Loader: Off** — it breaks Streamlit's frontend
-- **Caching Level: Standard**
+- **Host is just `hoops`**, not the full domain — Namecheap appends the zone.
+- Namecheap may show a trailing dot on the value after saving. Normal, leave it.
+- Existing football records (`@`, `www`) are untouched. This is purely additive.
 
-Nothing new to change. Wait a few minutes for Render to issue the TLS cert, then
-load `https://hoops.refbuddy.ai`. You should see the password screen.
+**Also check:** delete any **AAAA** records on the zone. Render is IPv4-only, and
+stale AAAA records interfere with routing and certificate issuance.
+
+### 4d. Verify
+
+Namecheap subdomain records usually propagate in 5–30 minutes. Check:
+
+```bash
+dig hoops.refbuddy.ai CNAME +short
+```
+
+Once that returns the `.onrender.com` hostname, go back to **Render → Settings →
+Custom Domains** and click **Verify**. Render checks DNS, then provisions the TLS
+certificate automatically (another 2–5 min). All HTTP traffic is redirected to
+HTTPS automatically — nothing to configure.
+
+Load `https://hoops.refbuddy.ai`. You should see the password screen.
+
+### 4e. Custom domain allowance
+
+Render's Hobby tier includes 2 custom domains **across all services**, and adding
+a `www` subdomain automatically adds the root domain with a redirect between
+them. So football likely consumes both already, making `hoops.refbuddy.ai` your
+third at **$0.25/month**. Professional tier is unlimited.
 
 ---
 
@@ -277,12 +303,23 @@ Render auto-deploys on push. Watch the deploy log; ~2 minutes.
 
 ## Troubleshooting
 
-**Infinite redirect loop at hoops.refbuddy.ai**
-Cloudflare SSL/TLS mode is Flexible. Change to **Full (strict)**. Zone-wide, so
-this would break football too — check there first.
+**Domain stuck on "Unverified" in Render after 30+ minutes**
+Nameservers aren't on Namecheap BasicDNS, or the Host field contains the full
+domain (`hoops.refbuddy.ai`) instead of just `hoops`. Confirm with
+`dig hoops.refbuddy.ai CNAME +short` — empty output means the record isn't live.
+
+**Certificate / HTTPS warning in the browser**
+DNS verified but the cert hasn't issued yet. Render provisions after
+verification, not before. Give it 5 more minutes.
+
+**Wrong app loads at hoops.refbuddy.ai**
+The CNAME target points at football's Render hostname. Recopy the target from
+the *hoops* service dashboard.
 
 **Page loads but spins forever / "Please wait…"**
-WebSockets off in Cloudflare, or Rocket Loader on.
+Streamlit is WebSocket-based. Straight Namecheap → Render has no proxy layer to
+break this, so check the Render logs — this usually means the service crashed
+rather than a DNS issue.
 
 **Sidebar shows "Powered by Claude" as text instead of the logo**
 `Claude.png` didn't make it into the commit. `git ls-files | grep Claude.png`
