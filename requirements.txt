@@ -1,6 +1,30 @@
-anthropic
-streamlit
-opencv-python-headless
-numpy
-fpdf2
-python-docx
+# RefBuddy Hoops — pinned dependencies
+#
+# WHY THE UPPER BOUNDS
+#
+# These were originally unpinned (just "anthropic", "streamlit", etc.). On
+# 2026-08-24 the anthropic SDK released 1.0.0, a major version that REMOVED
+# `temperature`, `top_p`, and `top_k` from messages.create() and
+# messages.stream(). A routine Render redeploy resolved to the new major
+# version and every API call in the live app began failing with:
+#
+#     TypeError: Messages.stream() got an unexpected keyword argument 'temperature'
+#
+# No application code had changed — the dependency moved underneath a running
+# app mid-season. Upper bounds prevent a future major release from doing the
+# same thing on an unrelated push.
+#
+# numpy is listed explicitly because app.py imports it directly in
+# image_to_frame_b64(). It also arrives transitively via opencv, and relying on
+# a transitive dependency is its own quiet risk.
+#
+# TO INTENTIONALLY UPGRADE: raise a bound here deliberately, redeploy to a
+# preview, and test all five API paths (chat, film analysis, RefGrade, single
+# quiz question, ten-question quiz) before promoting it.
+
+anthropic>=0.39.0,<1.0.0
+streamlit>=1.40.0,<2.0.0
+opencv-python-headless>=4.9.0,<5.0.0
+numpy>=1.26.0,<3.0.0
+fpdf2>=2.7.0,<3.0.0
+python-docx>=1.1.0,<2.0.0

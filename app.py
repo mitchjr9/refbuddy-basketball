@@ -34,6 +34,7 @@ Repo root must also contain: Claude.png, requirements.txt, .streamlit/config.tom
 # ── Standard library ──────────────────────────────────────────────────────────
 import base64
 import datetime
+import functools
 import hmac
 import json
 import os
@@ -1493,6 +1494,60 @@ def b64(data: bytes) -> str:
 
 MODEL = "claude-sonnet-4-6"
 
+# =============================================================================
+# ANTHROPIC SDK COMPATIBILITY SHIM
+#
+# INCIDENT: anthropic 1.0.0 (a major version bump) REMOVED `temperature`,
+# `top_p`, and `top_k` from the typed signatures of both messages.create() and
+# messages.stream(). Because requirements.txt originally pinned nothing, a
+# routine Render redeploy resolved to the new major version and every API call
+# in the app began raising:
+#
+#     TypeError: Messages.stream() got an unexpected keyword argument 'temperature'
+#
+# The sampling controls did not simply move — the new OutputConfigParam carries
+# only `effort` and `format`, and there is no **kwargs passthrough to absorb the
+# argument.
+#
+# The real fix is the upper bounds now in requirements.txt. This shim is
+# insurance: it introspects the INSTALLED SDK at runtime and passes temperature
+# only if that version accepts it. If a future SDK drops it again, the app
+# degrades to default sampling instead of going down mid-season.
+#
+# NOTE ON temperature=0: it matters here. RefBuddy is a rules reference — the
+# same question about a shot clock reset should return the same answer every
+# time. If you ever deliberately move past anthropic 1.0.0, this shim keeps the
+# app running but you will be on the API's default sampling. Revisit the
+# determinism approach at that point rather than letting it change silently.
+# =============================================================================
+
+@functools.lru_cache(maxsize=2)
+def _sdk_accepts(param: str) -> bool:
+    """Does the installed anthropic SDK accept this sampling parameter?"""
+    try:
+        import inspect
+        client = anthropic.Anthropic(api_key="sk-ant-introspection-only")
+        for fn in (client.messages.create, client.messages.stream):
+            params = inspect.signature(fn).parameters
+            if param not in params and not any(
+                p.kind == p.VAR_KEYWORD for p in params.values()
+            ):
+                return False
+        return True
+    except Exception:
+        # If introspection fails for any reason, omit the parameter rather than
+        # risk a TypeError that takes down every request.
+        return False
+
+
+def temp_kwargs() -> dict:
+    """
+    Returns {"temperature": 0} on SDKs that support it, {} on those that don't.
+    Spread into every API call with **temp_kwargs().
+    """
+    return {"temperature": 0} if _sdk_accepts("temperature") else {}
+
+
 def make_client():
     """
     Create an Anthropic client using get_secret(), which checks environment
@@ -1553,8 +1608,9 @@ def stream_chat(client, messages, files, system=None):
         else:
             api_msgs.append({"role": m["role"], "content": m["content"]})
     with client.messages.stream(
-        model=MODEL, max_tokens=4096,
-        system=system_blocks(sys_p), messages=api_msgs, temperature=0,
+        model=MODEL, max_tokens=8192,   # raised from 4096: long rules
+        # breakdowns and multi-part answers were at risk of stopping mid-sentence
+        system=system_blocks(sys_p), messages=api_msgs, **temp_kwargs(),
     ) as s:
         yield from s.text_stream
 
@@ -1562,17 +1618,97 @@ def call_api_sync(prompt: str, system: str, max_tokens: int = 3000) -> str:
     client = make_client()
     resp = client.messages.create(
         model=MODEL, max_tokens=max_tokens,
-        system=system_blocks(system), messages=[{"role": "user", "content": prompt}], temperature=0,
+        system=system_blocks(system), messages=[{"role": "user", "content": prompt}], **temp_kwargs(),
     )
     return resp.content[0].text
 
+def _human_ts(iso: str) -> str:
+    """Turn a stored ISO timestamp into 'Aug 24, 2026 at 07:24 PM'."""
+    if not iso:
+        return ""
+    try:
+        return datetime.datetime.fromisoformat(iso).strftime("%b %d, %Y at %I:%M %p")
+    except Exception:
+        return iso[:19]
+
+
+def chat_log_markdown() -> str:
+    """
+    Single source of truth for the TXT, PDF, and Word chat-log exports, so all
+    three contain identical content.
+
+    Questions and answers are PAIRED under numbered headings rather than dumped
+    as a flat role/content list — a flat list is what made exports read as
+    truncated blobs even when the full answer was present.
+    """
+    msgs = st.session_state.messages
+    now = datetime.datetime.now().strftime("%B %d, %Y at %I:%M %p")
+
+    out = ["RefBuddy Chat Log",
+           "=================",
+           f"Exported: {now}",
+           f"Messages: {len(msgs)}",
+           "_" * 70,
+           ""]
+
+    qnum = 0
+    i = 0
+    while i < len(msgs):
+        m = msgs[i]
+        if m["role"] == "user":
+            qnum += 1
+            out.append(f"Question {qnum}")
+            out.append("-" * len(f"Question {qnum}"))
+            out.append(_human_ts(m.get("timestamp", "")))
+            out.append("")
+            out.append(m["content"].strip())
+            out.append("")
+            # Pair the assistant reply that follows, if there is one
+            if i + 1 < len(msgs) and msgs[i + 1]["role"] == "assistant":
+                out.append("RefBuddy Response")
+                out.append("")
+                out.append(msgs[i + 1]["content"].strip())
+                out.append("")
+                i += 1
+            else:
+                out.append("RefBuddy Response")
+                out.append("")
+                out.append("_(No response recorded for this question.)_")
+                out.append("")
+            out.append("_" * 70)
+            out.append("")
+        else:
+            # An assistant message with no preceding question (shouldn't happen,
+            # but never silently drop content from an export)
+            out.append("RefBuddy Response")
+            out.append("")
+            out.append(m["content"].strip())
+            out.append("")
+            out.append("_" * 70)
+            out.append("")
+        i += 1
+
+    out.append("")
+    out.append("Always confirm rulings with your MSHSL assignor. "
+               "Not official NFHS/MSHSL interpretation.")
+    return "\n".join(out)
+
+
 def chat_log_json() -> str:
+    """Structured export. Roles read as You / RefBuddy; timestamps humanized."""
     return json.dumps({
-        "exported_at": datetime.datetime.now().isoformat(),
-        "model": MODEL,
-        "messages": [{"role": m["role"], "content": m["content"],
-                       "timestamp": m.get("timestamp", "")}
-                     for m in st.session_state.messages],
+        "exported_at": datetime.datetime.now().strftime("%B %d, %Y at %I:%M %p"),
+        "message_count": len(st.session_state.messages),
+        "messages": [
+            {
+                "role": "You" if m["role"] == "user" else "RefBuddy",
+                "timestamp": _human_ts(m.get("timestamp", "")),
+                "content": m["content"],
+            }
+            for m in st.session_state.messages
+        ],
+        "disclaimer": ("Always confirm rulings with your MSHSL assignor. "
+                       "Not official NFHS/MSHSL interpretation."),
     }, indent=2, ensure_ascii=False)
 
 
@@ -1674,8 +1810,8 @@ def build_vision_content(frames_b64, start_idx, end_idx, user_question,
 
 def stream_vision(client, content_blocks, system):
     with client.messages.stream(
-        model=MODEL, max_tokens=4096, system=system_blocks(system),
-        messages=[{"role": "user", "content": content_blocks}], temperature=0,
+        model=MODEL, max_tokens=8192, system=system_blocks(system),   # raised from 4096
+        messages=[{"role": "user", "content": content_blocks}], **temp_kwargs(),
     ) as s:
         yield from s.text_stream
 
@@ -1720,7 +1856,7 @@ def generate_single_question(topic: str, used_topics: list = None) -> dict | Non
             model=MODEL, max_tokens=900,
             system=system_blocks(QUIZ_SYSTEM_PROMPT),
             messages=[{"role": "user", "content": prompt}],
-            temperature=0,
+            **temp_kwargs(),
         )
         raw = _strip_json_fences(resp.content[0].text)
         q = json.loads(raw)
@@ -1752,7 +1888,7 @@ def generate_ten_questions(topic: str) -> list | None:
             model=MODEL, max_tokens=6000,
             system=system_blocks(QUIZ_SYSTEM_PROMPT),
             messages=[{"role": "user", "content": prompt}],
-            temperature=0,
+            **temp_kwargs(),
         )
         raw = _strip_json_fences(resp.content[0].text)
         questions = json.loads(raw)
@@ -2035,9 +2171,35 @@ with st.sidebar:
     st.markdown("**Ref Log**")
     if st.session_state.messages:
         ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        st.download_button("⬇️ Download Chat Log", data=chat_log_json(),
-                           file_name=f"refbuddy_bb_chat_{ts}.json",
-                           mime="application/json", use_container_width=True)
+        _md = chat_log_markdown()
+
+        # 2x2 grid — PDF/Word on top (most readable), TXT/JSON below
+        sb_r1c1, sb_r1c2 = st.columns(2)
+        with sb_r1c1:
+            _pdf = markdown_to_pdf_bytes(_md, "RefBuddy Chat Log")
+            if _pdf:
+                st.download_button("⬇️ PDF", data=_pdf,
+                                   file_name=f"refbuddy_bb_chat_{ts}.pdf",
+                                   mime="application/pdf",
+                                   use_container_width=True)
+        with sb_r1c2:
+            _docx = markdown_to_docx_bytes(_md, "RefBuddy Chat Log")
+            if _docx:
+                st.download_button("⬇️ Word", data=_docx,
+                                   file_name=f"refbuddy_bb_chat_{ts}.docx",
+                                   mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                   use_container_width=True)
+
+        sb_r2c1, sb_r2c2 = st.columns(2)
+        with sb_r2c1:
+            st.download_button("⬇️ TXT", data=_md,
+                               file_name=f"refbuddy_bb_chat_{ts}.txt",
+                               mime="text/plain", use_container_width=True)
+        with sb_r2c2:
+            st.download_button("⬇️ JSON", data=chat_log_json(),
+                               file_name=f"refbuddy_bb_chat_{ts}.json",
+                               mime="application/json", use_container_width=True)
+
     if st.button("🗑️ Clear Home Chat", use_container_width=True):
         st.session_state.messages = []
         st.rerun()
@@ -2129,6 +2291,16 @@ with tab_home:
                         "role": "assistant", "content": full,
                         "timestamp": datetime.datetime.now().isoformat(),
                     })
+                    # ── DO NOT REMOVE ────────────────────────────────────────
+                    # st.download_button bakes its `data` argument in at
+                    # CREATION time. The sidebar is built earlier in the script
+                    # than this Home tab, so on the run that produces an answer
+                    # the sidebar's export buttons were created BEFORE this line
+                    # ran — capturing a transcript containing only the question.
+                    # Without this rerun, every exported log is missing the
+                    # answer. The rerun rebuilds the sidebar against the now
+                    # complete transcript.
+                    st.rerun()
                 except Exception as e:
                     st.error(handle_api_error(e))
 
@@ -2148,23 +2320,48 @@ with tab_home:
     if st.session_state.messages:
         st.markdown("---")
         with st.expander("📋 Ref Log — Session Summary", expanded=False):
+            _first = _human_ts(st.session_state.messages[0].get("timestamp", ""))
+            _last = _human_ts(st.session_state.messages[-1].get("timestamp", ""))
             st.markdown(f"""<div class="ref-log">
             <strong>Session Stats</strong><br>
-            Messages: {len(st.session_state.messages)} &nbsp;|&nbsp;
-            Model: {MODEL}<br>
-            Started: {st.session_state.messages[0].get("timestamp","")[:19]}<br>
-            Last: {st.session_state.messages[-1].get("timestamp","")[:19]}
+            Messages: {len(st.session_state.messages)}<br>
+            Started: {_first}<br>
+            Last: {_last}
             </div>""", unsafe_allow_html=True)
             for i, m in enumerate(st.session_state.messages):
                 icon = "🏀 You" if m["role"] == "user" else "⚡ RefBuddy"
-                st.markdown(f"**{icon}** _{m.get('timestamp','')[:19]}_")
+                st.markdown(f"**{icon}** _{_human_ts(m.get('timestamp',''))}_")
                 st.markdown(m["content"])
                 if i < len(st.session_state.messages) - 1:
                     st.markdown("---")
+
+            st.markdown("---")
             ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-            st.download_button("⬇️ Save Ref Log", data=chat_log_json(),
-                               file_name=f"refbuddy_bb_reflog_{ts}.json",
-                               mime="application/json")
+            _md = chat_log_markdown()
+            rl_pdf, rl_docx, rl_txt, rl_json = st.columns(4)
+            with rl_pdf:
+                _p = markdown_to_pdf_bytes(_md, "RefBuddy Ref Log")
+                if _p:
+                    st.download_button("⬇️ PDF", data=_p,
+                                       file_name=f"refbuddy_bb_reflog_{ts}.pdf",
+                                       mime="application/pdf",
+                                       use_container_width=True)
+            with rl_docx:
+                _d = markdown_to_docx_bytes(_md, "RefBuddy Ref Log")
+                if _d:
+                    st.download_button("⬇️ Word", data=_d,
+                                       file_name=f"refbuddy_bb_reflog_{ts}.docx",
+                                       mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                       use_container_width=True)
+            with rl_txt:
+                st.download_button("⬇️ TXT", data=_md,
+                                   file_name=f"refbuddy_bb_reflog_{ts}.txt",
+                                   mime="text/plain", use_container_width=True)
+            with rl_json:
+                st.download_button("⬇️ JSON", data=chat_log_json(),
+                                   file_name=f"refbuddy_bb_reflog_{ts}.json",
+                                   mime="application/json",
+                                   use_container_width=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
