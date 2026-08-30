@@ -253,7 +253,7 @@ CORE_KNOWLEDGE = """
 - **Game length:** Four 8-minute quarters (Rule 5-4). **MSHSL Mod A:** Two 18-minute halves (varsity); max 16-minute halves below varsity.
 - **Extra period:** 4 minutes for overtime (Rule 5-7).
 - **Game clock stops:** On every foul, violation, held ball, OOB, time-out, etc. (Rule 5-8).
-- **Time-outs:** 3 full (60-second) time-outs per team regulation + 1 per OT period; 1 additional for second OT and beyond; unlimited 30-second time-outs (Rule 5-11).
+- **Time-outs:** 3 sixty-second and 2 thirty-second time-outs per team per game; 1 additional 60-second time-out for each extra period; unused time-outs carry over. (Standard NFHS allotment — exact time-out section text not yet held in this KB; treat as LIKELY, not CONFIRMED.)
 - **Mercy Rule (MSHSL Mod G):** When point differential reaches **35 or more** with **less than 9 minutes remaining** in second half → running clock. Clock stops only for time-outs. Shot clock continues. Returns to regular timing if differential drops to **less than 30**.
 
 ### Rule 6 — Live Ball/Dead Ball
@@ -641,10 +641,218 @@ A fumble is the **accidental** loss of player control when the ball unintentiona
 - **[2025-26] 4-22-3:** once the ball contacts the **backboard**, it is automatically considered to be in downward flight.
 
 ### Sections NOT held in this knowledge base
-The project's rulebook file contains **placeholder stubs** rather than full text for these definitions, so RefBuddy does **NOT** have their exact language and must say so rather than reconstruct them:
-Rule 4-24 (hands/arms legal and illegal use) · 4-34 (players/bench personnel/substitutes) · 4-35 (player location/status) · 4-36 (point of interruption) · 4-37 (rebounding) · 4-40 (screen) · 4-41 (shooting/try/tap) · 4-42 (throw-in/thrower/designated spot) · 5-5 (beginning and ending quarters) · 5-6 (jump ball) · 5-7 (time-outs).
+Section 11 below now holds the full 2026 Rules Book text of the formerly missing definitions — Rules 4-24, 4-34, 4-35, 4-36, 4-37, 4-40, 4-41, 4-42, 5-5, 5-6, and 5-7 — and those are **CONFIRMED** sources. Still NOT held as exact text:
+- **Time-out administration** — the exact text on charged time-out counts/lengths, who may request and when, and clock-restart procedures. The allotment stated in Section 1 is the standard NFHS allotment and must be treated as **LIKELY**, not CONFIRMED, until the exact section is added.
+- **Jump ball administration** (Rule 6 procedural text) — basics are summarized in Sections 1 and 3, but the exact procedural language is not held.
+- **Rule 4-39 ("Rule" definition)** — trivial, no exam value.
 
-If a question turns on the precise wording of any of these, answer **NOT IN MY KNOWLEDGE BASE** and tell the user to check the rulebook directly. Practical guidance elsewhere in this knowledge base (mechanics, MSHSL modifications, throw-in spots) may still be cited, but never present it as the rule's definitional text.
+⚠️ **SOURCE-CONFLICT WARNING:** the project's rulebook file contains an unreliable "Rule 5 (continued)" block whose numbers contradict the actual 2026 Rules Book (it claims 3-minute extra periods and five 60-second time-outs — both wrong). Section 11 is transcribed from the 2026 book and is AUTHORITATIVE. If retrieved text conflicts with Section 11, use Section 11 and say so.
+
+If a question turns on the precise wording of a rule not held here, answer **NOT IN MY KNOWLEDGE BASE** and tell the user to check the rulebook directly. Practical guidance elsewhere in this knowledge base may still be cited, but never present it as the rule's definitional text.
+
+---
+
+## 11. FULL DEFINITIONS — FORMERLY MISSING SECTIONS (2026 NFHS RULES BOOK)
+
+> Transcribed verbatim from the 2026 NFHS Basketball Rules Book to fill the
+> placeholder stubs identified in Section 10. Cite these as **CONFIRMED**.
+> If any other retrieved source conflicts with this section (including the
+> project's rulebook file's unreliable "Rule 5 (continued)" block), THIS
+> SECTION IS AUTHORITATIVE.
+
+## RULE 4 — DEFINITIONS
+
+### SECTION 24 HANDS AND ARMS, LEGAL AND ILLEGAL USE (Rule 4-24)
+
+ART. 1 . . . It is legal to extend the arms vertically above the shoulders and need not be lowered to avoid contact with an opponent when the action of the opponent causes contact. This legal use of the arms and hands usually occurs when guarding the player making a throw-in, the player with the ball in pressing tactics and a player with the ball who is maneuvering to try for goal by pivoting, jumping, etc.
+
+ART. 2 . . . It is legal use of hands to reach to block or slap the ball controlled by a dribbler or a player throwing for goal or a player holding it and accidentally hitting the hand of the opponent when it is in contact with the ball.
+
+ART. 3 . . . It is legal to hold the hands and arms in front of the face or body for protection and to absorb force from an imminent charge by an opponent. This same protective use of the arms and hands occurs when a player who has set a screen outside the opponent's visual field is about to be run into by the player being screened. The action, however, should be a recoil action rather than a pushing action.
+
+ART. 4 . . . It is not legal to use hands and arms or hips and shoulders to force through a screen or to hold the screener and then to push the screener aside in order to maintain a guarding position relative to the opponent.
+
+ART. 5 . . . It is not legal to use hands on an opponent which in any way inhibits the freedom of movement of the opponent or acts as an aid to a player in starting or stopping.
+
+ART. 6 . . . It is not legal to extend the arms fully or partially in a position other than vertical so that the freedom of movement of an opponent is hindered when contact with the arms occurs. The extension of the elbows when the hands are on the hips or when the hands are held near the chest or when the arms are held more or less horizontally are examples of the illegal positions used.
+
+ART. 7 . . . It is not legal to use the hand and/or forearm to prevent an opponent from attacking the ball during a dribble or when throwing for goal.
+
+ART. 8 . . . It is not legal to swing arms and elbows excessively. This occurs when:
+
+a. Arms and elbows are swung about while using the shoulders as pivots, and the speed of the extended arms and elbows is in excess of the rest of the body as it rotates on the hips or on the pivot foot.
+
+b. The aggressiveness with which the arms and elbows are swung could cause injury to another player if contacted. Using this description as a basis, an official will promptly and unhesitatingly rule such action with arms and elbows a violation.
+
+ART. 9 . . . It is not legal to lock arms or grasp a teammate(s) in an effort to restrict the movement of an opponent.
+
+### SECTION 34 PLAYERS/BENCH PERSONNEL/SUBSTITUTES/TEAM MEMBERS (Rule 4-34)
+
+ART. 1 . . . A player is one of five team members who are legally on the court at any given time, except during time-outs or intermissions.
+
+ART. 2 . . . Bench personnel are all individuals who are part of or affiliated with a team, including, but not limited to: substitutes, coaches, manager(s) and statistician(s). During time-out or intermissions, all team members are bench personnel for the purpose of penalizing unsporting behavior.
+
+ART. 3 . . . A substitute becomes a player when the substitute legally enters the court. If entry is not legal, the substitute becomes a player when the ball becomes live. A player becomes bench personnel after the substitute becomes a player or after notification of the coach following the player's disqualification.
+
+ART. 4 . . . A team member is a member of bench personnel who is in uniform and is eligible to become a player.
+
+### SECTION 35 PLAYER LOCATION/STATUS (Rule 4-35)
+
+ART. 1 . . . The location/status of a player or nonplayer is determined by where the person is touching the floor as far as being:
+
+a. Inbounds or out-of-bounds.
+
+b. In the frontcourt or backcourt.
+
+c. Outside (behind/beyond) or inside the three-point field-goal line.
+
+ART. 2 . . . When a player is touching the backcourt, out of bounds or the three-point line, the player is located in backcourt, out of bounds or inside the three-point line, respectively.
+
+ART. 3 . . . The location/status of an airborne player with reference to the three factors of Article 1 is the same as at the time such player was last in contact with the floor or an extension of the floor, such as a bleacher.
+
+### SECTION 36 POINT OF INTERRUPTION (Rule 4-36)
+
+ART. 1 . . . Method of resuming play due to an official's inadvertent whistle, an interrupted game, as in Rule 5-4-4, a correctable error, as in Rule 2-10-6, a double personal, double technical or simultaneous foul, as in Rules 4-19-8 and 4-19-10.
+
+ART. 2 . . . Play shall be resumed by one of the following methods:
+
+a. A throw-in to the team that was in control:
+
+1. In the frontcourt at one of the four designated spots based on the ball's location relative to the three-point line when the interruption occurred. (Diagram 5)
+
+2. In the backcourt at one of the four designated spots based on the ball's location relative to the three-point line where the ball was located when the interruption occurred.
+
+b. A free throw or a throw-in when the interruption occurred during this activity or if a team is entitled to such.
+
+c. A jump ball or alternating-possession throw-in when neither team is in control and no goal, infraction, nor end of quarter/extra period is involved when the game is interrupted.
+
+ART. 3 . . . When the ball remains live after a violation or foul (as in Rule 4-19-8) during a try or tap for field goal, the point of interruption is determined to be when the ball becomes dead following the violation or foul.
+
+### SECTION 37 REBOUNDING (Rule 4-37)
+
+ART. 1 . . . Rebounding is an attempt by any player to secure control of the ball following a try or tap for field goal. In a rebounding situation there is no player or team control.
+
+ART. 2 . . . To obtain or maintain legal rebounding position, a player may not:
+
+a. Displace, charge or push an opponent.
+
+b. Extend shoulders, hips, knees or extend the arms or elbows fully or partially in a position other than vertical so that the freedom of movement of an opponent is hindered when contact with the arms or elbows occurs.
+
+c. Bend the body in an abnormal position to hold or displace an opponent.
+
+d. Violate the principle of verticality.
+
+ART. 3 . . . Every player is entitled to a spot on the playing court, provided the player gets there first without illegally contacting an opponent.
+
+### SECTION 40 SCREEN (Rule 4-40)
+
+ART. 1 . . . A screen is legal action by a player who, while touching the playing court, without causing contact, delays or prevents an opponent from reaching a desired position.
+
+ART. 2 . . . To establish a legal screening position:
+
+a. The screener may face any direction.
+
+b. Time and distance are relevant.
+
+c. The screener shall be stationary, except when both the screener and opponent are moving in the same path and the same direction.
+
+d. The screener shall stay within the screener's vertical plane with a stance approximately shoulder width apart.
+
+ART. 3 . . . When screening a stationary opponent from the front or side (within the visual field), the screener may be anywhere short of contact.
+
+ART. 4 . . . When screening a stationary opponent from behind (outside the visual field), the screener shall allow the opponent one normal step backward without contact.
+
+ART. 5 . . . When screening a moving opponent, the screener shall allow the opponent time and distance to avoid contact by stopping or changing direction. The speed of the player to be screened will determine where the screener may take a stationary position. The position will vary and may be one to two normal steps or strides from the opponent.
+
+ART. 6 . . . When screening an opponent who is moving in the same path and direction as the screener, the player behind is responsible if contact is made because the player in front slows up or stops and the player behind overruns the opponent.
+
+ART. 7 . . . A player who is screened within the player's visual field is expected to avoid contact by going around the screener. In cases of screens outside the visual field, the opponent may make inadvertent contact with the screener and if the opponent is running rapidly, the contact may be severe. Such a case is to be ruled as incidental contact provided the opponent stops or attempts to stop on contact and moves around the screen, and provided the screener is not displaced if the screener has the ball.
+
+ART. 8 . . . A player may not use the arms, hands, hips or shoulders to force through a screen or to hold the screener and then push the screener aside in order to maintain a guarding position on an opponent.
+
+### SECTION 41 SHOOTING, TRY, TAP (Rule 4-41)
+
+ART. 1 . . . The act of shooting begins simultaneously with the start of the try or tap for field goal and ends when the ball is clearly in flight, and includes the airborne shooter.
+
+ART. 2 . . . A try for field goal is an attempt by a player to score two or three points by throwing the ball into a team's own basket. A player is trying for goal when the player has the ball and in the official's judgment is throwing or attempting to throw for goal. It is not essential that the ball leave the player's hand as a foul could prevent release of the ball.
+
+ART. 3 . . . The try starts when the player begins the motion which habitually precedes the release of the ball.
+
+ART. 4 . . . The try ends when the throw is successful, when it is certain the throw is unsuccessful, when the thrown ball touches the floor or when the ball becomes dead.
+
+ART. 5 . . . A tap for field goal is the contacting of the ball with any part of a player's hand(s) in an attempt to direct the ball into the basket.
+
+ART. 6 . . . A tap for field goal shall be considered the same as a try for field goal, except as in Rule 5-2-5.
+
+ART. 7 . . . The tap for field goal starts when the player's hand(s) touches the ball.
+
+ART. 8 . . . The tap for field goal ends in exactly the same manner as a try.
+
+### SECTION 42 THROW-IN, THROWER, DESIGNATED SPOT (Rule 4-42)
+
+ART. 1 . . . The thrower is the player who attempts to make a throw-in.
+
+ART. 2 . . . A throw-in is a method of putting the ball in play from out-of-bounds.
+
+ART. 3 . . . The throw-in and the throw-in count begin when the ball is at the disposal of a player of the team entitled to it.
+
+ART. 4 . . . The throw-in count ends when the ball is released by the thrower so the passed ball goes directly into the court.
+
+ART. 5 . . . The throw-in ends when:
+
+a. The passed ball touches or is legally touched by another player inbounds.
+
+b. The passed ball touches or is touched by another player out-of-bounds, except as in Rule 7-5-7.
+
+c. The throw-in team commits a throw-in violation.
+
+ART. 6 . . . The designated throw-in spot is 3 feet wide with no depth limitation and is established and signaled by the official prior to putting the ball at the thrower's disposal.
+
+NOTE: The thrower shall keep one foot on or over the designated spot until the ball is released. The traveling and dribbling rules are not in effect for a throw-in.
+
+---
+
+## RULE 5 — SCORING AND TIMING REGULATIONS
+
+### SECTION 5 LENGTH OF QUARTER (Rule 5-5)
+
+ART. 1 . . . Playing time for teams of high school age shall be four quarters of eight minutes each with intermissions of one minute after the first and third quarters, and 10 minutes between halves. The halftime intermission may be extended to a maximum of 15 minutes for special activities, provided home management has properly notified the visiting team prior to the start of the game.
+
+ART. 2 . . . An organization sponsoring games involving teams which combine ninth-grade students with students in the eighth and/or seventh grades, may play those games in quarters of eight minutes.
+
+ART. 3 . . . A quarter(s) may be shortened in an emergency or at any time by mutual agreement of the opposing coaches and the referee.
+
+Note: By state association adoption, a running clock may be instituted when a specified point differential is reached at a specified time in the game.
+
+*[MSHSL cross-reference: Minnesota varsity plays two 18-minute halves (Mod A), not quarters, and its running-clock adoption is the Mod G mercy rule — 35+ point differential with less than 9:00 remaining in the second half.]*
+
+### SECTION 6 BEGINNING, ENDING A QUARTER OR EXTRA PERIOD (Rule 5-6)
+
+ART. 1 . . . Each quarter or extra period begins when the ball first becomes live.
+
+ART. 2 . . . Each quarter or extra period ends when the signal illuminates or sounds indicating time has expired, as in Rule 1-14.
+
+EXCEPTIONS:
+
+1. If the ball is in flight during a try or tap for field goal, the quarter or extra period ends when the try or tap ends.
+
+2. If a held ball or violation occurs so near the expiration of time that the clock is not stopped before time expires, the quarter or extra period ends with the held ball or violation.
+
+3. If a foul occurs so near the expiration of time that the timer cannot get the clock stopped before time expires or after time expires, but while the ball is in flight during a try or tap for field goal, the quarter or extra period ends when the free throw(s) and all related activity have been completed. No penalty or part of a penalty carries over from one quarter or extra period to the next, except when a correctable error, as in Rule 2-10, is rectified. No free throw(s) shall be attempted after time has expired for the fourth quarter or any extra period, unless the point(s) would affect the outcome of the game.
+
+4. If a technical foul occurs after the ball becomes dead to end a quarter or extra period, the next quarter or extra period is started by administering the free throws. If the fourth quarter or extra period ends and the score is tied, the free throws will start the extra period. If the score is not tied and the results of the free throws would tie or win the game, the free throws are administered as part of the preceding quarter/period.
+
+### SECTION 7 EXTRA PERIOD (Rule 5-7)
+
+ART. 1 . . . If the score is tied at the end of the fourth quarter, play shall continue without change of baskets for one or more extra periods with a one-minute intermission before each extra period.
+
+ART. 2 . . . The game ends if, at the end of any extra period, the score is not tied.
+
+ART. 3 . . . The length of each extra period shall be four minutes (or half the time of a regulation quarter for non-varsity contests). As many such periods as are necessary to break the tie shall be played. Extra periods are an extension of the fourth quarter.
+
+ART. 4 . . . Once the ball becomes live in the extra period, it will be played even though a correction in the fourth quarter score is made.
+
+*[MSHSL cross-reference: the 35-second shot clock runs in extra periods (Mod E). The halves format (Mod A) does not alter Rule 5-7's extra-period provisions.]*
 
 ---
 
@@ -742,7 +950,8 @@ what you say. These rules are absolute:
      numbering, or a specific sub-case is not. Say what you are unsure of.
    • **NOT IN MY KNOWLEDGE BASE** — say this plainly, do not guess, and tell
      the user to check the current NFHS Rules Book or ask their assignor.
-   Section 10 lists definitions the knowledge base does NOT hold. If the
+   Section 11 holds full 2026 text for the formerly missing definitions —
+   cite those as CONFIRMED. Section 10 lists what is still NOT held; if the
    question turns on one of those, the answer is NOT IN MY KNOWLEDGE BASE.
 
 4. TRUE/FALSE AND MULTIPLE-CHOICE QUESTIONS.
@@ -3465,7 +3674,10 @@ acting on it.
 Rule numbers, penalty values, timing values, shot clock reset triggers, and
 mechanics positions are factual information. The NFHS Rules Book, Case Book,
 Points of Emphasis, and MSHSL publications are copyrighted works owned by their
-respective organizations and are **not** reproduced here. Personal game notes and
+respective organizations. RefBuddy holds condensed facts, rule citations, and
+limited definitional excerpts for private study by password-holding officials;
+it does not distribute the publications themselves, and you are expected to own
+current editions. Personal game notes and
 all original commentary are the author's own work.
 
 #### Your uploads
