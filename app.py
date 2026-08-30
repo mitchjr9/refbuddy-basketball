@@ -253,7 +253,7 @@ CORE_KNOWLEDGE = """
 - **Game length:** Four 8-minute quarters (Rule 5-4). **MSHSL Mod A:** Two 18-minute halves (varsity); max 16-minute halves below varsity.
 - **Extra period:** 4 minutes for overtime (Rule 5-7).
 - **Game clock stops:** On every foul, violation, held ball, OOB, time-out, etc. (Rule 5-8).
-- **Time-outs:** 3 sixty-second and 2 thirty-second time-outs per team per game; 1 additional 60-second time-out for each extra period; unused time-outs carry over. (Standard NFHS allotment — exact time-out section text not yet held in this KB; treat as LIKELY, not CONFIRMED.)
+- **Time-outs (Rule 5-11-1 — CONFIRMED, full text in Section 11):** three 60-second and two 30-second time-outs per team per regulation game; one additional 60-second time-out per extra period; unused time-outs accumulate and may be used at any time. Excess time-outs are granted but cost a technical foul (5-11-6, 10-2-3).
 - **Mercy Rule (MSHSL Mod G):** When point differential reaches **35 or more** with **less than 9 minutes remaining** in second half → running clock. Clock stops only for time-outs. Shot clock continues. Returns to regular timing if differential drops to **less than 30**.
 
 ### Rule 6 — Live Ball/Dead Ball
@@ -640,9 +640,13 @@ A fumble is the **accidental** loss of player control when the ball unintentiona
 - **[2025-26]** Offensive goaltending is **eliminated** — only defensive players can commit it.
 - **[2025-26] 4-22-3:** once the ball contacts the **backboard**, it is automatically considered to be in downward flight.
 
-### Sections NOT held in this knowledge base
-Section 11 below now holds the full 2026 Rules Book text of the formerly missing definitions — Rules 4-24, 4-34, 4-35, 4-36, 4-37, 4-39, 4-40, 4-41, 4-42, 4-43, 5-5, 5-6, 5-7, and ALL of Rule 6 (6-1 Live Ball through 6-7 Dead Ball, including jump-ball administration and alternating possession) — and those are **CONFIRMED** sources. Still NOT held as exact text:
-- **Charged time-out allotment & administration** — how many time-outs each team receives per game, who may request and when, and clock-restart procedures. Rule 4-43 (held, CONFIRMED) covers time-out LENGTHS (60/30-second, 15-second warning) and the successive time-out definition, but NOT the per-game count. The allotment stated in Section 1 is the standard NFHS allotment and must be treated as **LIKELY**, not CONFIRMED, until the exact section is added.
+### Coverage status of the formerly missing definitions
+Section 11 below now holds the full 2026 Rules Book text for **every** definition previously identified as missing:
+- **Rule 4:** 4-24 (hands/arms), 4-34 (players/bench personnel), 4-35 (player location/status), 4-36 (point of interruption), 4-37 (rebounding), 4-39 (rule), 4-40 (screen), 4-41 (shooting/try/tap), 4-42 (throw-in/thrower/designated spot), 4-43 (time-out lengths, successive time-out)
+- **Rule 5:** 5-5 (length of quarter), 5-6 (beginning/ending quarter or extra period), 5-7 (extra period), 5-8 (time-out, stopping play), 5-11 (charged time-outs — allotment, durations, exceptions, excess, successive, simultaneous)
+- **Rule 6:** complete — 6-1 (live ball) through 6-7 (dead ball), including jump-ball administration and alternating possession
+
+All of the above are **CONFIRMED** sources. Cite them directly.
 
 ⚠️ **SOURCE NOTE:** an earlier version of the project's rulebook file contained an unreliable "Rule 5 (continued)" block whose numbers contradicted the 2026 Rules Book (3-minute extra periods, five 60-second time-outs — both wrong). That block has been removed from the knowledge base, but if ANY retrieved text ever conflicts with Section 11, Section 11 is transcribed from the 2026 book and is AUTHORITATIVE — use it and say so.
 
@@ -864,6 +868,68 @@ ART. 3 . . . The length of each extra period shall be four minutes (or half the 
 ART. 4 . . . Once the ball becomes live in the extra period, it will be played even though a correction in the fourth quarter score is made.
 
 *[MSHSL cross-reference: the 35-second shot clock runs in extra periods (Mod E). The halves format (Mod A) does not alter Rule 5-7's extra-period provisions.]*
+
+### SECTION 8 TIME-OUT, STOPPING PLAY (Rule 5-8)
+
+Time-out occurs and the clock, if running, shall be stopped when an official:
+
+ART. 1 . . . Signals:
+
+a. A foul.
+
+b. A held ball.
+
+c. A violation.
+
+d. A time-out.
+
+ART. 2 . . . Stops play:
+
+a. Because of an injury as in Rules 3-3-6, 3-3-7 and 3-3-8.
+
+b. To confer with the scorer or timer.
+
+c. Because of unusual delay in getting a dead ball live.
+
+d. For any other situations or any emergency.
+
+Note: When a player is injured as in Article 2(a), the official may suspend play after the ball is dead or is in control of the injured player's team or when the opponents complete a play. A play is completed when a team loses control (including throwing for goal) or withholds the ball from play by ceasing to attempt to score or advance the ball to a scoring position. When necessary to protect an injured player, the official may immediately stop play.
+
+ART. 3 . . . Grants and signals a player's/head coach's oral or visual request for a time-out, such request being granted only when:
+
+a. The ball is at the disposal or in control of a player of the same team.
+
+b. The ball is dead, unless replacement of a disqualified, or injured player(s), or a player directed to leave the game is pending, and a substitute(s) is available and required.
+
+ART. 4 . . . Responds to the scorer's signal to grant a coach's request that a correctable error, as in Rule 2-10, or a timing, scoring or alternating-possession mistake be prevented or rectified. The appeal to the official shall be presented at the scorer's table where a coach of each team may be present.
+
+### SECTION 11 CHARGED TIME-OUTS (Rule 5-11)
+
+ART. 1 . . . Three 60-second and two 30-second time-outs may be charged to each team during a regulation game. Each team is entitled to one additional 60-second time-out during each extra period. Unused time-outs accumulate and may be used at any time.
+
+Note: State associations may determine the number of electronic media time-outs for games which are transmitted and may reduce the number of charged time-outs.
+
+ART. 2 . . . A single 60-second time-out charged to a team shall not exceed one minute and shall be conducted within the confines of the time-out area. A warning signal for the teams to prepare to resume play is sounded with 15 seconds remaining. Such a time-out shall not be reduced in length unless both teams are ready to play before the time-out is over.
+
+ART. 3 . . . A single 30-second charged time-out shall not exceed 30 seconds and players shall remain standing within the time-out area. A warning signal for teams to prepare to resume play is sounded with 15 seconds remaining. No on-court entertainment shall occur during this time.
+
+ART. 4 . . . Only one 60-second time-out is charged (or one 30-second time-out, if that is the only type of time-out remaining) in Rule 5-8-4 regardless of the amount of time consumed when no correction is made.
+
+EXCEPTION: No time-out is charged:
+
+a. If, in Rule 5-8-3, the player's request results from displaced eyeglasses or lens.
+
+b. If, in Rule 5-8-4, the error or mistake is prevented or rectified.
+
+ART. 5 . . . A time-out shall not be granted until after the ball has become live to start the game. The additional 60-second time-out provided for each extra period(s) shall not be granted until after the ball has become live to start the extra period(s).
+
+ART. 6 . . . Time-outs in excess of the allotted number may be requested and shall be granted during regulation playing time or any extra period at the expense of a technical foul for each, as in Rule 10-2-3.
+
+ART. 7 . . . Successive time-outs, as in Rule 4-43-2, shall not be granted after the expiration of playing time for the fourth quarter or any extra period. In all other instances, they shall be administered in the order in which they were requested.
+
+ART. 8 . . . Time-outs simultaneously requested by opposing teams or those requested to keep players in the game that were directed to leave for injury/blood, as in Rules 3-3-6 and 3-3-7 Notes, shall be granted, charged to the respective team and administered concurrently. When one team is charged with a 30-second time-out and the other a 60-second time-out, the duration shall be 60 seconds.
+
+*[MSHSL cross-reference: the 5-11-1 allotment (3×60 + 2×30, +1×60 per extra period, unused accumulate) applies in Minnesota. Note 5-8-3b — a time-out may be granted on a dead ball only when no required substitution is pending — and 5-11-6, where a time-out beyond the allotment is granted but costs a technical foul (10-2-3).]*
 
 ---
 
