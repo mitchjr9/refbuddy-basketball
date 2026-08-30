@@ -641,12 +641,10 @@ A fumble is the **accidental** loss of player control when the ball unintentiona
 - **[2025-26] 4-22-3:** once the ball contacts the **backboard**, it is automatically considered to be in downward flight.
 
 ### Sections NOT held in this knowledge base
-Section 11 below now holds the full 2026 Rules Book text of the formerly missing definitions — Rules 4-24, 4-34, 4-35, 4-36, 4-37, 4-40, 4-41, 4-42, 5-5, 5-6, and 5-7 — and those are **CONFIRMED** sources. Still NOT held as exact text:
-- **Time-out administration** — the exact text on charged time-out counts/lengths, who may request and when, and clock-restart procedures. The allotment stated in Section 1 is the standard NFHS allotment and must be treated as **LIKELY**, not CONFIRMED, until the exact section is added.
-- **Jump ball administration** (Rule 6 procedural text) — basics are summarized in Sections 1 and 3, but the exact procedural language is not held.
-- **Rule 4-39 ("Rule" definition)** — trivial, no exam value.
+Section 11 below now holds the full 2026 Rules Book text of the formerly missing definitions — Rules 4-24, 4-34, 4-35, 4-36, 4-37, 4-39, 4-40, 4-41, 4-42, 4-43, 5-5, 5-6, 5-7, and ALL of Rule 6 (6-1 Live Ball through 6-7 Dead Ball, including jump-ball administration and alternating possession) — and those are **CONFIRMED** sources. Still NOT held as exact text:
+- **Charged time-out allotment & administration** — how many time-outs each team receives per game, who may request and when, and clock-restart procedures. Rule 4-43 (held, CONFIRMED) covers time-out LENGTHS (60/30-second, 15-second warning) and the successive time-out definition, but NOT the per-game count. The allotment stated in Section 1 is the standard NFHS allotment and must be treated as **LIKELY**, not CONFIRMED, until the exact section is added.
 
-⚠️ **SOURCE-CONFLICT WARNING:** the project's rulebook file contains an unreliable "Rule 5 (continued)" block whose numbers contradict the actual 2026 Rules Book (it claims 3-minute extra periods and five 60-second time-outs — both wrong). Section 11 is transcribed from the 2026 book and is AUTHORITATIVE. If retrieved text conflicts with Section 11, use Section 11 and say so.
+⚠️ **SOURCE NOTE:** an earlier version of the project's rulebook file contained an unreliable "Rule 5 (continued)" block whose numbers contradicted the 2026 Rules Book (3-minute extra periods, five 60-second time-outs — both wrong). That block has been removed from the knowledge base, but if ANY retrieved text ever conflicts with Section 11, Section 11 is transcribed from the 2026 book and is AUTHORITATIVE — use it and say so.
 
 If a question turns on the precise wording of a rule not held here, answer **NOT IN MY KNOWLEDGE BASE** and tell the user to check the rulebook directly. Practical guidance elsewhere in this knowledge base may still be cited, but never present it as the rule's definitional text.
 
@@ -656,9 +654,8 @@ If a question turns on the precise wording of a rule not held here, answer **NOT
 
 > Transcribed verbatim from the 2026 NFHS Basketball Rules Book to fill the
 > placeholder stubs identified in Section 10. Cite these as **CONFIRMED**.
-> If any other retrieved source conflicts with this section (including the
-> project's rulebook file's unreliable "Rule 5 (continued)" block), THIS
-> SECTION IS AUTHORITATIVE.
+> If any other retrieved source conflicts with this section, THIS SECTION IS
+> AUTHORITATIVE.
 
 ## RULE 4 — DEFINITIONS
 
@@ -744,6 +741,14 @@ d. Violate the principle of verticality.
 
 ART. 3 . . . Every player is entitled to a spot on the playing court, provided the player gets there first without illegally contacting an opponent.
 
+### SECTION 39 RULE (Rule 4-39)
+
+ART. 1 . . . A rule is one of a group of regulations which governs the game.
+
+ART. 2 . . . A game regulation, commonly called a rule, sometimes states or implies that the ball is dead or a foul or violation is involved. If it does not, it is assumed the ball is live and no foul or violation has occurred to affect the situation.
+
+ART. 3 . . . A single infraction is not complicated by a second infraction unless so stated or implied.
+
 ### SECTION 40 SCREEN (Rule 4-40)
 
 ART. 1 . . . A screen is legal action by a player who, while touching the playing court, without causing contact, delays or prevents an opponent from reaching a desired position.
@@ -810,6 +815,12 @@ ART. 6 . . . The designated throw-in spot is 3 feet wide with no depth limitatio
 
 NOTE: The thrower shall keep one foot on or over the designated spot until the ball is released. The traveling and dribbling rules are not in effect for a throw-in.
 
+### SECTION 43 TIME-OUT (Rule 4-43)
+
+ART. 1 . . . A 60-second time-out charged to a team is a maximum of one minute in length. A 30-second time-out charged to a team is a maximum 30 seconds in length. A warning is sounded 15 seconds prior to the expiration of the 30 or 60 seconds.
+
+ART. 2 . . . A successive time-out is one which is granted to either team before the clock has started following the previous time-out.
+
 ---
 
 ## RULE 5 — SCORING AND TIMING REGULATIONS
@@ -853,6 +864,148 @@ ART. 3 . . . The length of each extra period shall be four minutes (or half the 
 ART. 4 . . . Once the ball becomes live in the extra period, it will be played even though a correction in the fourth quarter score is made.
 
 *[MSHSL cross-reference: the 35-second shot clock runs in extra periods (Mod E). The halves format (Mod A) does not alter Rule 5-7's extra-period provisions.]*
+
+---
+
+## RULE 6 — LIVE BALL AND DEAD BALL
+
+### SECTION 1 LIVE BALL (Rule 6-1)
+
+ART. 1 . . . The game and each extra period shall be started by a jump ball in the center restraining circle. After any subsequent dead ball, the only way to get the ball live is to resume play by a jump ball in the center restraining circle, by a throw-in or by a free throw. The dribble and traveling rules are not in effect in these situations.
+
+ART. 2 . . . The ball becomes live when:
+
+a. On a jump ball, the tossed ball leaves the official's hand(s).
+
+b. On a throw-in, it is at the disposal of the thrower.
+
+c. On a free throw, it is at the disposal of the free thrower.
+
+Note: Any rules statement is made on the assumption that no infraction is involved unless mentioned or implied. If such infraction occurs, the rule governing it is followed. For example, a game or extra period will not start with a jump ball if a foul occurs before the ball becomes live.
+
+### SECTION 2 STARTING GAME/QUARTER/EXTRA PERIOD (Rule 6-2)
+
+ART. 1 . . . The game, quarter and each extra period begins when the ball becomes live as specified in Rule 6-1-2 for a jump ball, throw-in or free throw.
+
+ART. 2 . . . To start the game and each extra period, the ball shall be put in play in the center restraining circle by a jump ball between any two opponents.
+
+ART. 3 . . . To start the second, third and fourth quarters, the ball shall be put in play by a throw-in under the alternating-possession procedure.
+
+### SECTION 3 JUMP-BALL ADMINISTRATION (Rule 6-3)
+
+ART. 1 . . . For any jump ball, each jumper shall have both feet within that half of the center restraining circle which is farther from the jumper's basket.
+
+ART. 2 . . . When the official is ready and until the ball is tossed, nonjumpers shall not:
+
+a. Move onto the center restraining circle (within 3 feet).
+
+b. Change position around the center restraining circle.
+
+ART. 3 . . . Teammates may not occupy adjacent positions around the center restraining circle if an opponent indicates a desire for one of these positions before the official is ready to toss the ball.
+
+ART. 4 . . . The ball shall be tossed upward between the jumpers in a plane at right angles to the sidelines. The toss shall be to a height greater than either of them can jump so that it will drop between them.
+
+ART. 5 . . . Until the tossed ball is touched by one or both jumpers, nonjumpers shall not:
+
+a. Have either foot break the plane of the center restraining circle cylinder.
+
+b. Take a position in any occupied space (within 3 feet of the center restraining circle).
+
+ART. 6 . . . The tossed ball shall be touched by one or both of the jumpers after it reaches its highest point. If the ball contacts the floor without being touched by at least one of the jumpers, the official shall toss it again.
+
+ART. 7 . . . Neither jumper shall:
+
+a. Touch the tossed ball before it reaches its highest point.
+
+b. Leave the center restraining circle until the ball has been touched.
+
+c. Catch the ball before the jump ball ends.
+
+d. Touch the ball more than twice.
+
+ART. 8 . . . The jump ball and the restrictions in Rule 6-3-7 end when the touched ball contacts one of the eight nonjumpers, an official or the floor.
+
+Note: During a jump ball, a jumper is not required to face the jumper's own basket, provided the jumper is in the proper half of the center restraining circle. The jumper is also not required to jump and attempt to touch the tossed ball. However, if neither jumper touches the ball it should be tossed again with both jumpers being ordered to jump and try to touch the ball.
+
+### SECTION 4 ALTERNATING POSSESSION (Rule 6-4)
+
+ART. 1 . . . Other than the start of the game and each extra period, the teams will alternate taking the ball out of bounds for a throw-in. The team obtaining control from the jump ball establishes the alternating-possession procedure, and the arrow is set toward the opponent's basket. Control may also be established by the results of a violation or foul, as in Rule 4-3.
+
+ART. 2 . . . To start the second, third and fourth quarters, the throw-in shall be from out of bounds at the division line opposite the scorer's and timer's table.
+
+ART. 3 . . . Alternating-possession throw-ins shall be from:
+
+a. One of the four designated spots based on the ball's location relative to the three-point line if team control is retained or gained in the team's frontcourt. (Diagram 5)
+
+b. The out-of-bounds spot nearest to where the ball was located if team control is retained or gained in the team's backcourt.
+
+ART. 4 . . . An alternating-possession throw-in shall result when:
+
+a. A held ball occurs.
+
+b. The ball goes out of bounds, as in Rule 7-3.
+
+c. Simultaneous floor or free-throw violations occur.
+
+d. A live ball lodges between the backboard and ring or comes to rest on the flange, unless a free throw or throw-in follows.
+
+e. Opponents commit simultaneous basket-interference violations.
+
+f. The point of interruption cannot be determined as in Rule 4-36-2c.
+
+g. A warning is issued for faking being fouled when an offensive player fakes being fouled after a try has been released and the attempt is unsuccessful.
+
+Note: When the alternating-possession procedure has not been established, the jump ball shall be in the center restraining circle between the two players involved in the previous action.
+
+ART. 5 . . . The direction of the possession arrow is reversed immediately after an alternating-possession throw-in ends. An alternating-possession throw-in ends when the throw-in ends, as in Rule 4-42-5.
+
+ART. 6 . . . The opportunity to make an alternating-possession throw-in is lost if the throw-in team violates. If either team fouls during an alternating-possession throw-in, it does not cause the throw-in team to lose the possession arrow. If the defensive team commits a violation during the throw-in, the possession arrow is not switched.
+
+### SECTION 5 BALL IN PLAY BY THROW-IN (Rule 6-5)
+
+The ball shall be put in play by a throw-in under circumstances as outlined in Rules 6-4-1, 6-4-2, 6-4-4; Rules 7-1 through 7-6; Rule 8-5; and Rules 9-1 through 9-13.
+
+### SECTION 6 BALL IN PLAY BY FREE THROW (Rule 6-6)
+
+The ball shall be put in play by placing it at the disposal of the free thrower before each free throw.
+
+### SECTION 7 DEAD BALL (Rule 6-7)
+
+The ball becomes dead, or remains dead, when:
+
+ART. 1 . . . A goal, as in Rule 5-1, is made.
+
+ART. 2 . . . It is apparent the free throw will not be successful on a:
+
+a. Free throw which is to be followed by another free throw.
+
+b. Free throw which is to be followed by a throw-in.
+
+ART. 3 . . . A held ball occurs, or the ball lodges between the backboard and ring or comes to rest on the flange.
+
+ART. 4 . . . A player-control or team-control foul occurs.
+
+ART. 5 . . . An official's whistle is blown (see exceptions a and b below).
+
+ART. 6 . . . Time expires for a quarter or extra period (see EXCEPTION a below).
+
+ART. 7 . . . A foul, other than player-control or team-control, occurs (see exceptions a, b and c below).
+
+ART. 8 . . . A free-throw violation by the throwing team, as in Rule 9-1, occurs.
+
+ART. 9 . . . A violation, as in Rules 9-2 through 13, occurs (see EXCEPTION d below).
+
+EXCEPTION: The ball does not become dead until the try or tap for field goal ends, or until the airborne shooter returns to the floor, when:
+
+a. Article 5, 6, or 7 occurs while a try or tap for a field goal is in flight.
+
+b. Article 5 or 7 occurs while a try for a free throw is in flight.
+
+c. Article 7 occurs by any opponent of a player who has started a try or tap for field goal (is in the act of shooting) before the foul occurred, provided time did not expire before the ball was in flight. The trying motion shall be continuous and begins after the ball comes to rest in the player's hand(s) on a try or touches the hand(s) on a tap, and is completed when the ball is clearly in flight. The trying motion may include arm, foot or body movements used by the player when throwing the ball at the player's basket.
+
+d. Article 9 as in Rules 9-3-3 or 9-13-1, occurs by an opponent.
+
+Note: If A1's try or tap for field goal is legally touched in flight, the goal counts if made, if the period/quarter ends before or after the legal touching. If the touching is interference or goaltending by Team A, no points are scored. If Team B violates, the points are awarded — either two or three depending on whether it was a two or three-point try or tap for field goal.
 
 ---
 
