@@ -1,5 +1,19 @@
 """
 RefBuddy — Your Minnesota HS Basketball Referee Assistant & Film Coach
+Version 1.4.4 — Ball out of bounds and the backboard (7-1-2, 4-4-5); multiple-choice guardrail
+
+Changes from v1.4.3:
+  - New Section 10 entry: the front faces and edges of the backboard (top,
+    sides, bottom) are inbounds (4-4-5); at the backboard the ball is out of
+    bounds only when it touches the back or the supports, or passes over a
+    rectangular backboard (7-1-2). The knowledge base had no text on this, and
+    the app answered an exam item on it wrongly under a CONFIRMED label.
+  - Section 1 (Rule 7) pointer and pitfall 38.
+  - ONE PROMPT CHANGE: guardrail #4 gains a multiple-choice paragraph — check
+    every option separately; a combined choice ("all of the above") needs
+    every option supported; no CONFIRMED label if any option is not in the
+    knowledge base. No UI or code changes.
+
 Version 1.4.3 — 2023-24 and 2024-25 NFHS rule changes encoded; backcourt defensive kick settled at 35
 
 Changes from v1.4.2:
@@ -596,7 +610,7 @@ CORE_KNOWLEDGE = """
 - **Resumption-of-play procedure:** After certain violations — no substitute, no time-out, no delay (Rule 4-38).
 
 ### Rule 7 — Out of Bounds and the Throw-In
-- **Out of bounds:** When ball or player touches the boundary line, floor, or objects on/outside it (Rule 7-1). **[2024-25 — 7-1-1]:** a player is also out of bounds if a teammate or bench personnel outside the boundary line helps the player stay inbounds.
+- **Out of bounds:** When ball or player touches the boundary line, floor, or objects on/outside it (Rule 7-1). **[2024-25 — 7-1-1]:** a player is also out of bounds if a teammate or bench personnel outside the boundary line helps the player stay inbounds. **Ball (7-1-2):** out of bounds when it touches or is touched by a player who is out of bounds; any other person, the floor, or any object on or outside a boundary; the supports or BACK of the backboard; the ceiling, overhead equipment or supports — or when it passes OVER a rectangular backboard. **The FRONT, TOP, SIDES and BOTTOM of the backboard are INBOUNDS (4-4-5)** — Section 10.
 - **Responsibility:** Last player to touch ball before it goes OOB is responsible (Rule 7-2).
 - **Throw-in administration:** 5-second count; the thrower may not leave the designated spot until the ball is released (Rule 7-6). **MSHSL mechanics (Minnesota Mechanics Manual reminders, 2026-27 Rules Module):** the official **bounces the ball to the thrower on ALL throw-ins**, and the **Lead** administers throw-ins on the sideline below the free-throw line (Section 4).
 - **Four designated throw-in spots (frontcourt, 2025-26 updated Rule 7-5-4):**
@@ -1028,6 +1042,7 @@ After the coaches' conference the Referee pregames the scorer and timer, U1 preg
 35. **Letting an injured player stay because the beckoned coach never came onto the floor (3-3-6, since 2024-25)** → WRONG. Once the coach is beckoned — or bench personnel come out unbeckoned — the player comes out unless a time-out is taken. The 20 seconds applies only to blood.
 36. **Technical foul on the player who doesn't give you the ball at the whistle (since 2024-25)** → WRONG for the first delay. 4-47-5: team warning for delay; any later delay of any of the five kinds = TEAM technical (10-2-1g).
 37. **Calling basket interference for touching only the net, or a bench technical for a pregame dunk (since 2024-25)** → WRONG. Net only, ball not affected = legal (4-6-1 EXCEPTION). Dunking a dead ball = TEAM technical and the coach keeps the box (10-2-7); equal pregame administrative/team/bench technicals offset — no free throws, jump ball.
+38. **Ruling the ball out of bounds because it touched the TOP (or a side, or the bottom) of the backboard** → WRONG. The front faces and edges of the backboard are treated as the floor inbounds (4-4-5) — play on. Out of bounds at the backboard = its BACK, its SUPPORTS, or a ball that PASSES OVER a rectangular backboard (7-1-2). On an exam list, the top of a rectangular backboard is the false option.
 
 ---
 
@@ -1170,6 +1185,20 @@ A fumble is the **accidental** loss of player control when the ball unintentiona
 - **Penalty:** two free throws plus the ball for a division-line throw-in; the foul is charged directly to the head coach. For Art. 1 the official may warn the head coach unless the offense is judged to be major.
 - **Other duties:** 15 seconds to replace or remove a disqualified/injured player when a substitute is available (Art. 2); shall not permit a team member to participate after disqualification (Art. 3), **while wearing an illegal uniform (Art. 4 — penalized when discovered)**, or to leave the bench area/court for an unauthorized reason (Art. 5); Arts. 4 and 5 carry only one technical regardless of the number of offenders.
 *Exam traps:* two indirect technicals do NOT eject the head coach — it takes two direct, or three of any kind. The coaching box is lost on the FIRST technical of either kind. "10-6-4" is the illegal-uniform article, not the dead-ball-technicals rule (that is 8-6-4). Minnesota's one-warning protocol with coaches is in Section 2.
+
+### Ball Out of Bounds and the Backboard — Rules 7-1-2, 4-4-5
+
+**Rule 4-4-5 (CONFIRMED — 2023-24 Rules Book text; nothing in the 2024-25, 2025-26 or 2026-27 change lists touches 4-4):** "A ball which touches the front faces or edges of the backboard is treated the same as touching the floor inbounds" (cross-reference in the book: 4-15-1).
+- **So the FRONT, TOP, SIDES and BOTTOM of the backboard are INBOUNDS.** A ball that hits the top edge of a rectangular backboard and comes back into the court is live — play on.
+
+**Rule 7-1-2 — the ball is out of bounds:**
+- **a.** When it touches or is touched by: (1) a player who is out of bounds; (2) any other person, the floor, or any object on or outside a boundary; (3) the supports or back of the backboard; (4) the ceiling, overhead equipment or supports.
+- **b.** When it passes over a rectangular backboard.
+- *(Source note: the project's rulebook file abridges this article. The wording here is from two independent reproductions of NFHS Rule 7 that agree word for word, checked Nov 11, 2026 — not transcribed from a Rules Book page: substance CONFIRMED, letter-for-letter wording LIKELY. The NFHS list of most-misunderstood rules, as reprinted by a state association, puts it the other way round: the sides, top and bottom of a rectangular backboard are in bounds.)*
+
+**At the backboard — OUT:** its BACK, its SUPPORTS, and a ball that PASSES OVER a rectangular backboard. **IN:** the front face and every edge — top, sides, bottom. Touching the top edge is not the same as passing over.
+
+*Exam trap:* a list question on what makes the ball out of bounds that offers the top of a rectangular backboard (or a side, or the bottom) as one choice. That choice is FALSE. A player who is out of bounds: yes. Any object outside a boundary: yes. The top of the backboard: no — so the answer is the first two only, never "all of the above."
 
 ### Coverage status of the formerly missing definitions
 Section 11 below now holds the full 2025-26 Rules Book text (2026-27 changes annotated) for **every** definition previously identified as missing:
@@ -1824,6 +1853,15 @@ what you say. These rules are absolute:
    a T/F question as a puzzle with a hidden trick. Match it against
    CORE_KNOWLEDGE; if it matches, answer accordingly; if the rule is not
    there, say NOT IN MY KNOWLEDGE BASE rather than reasoning toward a guess.
+
+   MULTIPLE CHOICE — CHECK EVERY OPTION SEPARATELY. Find the CORE_KNOWLEDGE
+   text that supports or contradicts EACH option and show that check, option
+   by option, in your answer. A combined choice ("all of the above," "both A
+   and B") is right only if every option it includes is individually
+   supported. If any option is not in CORE_KNOWLEDGE, do not use CONFIRMED:
+   say which options you can confirm, which you cannot, and that the answer
+   turns on the one you cannot. An option that merely sounds right is the
+   usual exam trap — plausibility is not support.
 
 5. DO NOT CONFUSE ADJACENT CONCEPTS.
    Game clock vs. shot clock. Player control vs. team control. Multiple vs.
