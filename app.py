@@ -1,5 +1,60 @@
 """
 RefBuddy — Your Minnesota HS Basketball Referee Assistant & Film Coach
+Version 1.4.1 — Module follow-ups confirmed by the owner (Nov 10, 2026)
+
+Changes from v1.4:
+  - Shot clock (Section 3): three open plays settled — defensive kicked/fisted
+    ball in the backcourt is 19 or less -> 20, 20 or more -> 35; an offensive
+    foul in the backcourt, or a held ball, that gives the other team a frontcourt
+    throw-in -> 20. Season Flags table, both reset lists, and the quick-reference
+    row updated; the out-of-bounds/kick clause in item 7 stays LIKELY.
+  - Coach warning (Section 2, pitfall 28): given at the NEXT DEAD BALL, not by
+    stopping live play.
+  - 8-6-4 with a difference of two or more: free throws for each unmatched
+    technical — encoded as LIKELY (the owner's understanding, not a ruling).
+  - Uniform technicals: the module did not mention them; the "LIKELY in effect"
+    presumption is removed and the 2025-26 handling is the working approach.
+  - Section 11 is now labeled as the 2025-26 Rules Book (confirmed), in the
+    section title, edition note, coverage notes, and the one sentence of the
+    system prompt that describes Section 11. No other prompt, UI, or code change.
+
+Version 1.4 — MSHSL 2026-27 Rules Module encoded; Rules 8-6 and 10-6 added; corrections
+
+Changes from v1.3.1:
+  - New source: module notes from the MSHSL 2026-27 basketball rules module
+    (Jason Nickleby, MSHSL Director of Officials). Minnesota direction is PRIMARY,
+    NFHS text is the backup. One authoritative home per topic; pointers elsewhere.
+  - Section 0: 5-9-5 Minnesota wording ("each half"); 5-10-2 NOTE article wording;
+    6-4-4g CORRECTED (leftover language, "not a rule change" — resume by the
+    appropriate rule; a whistle with no team control still goes to the arrow per
+    4-36-2c); 8-6-4 article text, dead-ball-period definition, examples, and an
+    explicit limit on unequal-number cases; citation SETTLED as 8-6-4 (the
+    "10-6-4" heading in the NFHS Comments is an error — 10-6-4 is the
+    illegal-uniform article of the Head Coach's Rule); 7-5-6c; the 2026-27
+    editorial changes are now held as module summaries (was: citations only).
+  - Section 1: Minnesota undershirt rule CONFIRMED (torso color or black for the
+    HOME team); accessories and jersey/number colors MSHSL-first; throw-in and
+    ten-second lines updated. CORRECTIONS of pre-existing errors: Head Coach's
+    Rule (ejection = flagrant, second direct, or third technical of any
+    combination — not "second indirect"); the ball becomes live on a throw-in at
+    the thrower's disposal (not on release).
+  - Section 2: 2026-27 module block (uniform enforcement by season, coaching
+    box, Official Warning protocol).
+  - Section 3 REBUILT from official text: 2026-27 module lists primary, 2025-26
+    written protocol layered, Season Flags table for the differences, CORRECTED
+    officials' signals (stop clock + tap the head; rolling index finger; "20"
+    with two hands; point to the shot clock), end-of-period backcourt count,
+    U1's 12 pregame items, selected written situations.
+  - Section 4: all officials meet coaches/captains; bounce on all throw-ins; Lead
+    administers sideline throw-ins below the free-throw line; BI/GT mechanic.
+  - Sections 6, 7, 8, 10: flop mechanics corrected; module notes; pitfalls 18-19
+    reworded and 23-31 added; traveling-on-the-floor, airborne shooter,
+    continuous motion, and goaltending entries updated; Head Coach's Rule entry.
+  - Section 11: verbatim Rule 8-6 (Arts. 1-3) and Rule 10-6; edition note (the
+    transcribed text predates 2026-27; annotations govern); annotations at
+    4-40-3, 6-3-2, 6-3-4, 6-4-4g.
+  - No UI, prompt, or code changes.
+
 Version 1.3.1 — Corrections verified; MSHSL uniform rule made primary
 
 Changes from v1.3:
@@ -152,6 +207,7 @@ CORE_KNOWLEDGE = """
 **[2023-24] Undershirt Color — Visiting Team — Rule 3-5-6**
 - **New:** Visiting team may wear undershirts that are black OR a single solid color similar to the jersey torso. All teammates must match.
 - **Why it matters:** Common uniform question. Visitor can choose black or team color but all must wear the same.
+- **MINNESOTA (MSHSL — PRIMARY):** this is the NFHS rule, written for visitors in DARK jerseys. Minnesota reverses home and visitor colors (Mod B), so the black option belongs to the **HOME** team; visitors, in white jerseys, wear white undershirts. See Section 1, Rule 3 (2026-27 MSHSL Rules Module).
 
 **[2023-24] Shot Clock Operator Location — Rule 2-1-3 NOTE**
 - **New:** Shot clock operator shall be seated at the scorer's and timer's table.
@@ -230,62 +286,85 @@ CORE_KNOWLEDGE = """
 
 ### 2026-27 Rule Changes (CURRENT SEASON)
 
-> **Source status: CONFIRMED.** The rule text, rationale, and comments below are
-> taken verbatim from the NFHS "2026-27 Basketball Rules Changes," "Rules
-> Comments," and "Points of Emphasis" publications, corroborated by the NFHS press
-> release (May 20, 2026) and the MN preseason clinic (Oct 2026). The 2026-27
-> Rules Interpretations (NFHS, © 2026) are encoded at the end of this block.
-> Cite these as CONFIRMED. The 2026-27 editorial changes are listed by citation
-> only — their text is NOT held.
+> **Source status: CONFIRMED.** Three sources are held for 2026-27: (1) the NFHS
+> "2026-27 Basketball Rules Changes," "Rules Comments," and "Points of Emphasis"
+> publications, corroborated by the NFHS press release (May 20, 2026); (2) the
+> **MSHSL 2026-27 Rules Module** presented by Jason Nickleby, MSHSL Director of
+> Officials (module notes, uploaded Nov 2026) — the NFHS rules-presentation
+> slides plus Minnesota modifications, mechanics, and administration; (3) the MN
+> preseason clinic (Oct 2026). The 2026-27 Rules Interpretations (NFHS, © 2026)
+> are encoded at the end of this block. **Where the module gives Minnesota
+> direction, MSHSL is PRIMARY and the NFHS text is the backup.** The editorial
+> changes are held as module summaries; the few still NOT held are named below.
 
 **[2026-27] Rule 5-9-5 (NEW) — 0.3-Second Minimum After a Throw-In or Unsuccessful Free Throw**
 - **Rule text:** "In the last 59.9 seconds of each quarter or extra period, if play is resumed by a throw-in or an unsuccessful free throw, a minimum of three-tenths (.3) of a second must expire on the game clock when the ball is legally touched by a player inbounds."
 - **NOTE:** "This rule does not apply when the game clock is not capable of displaying tenths of a second."
 - **Rationale:** "When play is resumed with a throw-in or unsuccessful free throw, a player may not gain control and attempt a try without at least .3 seconds expiring from the game clock. This change aligns with existing provisions related to tap attempts found in Rule 5-2-5."
 - **Rules Comment:** provides consistency for end-of-period timing involving throw-ins and unsuccessful free throws; recognizes that a player cannot legally catch and release a try with less than three-tenths remaining; officials and timer personnel should communicate clearly; schools with clocks lacking tenths displays are exempt.
-- **MSHSL translation (Mod A halves):** last 59.9 seconds of **each half** and each extra period — as presented at the MN preseason clinic ("remove a minimum of 0.3 under one minute in either half if the throw-in is tipped, or on a rebound off a free throw").
+- **MINNESOTA (MSHSL 2026-27 Rules Module — PRIMARY, CONFIRMED):** the Minnesota slide reads "In the last 59.9 seconds of each **half** or extra period, if play is to be resumed by a throw-in or an unsuccessful free throw, a minimum of 3/10ths (.3) of a second must expire on the game clock when the ball is legally touched by a player inbounds." Minnesota plays halves (Mod A) — read "quarter" as "half." (MN preseason clinic: "remove a minimum of 0.3 under one minute in either half if the throw-in is tipped, or on a rebound off a free throw.")
+- **Game clock, not shot clock:** 5-9-5 takes time off the **game clock** and applies only where the game clock displays tenths. The 2026-27 MSHSL direction that the tenth-of-second functionality "will be turned off" is listed under the **shot clock** modifications (Section 3); the module notes do not say that about the game clock.
 - **Why it matters:** a tipped throw-in with 0.2 showing can no longer leave 0.2 on the clock. Example from the rationale: clock at 2.8, ball legally touched → clock corrected to **2.5**. Confirm the clock shows tenths in pregame.
 
 **[2026-27] Rule 5-10-2 NOTE (NEW) — Officials' Visible or Silent Count as Definite Knowledge**
 - **Rule text:** "If the referee determines the game clock malfunctioned, was improperly started or stopped, or failed to run, an official's visible or silent count, or other official information, may be used to correct the timing error."
+- **Article wording (NFHS rules presentation, as shown in the MSHSL 2026-27 Rules Module):** "If the referee determines the clock malfunctioned or was not started/stopped properly, or if the clock did not run, an official's count, **visible or silent**, or other official information may be used to make a correction."
 - **Rationale:** "Officials currently utilize visible counts for backcourt violations, closely guarded situations, and three-second violations. This change permits officials to also maintain silent counts that may be used as definite knowledge in correcting timing mistakes under Rule 5-10-1."
 - **Rules Comment:** both visible and silent counts now serve as definite knowledge; officials are encouraged to maintain awareness of elapsed time in all situations, particularly during clock malfunctions or operator errors.
 - **Why it matters:** if the clock didn't start on the touch, your count IS the correction. Clinic phrasing: "correct the game clock if definite knowledge."
 
-**[2026-27] Rule 6-4-4g — DELETED (Faking-Being-Fouled Warning No Longer Produces an AP Throw-In)**
+**[2026-27] Rule 6-4-4g — DELETED (Leftover Faking-Being-Fouled Language Removed; Resume by the Appropriate Rule)**
 - **Change:** "Deleted language regarding an alternating possession throw-in following a warning for faking being fouled after a released try attempt."
 - **Rationale:** "The provision is no longer necessary due to the 2025-26 interpretation change modifying procedures for addressing faking being fouled situations."
 - **Rules Comment:** removes outdated language; procedures for these situations are covered through current interpretations and no longer require a separate alternating-possession provision.
-- **Why it matters:** a flop warning should never put you in an arrow situation. Clinic guidance: **wait for a team to have possession or a dead ball, then report the warning.** See Section 6.
+- **MSHSL 2026-27 Rules Module (slide text — CONFIRMED):** "The letter 'g' is now eliminated. Play is stopped when there is team control, a goal is scored, or another official stoppage occurs. When play is properly stopped, the ensuing resumption is administered under the appropriate rule for the situation, rather than using the alternating possession procedure (Rule 4-36-2.c). **This is not a rule change; this was inadvertently left in the rule after the rule change in 2025-26.**"
+- ⚠️ **Precision — the arrow is NOT abolished for flop situations.** Only the special 6-4-4g trigger was removed. Stop play at the right time (team control, a made goal, another official stoppage) and resumption follows the ordinary rule for that situation. Module notes: **"If we blow it dead prior to team control, we need to go to alternating possession arrow, but avoid this in practice"** (4-36-2c, Section 11). Never answer that a flop warning can never lead to an AP throw-in. Floor mechanics: Section 6.
 
 **[2026-27] Rule 8-6-4a through d (NEW) — Technical Fouls by BOTH Teams in the Same Dead-Ball Period**
-- **Rule text:** "When both teams are assessed technical fouls during the same dead-ball period and before the ball becomes live:
-  a. All technical fouls are considered to have occurred at approximately the same time for offsetting penalty purposes;
-  b. All fouls are recorded and penalties identified;
-  c. If an unequal number of technical fouls are committed, play resumes as though the final single technical foul was the only foul committed; and
-  d. If penalties cancel for equal technical fouls, play resumes at the point of interruption."
+- **Article text (NFHS rules presentation, as shown in the MSHSL 2026-27 Rules Module under "RESUMING PLAY DIFFERENCES — 8-6-4a-d (NEW)"):** "ART. 4 . . . When, during the same dead-ball period that follows an infraction or stoppage in play and before the ball becomes live, both teams are assessed technical fouls:
+  a. All technical fouls are considered to have been committed at approximately the same time for the purposes of offsetting their penalties;
+  b. All fouls are charged, and their penalties are identified;
+  c. When there is an unequal number of fouls committed during the dead-ball period, play shall resume as if the last committed single administrative, team, substitute, player, or bench technical foul was the only foul committed; and
+  d. If, after the cancellation of the penalties for an equal number of fouls by both teams, the game shall be resumed at the point of interruption."
+  (Quoted from the slide — two independent copies agree — not from a page of the 2026-27 Rules Book: substance CONFIRMED, letter-for-letter wording LIKELY. The NFHS "Rules Changes" handout prints a shorter paraphrase of a–d with the same substance: "...occurred at approximately the same time for offsetting penalty purposes ... play resumes as though the final single technical foul was the only foul committed ... if penalties cancel for equal technical fouls, play resumes at the point of interruption.")
 - **Rationale:** "This proposal clarifies that all technical fouls occurring during the same dead-ball period are treated as occurring at approximately the same time."
-- **Rules Comment** (published under the heading **10-6-4**): simplifies administration; treating all technical fouls in the dead-ball interval as simultaneous lets officials administer penalties consistently and reduces confusion over order of enforcement and resumption.
-- ⚠️ **Citation note (verified against NFHS's own web pages):** the NFHS "Rules Changes" document and the press release number this **8-6-4a–d**; the NFHS "Comments on the Rules — 2026-27" page heads the identical comment **10-6-4**. The discrepancy is in the NFHS source, not in transcription. Cite **8-6-4** (the article as added); if pressed, say the Comments label it 10-6-4. Do not invent content for a "10-6-4" beyond this comment. (Rule 10 Section 6 is a different subject in the Rules Book — the exact 2026-27 book text for 8-6-4 and 10-6 is not held; see the verification checklist in the project's working notes.)
-- **Why it matters:** no sequencing arguments about which bench's tech came first. Equal → nothing shot, POI. Unequal → administer only the last unmatched one. Clinic phrasing: "both teams assessed technicals in a dead-ball period are considered to have happened at the same time."
+- **The dead-ball period (module diagram):** it **STARTS** with the officials' jurisdiction prior to the game, a whistle to end play, or a horn to end play — so it covers the pregame warm-up, time-outs, and the time between quarters/extra periods — and it **ENDS when the ball becomes live** (jump ball: the ball leaves the official's hand(s); throw-in: at the disposal of the thrower; free throw: at the disposal of the free thrower — 6-1-2). Technical-foul categories on the diagram: Administrative (10-1), Team (10-2), Substitute (10-3), Player (10-4), Bench (10-5), Head Coach (10-6).
+- **Module examples:** technical fouls **more than 13 minutes apart in the pregame warm-up**, and unsporting technical fouls at the **start and the end of the same time-out**, are each "considered to be at approximately the same time for purposes of offsetting their penalties."
+- **IN PRACTICE (module notes):** "if equal # of technical fouls against both teams in same dead ball period, they cancel out; if unequal, treat the last technical foul as the only technical foul."
+- ⚠️ **Unequal numbers — what is held:** no official source held works an unequal example. The article establishes that every foul is charged (b), that equal numbers offset (a, d), and that with unequal numbers play resumes "as if the last committed **single** ... technical foul was the only foul committed" (c). **LIKELY reading — say LIKELY:** the equal numbers pair off and the **unmatched** technical(s) belong to the team that committed more; its opponent shoots the free throws and takes the division-line throw-in. With a difference of **two or more** (e.g., three against A, one against B): **LIKELY — free throws are attempted for each unmatched technical** (two unmatched = four free throws), with play resuming as for the last one. That is the understanding of the official who took the module notes (Nov 10, 2026), not an NFHS or MSHSL ruling — the module presenter covered only the last-technical case. Label it LIKELY and refer a real 3-to-1 case to the assignor/MSHSL.
+- **Citation — SETTLED: cite 8-6-4.** Rule 8 Section 6 is "RESUMING PLAY DIFFERENCES"; through 2025-26 it had three articles, and this is the new Article 4 (Section 11). The NFHS "Comments on the Rules — 2026-27" page prints this change's comment under the heading "10-6-4" — an error on that page: Rule 10 Section 6 is the HEAD COACH'S RULE, and 10-6-4 is "The head coach shall not permit a team member to participate while wearing an illegal uniform." The NFHS Rules Changes document, the press release, and the rules presentation all number the change 8-6-4. Never cite 10-6-4 for dead-ball technical fouls.
+- **Rules Comment (the one printed under "10-6-4"):** simplifies administration; treating all technical fouls in the dead-ball interval as simultaneous lets officials administer penalties consistently and reduces confusion over order of enforcement and resumption.
+- **Why it matters:** no sequencing arguments about which bench's technical came first. Offsetting cancels the PENALTIES, not the fouls — every technical is still charged (b). Equal → nothing shot, point of interruption.
 
 **[2026-27] Rule 9-2 PENALTY (Section 2) — Throw-In Violation Located at the ORIGINAL Throw-In Spot**
 - **Rule text:** "The ball becomes dead when the violation or technical foul occurs. The location of the violation is the original throw-in spot."
 - **Rationale:** "Prior to designated throw-in spots, all throw-in violations were administered from the original throw-in location. Language referencing the original throw-in spot was inadvertently removed following implementation of designated throw-in spots. This change restores that language and clarifies administration procedures."
 - **Rules Comment:** officials should continue using designated throw-in spots when applicable while recognizing that the original throw-in location remains the basis for enforcement following violations. Press release: if the original spot is not a designated spot, the ensuing throw-in is moved to such a spot.
+- **Division-line exception — 7-5-6c (NEW, 2026-27 editorial; module):** "When a throw-in violation occurs during a division line throw-in, the resulting throw-in shall remain at the division line opposite the scorer's and timer's table." It is NOT moved to one of the eight designated spots (the four in each half of the court).
 - **Why it matters:** a thrower running the end line who violates is treated at the original spot — which decides inside-vs-outside the three-point line for the next throw-in.
 
-**2026-27 Editorial Changes (citations only — exact text NOT held):**
-1-19 · 2-2-1 EXCEPTION · 4-1-1 EXCEPTION (new) · 4-6-2 · 4.11.2 SITUATION · 4-22-1 NOTE (new) · 4-22-2 · 4-22-3 · 4-40-3 · 4-44-5b · 4-44-5c · 4.44.5 SITUATION B · 4-44-5c (new) · 4.44.5 SITUATION C · 6-3-2 · 6-3-4 · 6-4-6 · 6.4.6 SITUATION A · 7-5-6c (new) · 9-2-10 PENALTIES 1 · Technical Foul Penalty Summary.
-If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the wording. (Exception: the 4-44-5b/c traveling-on-the-floor provisions are illustrated by the 2026-27 Interpretations SITUATIONS 2 and 3 below — cite those rulings as CONFIRMED.)
+**2026-27 Editorial Changes — NFHS citation list:** 1-19 · 2-2-1 EXCEPTION · 4-1-1 EXCEPTION (new) · 4-6-2 · 4.11.2 SITUATION · 4-22-1 NOTE (new) · 4-22-2 · 4-22-3 · 4-40-3 · 4-44-5b · 4-44-5c · 4.44.5 SITUATION B · 4-44-5c (new) · 4.44.5 SITUATION C · 6-3-2 · 6-3-4 · 6-4-6 · 6.4.6 SITUATION A · 7-5-6c (new) · 9-2-10 PENALTIES 1 · Technical Foul Penalty Summary.
+
+**What they say — as presented in the MSHSL 2026-27 Rules Module (NFHS rules-presentation summaries; CONFIRMED as presented — the Rules Book's letter-for-letter wording is held only where quoted):**
+- **1-19 NOTE (NEW) — Electronic devices:** "Communication between a coach and player through electronic devices is prohibited." Hearing aids are legal.
+- **4-1-1 EXCEPTION (NEW) — Airborne shooter:** a player hanging on the rim after a dunk attempt is not an airborne shooter. Full text: Section 10, Airborne Shooter.
+- **4-6-2 — Basket interference:** "Occurs when a player slaps or strikes the backboard, causing the backboard or ring to vibrate during a try for goal that has the possibility of entering the basket." (The 2025-26 provision, 4-6-1a/b, read "while the ball is on or within the basket, touching the backboard, or within the cylinder" — use the 2026-27 wording for the current season.)
+- **4.11.2 SITUATION — Act of shooting:** stepping or pivoting toward the basket is not required; a player may step in a direction that creates space to attempt a try — lateral or away from the basket. Full text: Section 10, Continuous Motion.
+- **4-22-1 NOTE (NEW) and 4-22-2 — Goaltending:** goaltending does not apply to a ball released on a throw-in pass; a defensive player's goaltending during a free throw is also a player technical foul (10-4-8). Full text: Section 10, Goaltending.
+- **4-40-3 NOTE (NEW) — Screen:** the visual field includes forward and peripheral vision and extends horizontally from the ear. Full text: Section 11 at 4-40-3.
+- **4-44-5b, 4-44-5c (NEW), 4.44.5 SITUATION — Traveling on the floor:** may not attempt to stand up with the ball; a slide and/or roll caused by momentum is legal; a player flat on the back may sit up and may return to the back. Full text: Section 10, Traveling — Player on the Floor.
+- **6-3-2 and 6-3-4 NOTE (NEW) — Jump ball:** "when the official enters the center restraining circle" replaces "is ready"; each jumper keeps both feet within their half of the circle until the jump ball ends. Full text: Section 11 at 6-3-2 and 6-3-4.
+- **7-5-6c (NEW) — Throw-ins:** a throw-in violation on a division-line throw-in → the next throw-in stays at the division line (see 9-2 PENALTY above).
+- **Technical Foul Penalty Summary:** the chart was revised to better align with Rule 10 (per the NFHS rules presentation as posted by IAABO Bd. 7 — not in the MSHSL module notes). The chart's contents are NOT held.
+- **Still NOT held (citation only):** 2-2-1 EXCEPTION · 4-22-3 (the 2026-27 edit) · 6-4-6 · 6.4.6 SITUATION A · 9-2-10 PENALTIES 1. If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE**.
 
 **2026-27 Points of Emphasis (NFHS — official text condensed, with MN clinic commentary in brackets):**
-1. **Uniforms — Education-Based Activities.** Proper uniform standards reinforce school identity, team unity, and respect for the game; coaches and players share responsibility for compliance. **MINNESOTA (MSHSL Mod B — PRIMARY): HOME = dark, VISITOR = white.** *NFHS backup text as published in this POE: "The traditional designation of white jerseys for the home team and dark jerseys for the visiting team continues…" — do NOT apply that line in an MSHSL game.* Uniforms must be worn as intended by rule at all times; jerseys designed to be tucked in must remain properly tucked, front and back; a non-compliant player shall be directed to leave the game until corrected (Rule 3-3-4). Coaches are expected to address compliance before competition.
+1. **Uniforms — Education-Based Activities.** Proper uniform standards reinforce school identity, team unity, and respect for the game; coaches and players share responsibility for compliance. **MINNESOTA (MSHSL Mod B — PRIMARY): HOME = dark, VISITOR = white.** *NFHS backup text as published in this POE: "The traditional designation of white jerseys for the home team and dark jerseys for the visiting team continues…" — do NOT apply that line in an MSHSL game.* Uniforms must be worn as intended by rule at all times; jerseys designed to be tucked in must remain properly tucked, front and back; a non-compliant player shall be directed to leave the game until corrected (Rule 3-3-4). Coaches are expected to address compliance before competition. [Module: players not in compliance with **Rule 3-3-5** are directed to leave the game until corrected (3-3-4). Illegal examples shown: a jersey tucked, folded, tied, or otherwise modified so that it is not worn as the manufacturer designed.]
 2. **Timing Corrections and Officials' Counts.** Officials and table personnel must manage timing collaboratively; when mistakes or equipment issues occur, officials may use visible or silent counts to maintain fairness. Counts are not limited to rule-mandated situations (backcourt, closely guarded, three seconds) — they may address timing mistakes or administrative issues. Communicate with the table. (Ties to 5-9-5 and 5-10-2 NOTE.)
 3. **Bench Decorum, Sportsmanship and Professional Conduct.** Behavior on the court and in the stands should reflect the same respect, integrity, and responsibility expected in the classroom. The head coach is responsible for all bench personnel and for communication with officials; assistants must remain composed and supportive. Unsporting behavior, excessive reactions, prolonged dissent, and inappropriate comments undermine the game. **Taunting** — actions or remarks intended to embarrass, ridicule, or demean an opponent — must be addressed promptly and consistently. [Clinic: *if you can't do it in the classroom, you can't do it on the court.* Apply 4-48 warnings early. **Don't bring warnings home.**]
 4. **Physical Play and Illegal Contact.** Illegal contact includes **hand checking, displacement, push-offs using the controlling arm**, and other actions that restrict freedom of movement or violate legal guarding principles. Unnecessary roughness must be penalized. **Post play** requires special attention: **illegal use of two hands on the back, forearm displacement, or dislodging a legally positioned opponent.** [Clinic: two hands on the back and the arm-bar are the two to clean up. **Put the rulebook in play in the first half** — waiting means playing catch-up in the second.]
 5. **Traveling, Continuous Motion and Legal Player Movement.** Euro-steps, spin moves, and jump stops are **legal when executed within the limits of establishing and maintaining a pivot foot**; dragging a pivot foot, taking extra steps, or failing to maintain a pivot foot when ending a dribble is traveling. Continuous motion: if an opponent fouls after a player has started a try or tap, the player may complete the customary arm movement, and if pivoting or stepping when fouled, may complete the usual foot or body movement while holding the ball; **continuous motion ends when the ball is clearly in flight.** [Clinic: a player must have **control** before a travel can exist; once in control, find the pivot foot — it may be lifted to pass or shoot but may not return to the floor before release. Watch the spin move, the Euro step, and three-point-line footwork (the "bunny hop" and the step-back). On a continuous-motion foul by the defense, **count the basket** if made.]
-6. **Player Equipment — Tooth and Mouth Protectors.** Must be properly designed and worn for protection. Custom-fitted or molded protectors are required and must not include attachments or features unrelated to protection; decorative or non-protective additions are prohibited.
+6. **Player Equipment — Tooth and Mouth Protectors.** Must be properly designed and worn for protection. Custom-fitted or molded protectors are required and must not include attachments or features unrelated to protection; decorative or non-protective additions are prohibited. [Module PlayPics: a standard protector used solely for protection = legal; a protector with an attached chain or accessory, with decorative or non-protective attachments, or with a ring/loop attached = illegal.]
 7. **Authenticating Mark.** All game balls must display the NFHS Authenticating Mark. Non-conforming equipment must be reported to the state association following the contest; officials must remain vigilant in identifying and reporting it.
 
 **2026-27 NFHS Rules Interpretations (NFHS, © 2026 — the only source of official interpretations; they do not set aside or modify any rule):**
@@ -312,7 +391,7 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 | 4-8-1 | 2023-24 | Bonus = 5th team foul/quarter (2 FTs); no 1&1 [NFHS only — MSHSL retains 1&1 half system] |
 | 4-36, 7-5-2–4 | 2023-24 | Four designated frontcourt throw-in spots established |
 | 3-4-5 | 2023-24 | Like-colored uniform bottoms required |
-| 3-5-6 | 2023-24 | Visiting undershirt: black or jersey color (team must match) |
+| 3-5-6 | 2023-24 | NFHS: visiting team (dark jerseys) undershirt black or jersey color, team must match. Minnesota reverses the colors — the black option is the HOME team's (see the MSHSL uniforms row) |
 | 7-6-6 | 2023-24 | Wrong throw-in team correctable before first dead ball / change of possession |
 | 9-3-3 | 2023-24 | Stepping OOB not a violation unless first to touch ball on return |
 | 2-1-3 NOTE | 2023-24 | Shot clock operator must sit at scorer's/timer's table |
@@ -326,12 +405,22 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 | 10-4-4b | 2025-26 | Backboard/ring contact creating unfair advantage = technical foul |
 | 5-9-5 | 2026-27 | NEW: last 59.9 sec — min 0.3 sec runs off on legal inbounds touch after throw-in or missed FT (tenths display only) |
 | 5-10-2 NOTE | 2026-27 | NEW: official's visible or silent count = definite knowledge to correct a clock error |
-| 6-4-4g | 2026-27 | DELETED: faking-being-fouled warning no longer produces an AP throw-in |
-| 8-6-4a–d | 2026-27 | NEW: both teams' techs in same dead-ball period = same time; unequal → last single tech governs; equal → cancel, POI |
+| 6-4-4g | 2026-27 | DELETED — leftover language ("not a rule change"): after a flop warning, resume by the appropriate rule; stop play with team control, after a goal, or at another stoppage. Whistle with NO team control → AP arrow still applies (4-36-2c) — avoid |
+| 8-6-4a–d | 2026-27 | NEW (Rule 8 Section 6, Article 4 — NOT "10-6-4"): both teams' techs in the same dead-ball period = same time; all charged; equal → penalties cancel, POI; unequal → play resumes as if the last committed single tech were the only foul |
 | 9-2 PENALTY | 2026-27 | Throw-in violation located at the ORIGINAL throw-in spot; move to designated spot if needed |
 | 6-4-3, 8-5-3 | 2026-27 (Rules Book Correction) | AP throw-ins and throw-ins after intentional/flagrant fouls → one of the four designated spots in frontcourt OR backcourt; backcourt "nearest spot" alternative deleted (CONFIRMED — markup verified) |
 | 4-44-5b, c | 2026-27 (Interpretations) | On the floor with control: sitting up = legal; attempting to stand = travel; on a knee: dribble first then stand = legal, rise while holding = travel |
 | 3-3-4, 3-3-5, 3-5-5 | 2026-27 (Interpretations/POE) | Jersey worn as manufacturer intended — tucked front AND back if designed to tuck; no rolling/folding the hem; non-compliant player leaves until corrected |
+| 4-1-1 EXCEPTION | 2026-27 (editorial) | Hanging on the rim after a dunk attempt ≠ airborne shooter: made → later contact ignored unless intentional/flagrant; missed and live → common foul, bonus |
+| 4-22-1 NOTE, 4-22-2 | 2026-27 (editorial) | No goaltending on a throw-in pass; defensive goaltending on a free throw = also a player technical (10-4-8) |
+| 4-40-3 NOTE | 2026-27 (editorial) | Visual field = forward + peripheral vision, horizontally from the ear |
+| 4-44-5c, 4.44.5 SITUATION | 2026-27 (editorial) | Slide/roll on momentum after gaining control on the floor = legal; may sit up AND return to the back |
+| 6-3-2, 6-3-4 NOTE | 2026-27 (editorial) | Jump ball: "official enters the center restraining circle" replaces "is ready"; jumpers' feet in their half until the jump ball ends |
+| 7-5-6c | 2026-27 (editorial) | Throw-in violation on a division-line throw-in → next throw-in stays at the division line |
+| 1-19 NOTE | 2026-27 (editorial) | Coach–player communication through electronic devices prohibited; hearing aids legal |
+| MSHSL uniforms | 2026-27 (module) | Home undershirt = torso color OR black; accessories solid white or black, same for all; home number body light, visitor number body dark |
+| MSHSL shot clock | 2026-27 (module) | Mounted to backboards; shot-clock tenths off; defensive kick in the backcourt: 19 or less → 20, 20 or more → 35 (2025-26 written: always 35) — Section 3 Season Flags |
+| MSHSL coach warning | 2026-27 (module) | One official warning, given at the next dead ball ("You have been warned," in the book with the time); next issue = technical; profanity = technical, no warning |
 
 ---
 
@@ -360,9 +449,9 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 ### Rule 3 — Uniforms and Equipment
 - **Jersey numbers:** Must be 0–5, 10–15, 20–25, 30–35, 40–45, 50–55 (numerals that can be indicated with one hand). No duplicates within a team (Rule 3-4-3).
 - **Jersey colors — MINNESOTA (MSHSL Mod B, PRIMARY for every MSHSL game): HOME = dark; VISITOR = white.** *NFHS default (backup — applies only where a state has not modified it, and for questions about the NFHS text itself): Rule 3-4-1c — torso white for the home team, contrasting dark for the visiting team.* The torso must be the same single solid color for all team members (3-4-1a). MSHSL memo (12/20/24): numbers on dark uniforms must distinctly contrast — white numbers are the best practice.
-- **Number contrast (MSHSL memo 12/20/24):** Numbers on dark uniforms must clearly contrast. Best practice = white numbers.
-- **Undershirts (Rule 3-5-6a, CONFIRMED text):** "Shall be a single solid color similar to the torso of the jersey or be solid black (under visiting team dark jerseys only) and shall be hemmed and not have frayed or ragged edges. Visiting team members may wear either a single solid color similar to the torso of the jersey or black, but not both." Sleeves, if any, the same length (3-5-6b). **The rule is torso-color-based, not home/visitor-based** — "home undershirts are white" is only a consequence of white home jerseys under the NFHS default. **MINNESOTA application (Mod B, home = dark):** the home team's undershirts match its dark torso and the visitors' match their white torso. Whether MSHSL extends the solid-black option to the home team's dark jerseys is **NOT held** — the NFHS text ties black to "visiting team dark jerseys only"; treat black under a Minnesota home dark jersey as **LIKELY permitted but unconfirmed** and check the MSHSL Uniform Requirements poster.
-- **Compression apparel:** Black, white, beige, or predominant jersey color; all teammates same color. **MSHSL Mod C:** All apparel (wristbands, headbands, sleeves, knee pads, compression) must be solid black OR white; same color for all participants.
+- **Jersey/number colors — MSHSL Uniform Rules (2026-27 Rules Module — PRIMARY, CONFIRMED):** home jerseys must be **dark** (the darkest of the school's colors) with a **light number body** — white highly recommended; the number cannot be darker than the jersey itself. Visiting jerseys must be **white** with a **dark number body** (the darkest of the school's colors). Number trim/outline is optional and does not affect legality. (Officiating Memorandum 5, 2025-26: yellow, gold, and light grey "typically do not meet the standard of dark.")
+- **Undershirts — MINNESOTA (MSHSL 2026-27 Rules Module — PRIMARY, CONFIRMED):** "Undershirts – single solid color similar to the torso (**or black for the home team**) of the jersey and shall be hemmed and not have frayed or ragged edges. Sleeves shall be the same length for each individual player that chooses to wear an undershirt. Rule 3-5-6." In Minnesota (home = dark) the **home** undershirt is similar to the dark torso **or black**; the **visitors'** (white jerseys) is white. A **white undershirt under the home dark jersey is not legal** (Officiating Memorandum 5, 2025-26, lists "Wearing white undershirts as the home team"). Undershirts are not part of the white-or-black accessory rule. *NFHS backup (Rule 3-5-6a, text held): "Shall be a single solid color similar to the torso of the jersey or be solid black (under visiting team dark jerseys only) and shall be hemmed and not have frayed or ragged edges. Visiting team members may wear either a single solid color similar to the torso of the jersey or black, but not both." Sleeves, if any, the same length (3-5-6b). NFHS attaches black to the visitors because NFHS visitors wear dark; Minnesota reverses the colors, so black attaches to the HOME team. Whether "but not both" (one choice for the whole team) carries over to the Minnesota home team is not restated in the module notes — LIKELY, unconfirmed.*
+- **Accessories/apparel — MINNESOTA (MSHSL Mod C + 2026-27 Rules Module — PRIMARY):** all wristbands, headbands, arm sleeves, leg sleeves, and knee pads must be **solid white or black**, and if worn by any team member all must be the **same** solid color (white or black). **This does not include undershirts** (they follow the torso rule above). Mod C as published (December 2025): "All apparel (excluding knee braces) – i.e. wristbands, headbands, arm/knee sleeves, knee pads, compression shorts, and tights must be solid black or white and the same color for all participants." *NFHS backup: black, white, beige, or the predominant jersey color; same color for all teammates.*
 - **Jewelry prohibited** (Rule 3-5-3). Medical alert jewelry may be taped.
 - **Headbands/wristbands:** Single solid color, must match teammates (Rule 3-5-3c). MSHSL: must be black or white.
 
@@ -374,7 +463,7 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 - **Control (Team):** While player controls, live ball passed among teammates, interrupted dribble, or player has disposal for throw-in (Rule 4-12-2).
 - **Dribble:** Begins when player pushes/throws/bats ball to floor before pivot foot is lifted; ends when ball rests in hand(s), both hands touch simultaneously, or ball becomes dead (Rule 4-15).
 - **Foul types:** Common foul (Rule 4-19-2), intentional foul (Rule 4-19-3), flagrant foul (Rule 4-19-4), technical foul (Rule 4-19-5), player-control foul (Rule 4-19-6), team-control foul (Rule 4-19-7).
-- **Goaltending [2025-26 UPDATED]:** (a) Defensive player touches ball during try/tap while ball is in downward flight entirely above ring level with possibility of entering basket, not touching cylinder (Rule 4-22-1). (b) Ball contacting backboard = automatically on downward flight (Rule 4-22-3 NEW). NO more offensive goaltending (Rule 4-22-1 & 2 [2025-26]).
+- **Goaltending [2025-26 UPDATED]:** (a) Defensive player touches ball during try/tap while ball is in downward flight entirely above ring level with possibility of entering basket, not touching cylinder (Rule 4-22-1). (b) Ball contacting backboard = automatically on downward flight (Rule 4-22-3 NEW). NO more offensive goaltending (Rule 4-22-1 & 2 [2025-26]). **[2026-27 editorial — 4-22-1 NOTE]:** goaltending does not apply to a ball released on a throw-in pass.
 - **Guarding (legal):** Both feet on floor, torso facing opponent. Max 6 feet in closely guarded (Rule 4-23).
 - **Held ball:** Opponents' hands firmly on ball so control can't be obtained without undue roughness (Rule 4-25).
 - **Pivot:** Stepping with same foot while other (pivot) foot kept at point of contact (Rule 4-33).
@@ -394,14 +483,14 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 - **Mercy Rule (MSHSL Mod G):** When point differential reaches **35 or more** with **less than 9 minutes remaining** in second half → running clock. Clock stops only for time-outs. Shot clock continues. Returns to regular timing if differential drops to **less than 30**.
 
 ### Rule 6 — Live Ball/Dead Ball
-- **Ball becomes live:** On a throw-in, when the ball is released; on a jump ball, when the ball leaves the official's hand; on a free throw, when at the disposal of the free thrower (Rule 6-1).
+- **Ball becomes live (Rule 6-1-2 — verbatim in Section 11):** on a jump ball, when the tossed ball leaves the official's hand(s); on a throw-in, when the ball is **at the disposal of the thrower**; on a free throw, when it is at the disposal of the free thrower.
 - **Ball becomes dead:** On any foul, violation, held ball, time-out, successful goal, when period expires (Rule 6-7).
 - **Resumption-of-play procedure:** After certain violations — no substitute, no time-out, no delay (Rule 4-38).
 
 ### Rule 7 — Out of Bounds and the Throw-In
 - **Out of bounds:** When ball or player touches the boundary line, floor, or objects on/outside it (Rule 7-1).
 - **Responsibility:** Last player to touch ball before it goes OOB is responsible (Rule 7-2).
-- **Throw-in administration (TRAIL):** Bounce pass or direct pass; 5-second count; thrower may not leave spot until ball is released (Rule 7-6).
+- **Throw-in administration:** 5-second count; the thrower may not leave the designated spot until the ball is released (Rule 7-6). **MSHSL mechanics (Minnesota Mechanics Manual reminders, 2026-27 Rules Module):** the official **bounces the ball to the thrower on ALL throw-ins**, and the **Lead** administers throw-ins on the sideline below the free-throw line (Section 4).
 - **Four designated throw-in spots (frontcourt, 2025-26 updated Rule 7-5-4):**
   - **Inside 3-pt line** (stoppage occurred inside 3-pt line or on 3-pt line) → end line, 3 feet outside lane line (nearest to stoppage).
   - **Outside 3-pt line** (stoppage occurred outside arc) → 28-foot sideline mark nearest to stoppage.
@@ -423,12 +512,12 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 - **Traveling (Rule 9-4):** Pivot foot lifted and replaced, two steps without dribble, jumping with ball and not releasing before touching floor.
 - **Illegal dribble (Rule 9-5):** Dribble with two hands, carry/palm, dribble a second time after dribble ends (double dribble).
 - **Three seconds (Rule 9-7):** Player in their team's frontcourt may not remain in the lane for more than 3 consecutive seconds while team is in control and clock is running.
-- **Ten seconds (backcourt) (Rule 9-8):** Team must advance from backcourt to frontcourt within 10 seconds. **MSHSL:** Use shot clock for 10-second count when shot clock is operating.
+- **Ten seconds (backcourt) (Rule 9-8):** Team must advance from backcourt to frontcourt within 10 seconds. **MSHSL:** Use shot clock for 10-second count when shot clock is operating. The count begins when the ball touches or is legally touched by a player in the backcourt on a throw-in, or on player control on a defensive rebound, a frontcourt change of possession, or a jump ball secured in the backcourt; violation if the ball has not gained frontcourt status by the time the shot clock reads **25**. No visible shot clock → silent, visible count. Shot clock off at the end of a half → the count starts on team possession (Section 3).
 - **Backcourt violation (Rule 9-9):** Once ball established in frontcourt, team in control may not return to backcourt. Note: if offense last touches in frontcourt and first touches in backcourt = violation.
 - **Closely guarded (Rule 9-10):** Holding ball in own frontcourt while closely guarded for 5 consecutive seconds = violation. **MSHSL Mod F:** NOT in effect while DRIBBLING.
 - **Goaltending/Basket interference (Rule 9-11 / 4-6, 4-22 [2025-26]):**
   - Goaltending: defensive player touches ball on downward flight above ring level (or after backboard contact per new Rule 4-22-3) = 2 pts awarded.
-  - Basket interference: touching ball/basket while ball is in/on basket, or within cylinder; also backboard slap causing vibration while ball in/on basket (Rule 4-6-1a/b NEW 2025-26) = 2 pts awarded.
+  - Basket interference: touching ball/basket while ball is in/on basket, or within cylinder; also backboard slap causing vibration while ball in/on basket (Rule 4-6-1a/b NEW 2025-26) = 2 pts awarded. **[2026-27 editorial — 4-6-2]:** the backboard-slap provision now reads "during a try for goal that has the possibility of entering the basket" (Section 0).
   - Offensive goaltending ELIMINATED (2025-26).
 - **Kicking/fisting ball (Rule 9-4-3):** Intentional striking = violation (ball to opponents).
 - **Excessive swinging of arms/elbows (Rule 9-12):** Violation if it endangers opponent.
@@ -436,11 +525,9 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 ### Rule 10 — Fouls and Penalties
 - **Administrative technical foul (Rule 10-1):** Roster errors, equipment violations, delay.
 - **Team technical foul (Rule 10-2):** Delay of game after warning, too many players, improperly worn equipment after warning.
-- **Player technical foul (Rule 10-4):** Unsporting act, delay, illegal equipment, taunting, hanging on rim, backboard slap (Rule 10-4-4b [2025-26]).
+- **Player technical foul (Rule 10-4):** Unsporting act, delay, illegal equipment, taunting, hanging on rim, backboard slap (Rule 10-4-4b [2025-26]). **[2026-27 editorial — 4-22-2]:** a defensive player's goaltending during a free throw is also a player technical foul (10-4-8).
 - **Bench technical foul (Rule 10-5):** Coach, substitute, team attendant, or follower commits unsporting acts. Bench tech = indirect tech to head coach = loss of coaching box.
-- **Head Coach's Rule (Rule 10-6):**
-  - Direct tech: assessed directly to head coach for abusive conduct. Coach gets 2 FTs against them; flagrant or second direct = ejection.
-  - Indirect tech: bench tech charged to bench member → indirect tech charged to head coach. First indirect = warning, loss of coaching box. Second indirect in same half = ejection of head coach.
+- **Head Coach's Rule (Rule 10-6 — CONFIRMED; exam entry in Section 10, verbatim text in Section 11):** the **first** technical foul charged **directly or indirectly** to the head coach = loss of coaching-box privileges for the rest of the game. **Ejection** = a single flagrant foul, the **second direct** technical, or the **third technical of any combination** of direct or indirect — two indirect technicals do NOT eject. Penalty for a 10-6 technical: two free throws plus the ball for a division-line throw-in, charged directly to the head coach.
 - **Personal foul penalty:** Offended player shoots FTs (if in bonus), or throw-in if not in bonus.
 - **Intentional foul penalty:** 2 FTs + throw-in at point of interruption regardless of bonus.
 - **Flagrant foul:** 2 FTs + throw-in; offender ejected (Rule 10-7-12).
@@ -464,64 +551,139 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 - **Mod J — Officials Uniform:** Smitty gray shirt with black panel, black collar, sleeve cuffs, MSHSL logo on left crest. All crew members must match.
 - **Mod K — Bonus Free Throws:** 1&1 on 7th team foul per HALF; double bonus (2 FTs) on 10th team foul per half. (MSHSL does NOT use the NFHS quarter-reset system.)
 
+### 2026-27 Season — MSHSL Rules Module (Jason Nickleby, MSHSL Director of Officials)
+> Source: module notes uploaded Nov 2026 — CURRENT-season Minnesota direction, PRIMARY over the NFHS defaults. The December 2025 lettered list above is the last written "Minnesota Modifications" sheet held; a 2026-27 written sheet is not held.
+
+- **Restated without change:** bonus on the 7th and 10th team foul in each half (Mod K); shot clock for all varsity contests; the shot clock continues under the mercy rule.
+- **Uniforms:** home dark / visitor white; number-body colors; accessories solid white or black and all the same; undershirts similar to the torso **or black for the home team** — full entries in Section 1, Rule 3.
+- **Uniform enforcement — what is held, by season:**
+  - *Rule 10-6-4 (Section 11):* the head coach shall not permit a team member to participate while wearing an illegal uniform — penalized when discovered; one technical foul, charged directly to the head coach, regardless of the number of offenders. *NFHS 2026-27 POE and Interpretations:* a player not wearing the uniform as the manufacturer intended is directed to leave until it is corrected (3-3-4, 3-3-5).
+  - *MSHSL through 2025-26 (Officiating Memorandum 2):* address it with the head coach during the pregame conference; "Send the players out if they cannot play in a legal uniform"; "If a jersey does not have a compliant color (torso or number), play the game and file a contest report." Memorandum 5 listed the recurring problems (home jerseys not dark, visitors not in white, white undershirts on the home team, special-event pink/teal jerseys, mixed accessory colors) and said: **"Beginning next year, many of these items will result in a direct technical foul to the head coach."**
+  - *2026-27:* the rules module **did not mention** direct-technical enforcement for uniforms (confirmed Nov 10, 2026 by the official who took the module notes). Do not present a uniform problem as a technical foul in Minnesota this season. Working approach — the MSHSL handling through 2025-26: raise it with the head coach in the pregame conference; a player who cannot play in a legal uniform sits until it is corrected; for a jersey of non-compliant color, play the game and file a contest report. Rule 10-6-4 remains the NFHS rule text; check with the assignor before ever assessing a technical foul for a uniform issue.
+- **Shot clock equipment:** must be mounted to the backboards; tenth-of-second functionality turned off; a separate operator; an alternative available for malfunctions — Section 3.
+- **Coaching box (Rule 1-13-2 / Mod I):** NFHS lets state associations extend the coaching box up to 28 feet; **Minnesota stays with the 14-foot box**, and schools are required to have it properly marked. (The module showed a diagram of the proper location; the diagram is not held — do not describe where the box begins and ends beyond "14 feet.")
+- **Official Warning to a coach (module — CONFIRMED as presented):** when coaches continue to show disregard for the coaching box or disrespect for officials, officials shall **(1) STOP PLAY; (2) tell the coach, "You have been warned."; (3) have the warning recorded in the official book; (4) include the time of the warning.** **Timing: give the warning at the NEXT DEAD BALL — do not blow a live play dead to warn** (confirmed Nov 10, 2026 by the official who took the module notes). **NO further warnings** — the next issue is a technical foul, and warnings are not necessary before a technical is called. An indirect or direct technical on the coach **has the same effect as a warning — no warning shall be given.** **No tolerance for profanity: no warning, automatic technical foul.**
+  - *Rule basis held:* 10-6 PENALTY (Art. 1) — "The official may warn the head coach unless the offense is judged to be major, in which case a technical foul shall be ruled." NFHS administrative warnings cover non-major infractions of the coaching-box rule, disrespectfully addressing an official, attempting to influence an official's decision, inciting undesirable crowd reactions, entering the court without permission, or standing at the team bench (2025-26 NCAA/NFHS Major Rules Differences).
+  - *Officiating Memorandum 2 (2025-26):* "Assistant coaches may not receive formal warnings in the book. If their behavior rises to that level, a technical foul shall be assessed." And: "do not stop live play to assess a warning. If the game is stopped because of a behavior, then it warrants a technical foul, not a warning."
+  - *Timing — settled:* "STOP PLAY" on the slide means hold play at the next dead ball to deliver and record the warning, not an immediate whistle during live action. That agrees with Officiating Memorandum 2 (2025-26): do not stop live play to assess a warning; behavior that forces the game to be stopped warrants a technical foul, not a warning.
+- **Minnesota Mechanics Manual reminders:** Section 4.
+
 ---
 
-## 3. MSHSL SHOT CLOCK — COMPLETE RULES (2025-26)
+## 3. MSHSL SHOT CLOCK — COMPLETE RULES (2026-27; 2025-26 Written Protocol Layered)
+
+> **Sources and layering.** PRIMARY for the current season: the **MSHSL 2026-27 Rules Module** (module notes, uploaded Nov 2026). Layered beneath it, all CONFIRMED text: the written **MSHSL Shot Clock Rules and Protocol 2025-26**, **Condensed Shot Clock Guide (updated 12/1/2025)**, **Officials Guide for Shot Clock Pre-Game with Table 2025-26**, **Shot Clock Situations 2025-26**, and the NFHS Shot Clock Guidelines (09/2025). **The written 2026-27 MSHSL protocol is NOT held** — where the 2026-27 module list differs from the 2025-26 written protocol, both are given, tagged, and listed under Season Flags; three of those differences were settled on Nov 10, 2026 by confirmation from the official who took the module notes. Authority: NFHS Rule 2-14; MSHSL adopted the 35-second shot clock beginning in 2023-24 (Mod E).
 
 ### Basics
-- **Shot clock period:** 35 seconds (standard); 20 seconds (offensive rebound situations).
-- **Mandatory:** All varsity games including extra periods; mercy rule games.
-- **Turn off:** When game clock ≤ shot clock period (i.e., game clock ≤ 35 seconds).
-- **Operator:** Seated at scorer's/timer's table. Separate distinct horn. Must have backup stopwatch and air horn.
-- **Both clocks must work** to start game. If one fails → turn off both, use alternate procedure.
-- **Shot clock horns do NOT stop play.** Only a whistle indicating a violation stops play.
-- **Recall function:** Not required but strongly recommended.
+- **Mandatory** for all varsity contests, the entire game including extra periods; **use of the shot clock continues when the mercy rule is in effect.** Period: **35 seconds**; resets are to **35**, **20**, or **20 or time remaining, whichever is greater.**
+- **Equipment (2026-27 module):** shot clocks **must be mounted to the backboards**; **the tenth-of-second functionality will be turned off**; **an alternative must be available for malfunctions**. *(2025-26: "preferably recessed and mounted on the supports behind each backboard"; "MSHSL Recommendation: NO tenths on Shot Clock.")* LED lights around the shot clock mark the expiration of the shot clock period only.
+- **Operator:** a **separate shot clock operator**, seated next to the timer at the table, with a horn distinct from the game-clock horn; an alternate timing device (stopwatch) and sound device (air horn) should be available. **Both shot clocks must be in working order to start the game** — if one is not working, turn off both and use the alternative (e.g., the announcer counts down from 10).
+- **The shot clock horn does NOT stop play** unless recognized by an official's whistle (NFHS Shot Clock Guidelines).
 
-### When Shot Clock STARTS
-- Any throw-in when ball is legally touched/touches any player on court (does not need to be in possession).
-- Jump ball: when ball is POSSESSED (not when it's tipped).
-- Change in team control.
+### When the Shot Clock STARTS
+- **Throw-in:** when the ball touches or is legally touched by a player on the court — it does not have to be possessed.
+- **After a jump ball or an unsuccessful try:** when a team gains initial control. On the opening jump the shot clock starts when the ball is POSSESSED, not tipped (2025-26 Situation 1: the game clock starts on the tip; the shot clock starts on possession).
+- **Change in team control** — on a steal or loose ball, wait for ACTUAL POSSESSION. On a shot that hits the rim or flange the operator holds the button until actual possession of the rebound (Condensed Guide).
 
-### RESET to 35 Seconds (Full Reset)
-1. Scored basket (starts when ball legally touched after throw-in).
-2. Change in team control while ball remains live.
-3. Single personal foul in the BACKCOURT.
-4. Kicked or fisted ball by defense in the BACKCOURT.
-5. Free throw situation: set to :35 immediately; offense rebounds → reset to :20.
-6. Defense causes held ball during team control; AP arrow favors defense.
+### Turn the Shot Clock OFF — and the End-of-Period Backcourt Count
+- Turn the shot clock off when the game clock is **equal to or less than the shot clock period.**
+- **[2026-27 module]** "When the shot clock is off (less than 35 seconds), the game clock starts when the ball is legally touched but the start of the 10-second backcourt count switches from legally touched to **team possession**. The timekeeper is responsible for the former and the **trail official** is responsible for the latter, including a **silent visible count**. If the offensive team gains backcourt possession with **10 seconds or less** on the game clock, **no backcourt violation can occur.**"
+- *2025-26 Situation 22:* shot clock off with :34 on the game clock; free throws with :31 showing; the last one is missed and rebounded by the shooting team — "the shot clock is re-set to 20 seconds as the game clock is at 31 seconds." *(Reading, not quoted: the game clock is compared with the period being set — 20 here.)*
 
-### RESET to 20 Seconds (Offensive Rebound Situations)
-1. Offense gains control anywhere after unsuccessful field goal that contacts ring/flange.
-2. Offense gains control anywhere after unsuccessful free throw remaining in play.
-3. Defense fouls after FG miss (hits rim) or during successful try, offense inbounds in frontcourt.
-4. Defense causes ball OOB after FG/FT miss (hits rim), offense retains possession in frontcourt.
-5. AP arrow favors offense after held ball following shot that hit rim (prior to team control).
-6. Offensive foul in their BACKCOURT; defense awarded ball in their frontcourt.
-7. Held ball; defense awarded ball in their frontcourt.
-8. Violation; defense awarded ball in their frontcourt.
-9. Double personal foul, one intentional/flagrant on offense; defense awarded ball in frontcourt.
-10. Shot hits rim/flange, batted into backcourt OOB by offense; defense gets ball in their frontcourt.
+### RESET to FULL (:35) — [2026-27 module list]
+1. The offensive team is credited with a scored basket (the shot clock starts when the ball touches or is legally touched by any player on the court after the throw-in).
+2. There is a change in team control and the ball remains live.
+3. A single personal foul occurs in the backcourt.
+4. A single technical foul is assessed.
+5. A defensive player causes a held ball in the offensive team's frontcourt and the alternating-possession arrow favors the defensive team for a throw-in in their backcourt.
+6. Any other situation where the alternating-possession arrow is used to determine team possession and the arrow favors the defense for the throw-in in their backcourt.
+7. A violation occurs and the defense is awarded the ball for a throw-in in their backcourt.
 
-### RESET to 20 Seconds OR TIME REMAINING (whichever is greater)
-1. Personal foul by defense, ball inbounded in frontcourt by offense (shot clock was above 20).
-2. Kicked/fisted ball by defense, ball inbounded in frontcourt by offense.
-3. Inadvertent whistle, no player/team possession, AP arrow favors either team in frontcourt.
+*Also reset to 35 — confirmed for 2026-27 (Nov 10, 2026):* a kicked or fisted ball by the defense in the backcourt with **20 or more** seconds remaining. (The 2025-26 written protocol, Art. A, listed "There is a kicked or fisted ball by the defense in the backcourt" with no time condition; for 2026-27, 19 or less is a reset to 20 — see that list and Season Flags.)
+*Free throws (2025-26 pregame guide; Officiating Memorandum 2):* set the shot clock to :35 — it must start immediately on the defense's control because the shot clock runs the ten-second count; if the offense gets the rebound, reset to :20.
 
-### NO RESET (Unexpired Time Remains)
-- Ball deflected OOB retained by offense (offense threw it OOB during a pass — stays same).
-- Time-out.
-- Double foul.
-- Defense causes held ball during team control; AP arrow favors OFFENSE → NO reset.
-- Defense commits foul/violation → frontcourt throw-in by offense, shot clock above :20 → NO reset (leave it above 20; only reset if at/below 20).
+### CONTINUE WITHOUT A RESET (unexpired time stays) — the same nine items in the 2026-27 module and the 2025-26 written protocol (Art. B)
+1. The ball is deflected out of bounds by a defensive player.
+2. A player is injured or loses a contact lens.
+3. A charged time-out has concluded.
+4. During team control as defined in Rule 4-12-1, a defensive player causes a held ball and the alternating-possession arrow favors the offensive team.
+5. After any double personal or technical fouls or simultaneous personal or technical fouls when there is team control, unless the penalty for the foul results in a change of possession.
+6. After an inadvertent whistle when there is team control.
+7. After a held ball occurs during a throw-in and the arrow favors the team that made the throw-in.
+8. When a held ball occurs after an unsuccessful try that does not contact the ring or flange, and the arrow favors the shooting team.
+9. After the ball goes out of bounds and was last touched simultaneously by two opponents, both of whom are either inbounds or out of bounds, or when there is doubt as to who last touched the ball, and the arrow favors the offensive team.
+
+*Also no reset:* a **pass** that strikes the rim or flange (Officiating Memorandum 2, 2025-26); loose-ball situations when the offense retains control, a try at the wrong basket, and a try that fails to hit the rim or flange (NFHS Shot Clock Guidelines).
+
+### RESET to 20 OR TIME REMAINING, whichever is greater
+1. **[2026-27 module]** "There is a personal foul committed by the defensive team **prior to a try for goal which hits the ring or flange**, and the ball is to be inbounded in the frontcourt by the offense." *(2025-26 Art. C1: the same sentence without the "prior to a try..." clause.)*
+2. There is a kicked or fisted ball by the defensive team and the ball is to be inbounded in the frontcourt by the offense.
+3. There is an inadvertent whistle when there was no player or team possession, and the AP arrow favors either team for a throw-in in its frontcourt.
+
+*Operator shorthand (2025-26 pregame guide):* 20 or above — no reset; under 20 — reset to 20.
+
+### RESET to 20 — [2026-27 module list]
+1. The offense gains control of the ball after an unsuccessful field goal attempt that contacts the ring or flange. *(2025-26: "...anywhere on the court...")*
+2. The offense gains control of the ball after an unsuccessful free throw that remains in play. *(2025-26: "...anywhere on the court...")*
+3. The defense is assessed with a foul after an unsuccessful free throw that remains in play, or an unsuccessful field goal that contacts the ring or flange, or during a successful try, provided that the offensive team will inbound the ball in the frontcourt.
+4. After the defense causes the ball to be out of bounds in the frontcourt following an unsuccessful free throw or an unsuccessful field goal attempt that contacts the ring or flange.
+5. When there is no team control, after the offense is awarded possession in their frontcourt when the alternating-possession arrow favors the offense following an unsuccessful free throw that remains in play [or] an unsuccessful field goal that hits the rim.
+6. **There is a kicked or fisted ball in the backcourt by the defense with 19 seconds or less remaining.** *(New for 2026-27. With 20 or more remaining the reset is 35 — Season Flags.)*
+7. A violation occurs, **other than an opponent causing the ball to be out of bounds or kicking the ball**, and the defense is awarded the ball in its frontcourt. *(2025-26 Art. D8 had no "other than" clause — Season Flags.)*
+8. After any double personal foul when only one of the fouls is intentional or flagrant, and it is assessed against the offense and the defense is awarded possession in its frontcourt.
+9. After a shot that contacts the rim/flange is batted into the backcourt and out of bounds by the shooting team and the ball is awarded to the other team.
+
+*Also reset to 20 — in the 2025-26 written protocol (Art. D6, D7) and confirmed for 2026-27 (Nov 10, 2026), though not on the module list as copied:* "An offensive foul occurs in their backcourt and the defense is awarded the ball in their front court" and "A held ball occurs and the defense is awarded the ball in their front court."
+*Rules of thumb from the 2025-26 Condensed Guide (apply them subject to the Season Flags below):* a change of possession that results in a throw-in → frontcourt **20**, backcourt **35**; a live-ball steal → **35**; a held ball after a shot or free throw hits the rim and before either team has control → arrow to the offense **20**, to the defense **35**; during team control a defensive held ball → arrow to the defense **35**, to the offense no reset.
+
+### ⚠️ Season Flags — where the 2026-27 module list differs from the 2025-26 written protocol
+| Play | 2025-26 written protocol | 2026-27 module | How to answer |
+|---|---|---|---|
+| Defense kicks/fists the ball in the offense's **backcourt** | Reset to **35**, no time condition (Art. A; Condensed Guide: "Reset to 35 secs in the backcourt") | Reset-to-20 list: "with 19 seconds or less remaining" | **19 or less → 20; 20 or more → 35.** The 20-or-more half is not on the module list as copied; confirmed Nov 10, 2026 |
+| **Offensive foul in the backcourt**, defense awarded the ball in its frontcourt | Reset to **20** (Art. D6) | Not on the module list as copied | **20** — confirmed for 2026-27 (Nov 10, 2026) |
+| **Held ball**, defense awarded the ball in its frontcourt | Reset to **20** (Art. D7) | Not on the module list as copied | **20** — confirmed for 2026-27 (Nov 10, 2026) |
+| Team with the ball commits a violation; opponent's throw-in in its frontcourt | Reset to **20** (Art. D8; Situation 6 — ball thrown out of bounds in the backcourt) | Item 7 adds "other than an opponent causing the ball to be out of bounds or kicking the ball" | Still **20** for traveling, a ten-second violation, and the like. For an out-of-bounds or kicked-ball violation by the team that had the ball: **LIKELY still 20** — the added clause most naturally carves out the DEFENSE's out-of-bounds and kicked-ball violations, which have their own items — but the wording is ambiguous and the notes do not explain it. Say LIKELY and name the clause |
+| Defensive personal foul, offense to inbound in its frontcourt | 20 or time remaining (Art. C1) | Adds "prior to a try for goal which hits the ring or flange" | Same result for the ordinary foul; read it with reset-to-20 item 3 (defensive foul AFTER a try contacts the ring/flange, or during a successful try → 20) |
+
+Rows 1–3 were settled by confirmation from the official who took the module notes — answer them as stated and mention that the written 2026-27 protocol is not held. Row 4 remains LIKELY: disclose it and recommend checking the written 2026-27 MSHSL Shot Clock Rules and Protocol or the assignor.
 
 ### Shot Clock Violation
-- Signal: Two hands above head, index fingers extended; verbal "shot clock."
-- Shot clock horn doesn't stop play — official must whistle.
+- The team in control must attempt a try for a field goal within the 35-second shot clock period.
+- A try for goal during the shot clock period is the ball having **left the shooter's hand(s) before the sounding of the shot clock horn** and then **striking the ring or flange, or entering the basket.**
+- It is a violation when a try does not leave the shooter's hand(s) before the expiration of the shot clock period (as indicated by the sounding of the shot clock horn), OR when it does leave the hand(s) in time and does not subsequently strike the ring or flange or enter the basket.
+- The other team's throw-in is at the designated spot nearest the ball at the time of the violation, shot clock **35** (2025-26 Situations 30–32: an air ball is called as soon as it falls below the level of the rim → end line; ball still in the shooter's hand beyond the arc at the horn → 28-foot mark).
 
-### Officials Signals to Table
-- Shot clock violation: two hands overhead with index fingers extended.
-- Reset to 35: circle/roll hands signal (full reset).
-- Reset to 20: one arm extended at 90-degree angle.
+### Officials' Shot Clock SIGNALS (2026-27 module; same wording in the 2025-26 written protocol)
+- **Shot clock violation:** the **stop-the-clock signal, followed by TAPPING THE HEAD**; then a directional signal, and designate the throw-in spot (the nearest spot to the ball at the time of the violation).
+- **Shot clock reset:** a **rolling motion of a pointed index finger above the head.**
+- **Shot clock reset to 20 seconds:** indicate **"20" with two hands.**
+- **Shot clock near expiration, or awareness of the shot clock time:** **point to the shot clock.**
+- *Mechanics (MSHSL "New Signals and Mechanics" 2023-24, held):* in 3-person, when the shot clock nears 10 seconds the off-ball official (Center or Trail) points to the shot clock; the Center or Trail is responsible for the flight of the ball on a try and the off official determines when a violation occurs. In 2-person, the Trail. On a kicking violation in the frontcourt by the defense, stop the clock and show the reset-to-20 signal to the table if the shot clock is below 20; at 20 or greater the time remaining stays.
+- *Signal numbers:* the MSHSL documents cite their own signal chart — violation "#41" in the 2025-26 protocol ("Signal 40" in the 2023-24 mechanics sheet), reset "#20," reset to 20 "#21," point to the shot clock "#22," flop "#23." **These are NOT the numbers on the NFHS signal chart held in this project** (2025-26 NFHS chart: #15 flopping, #20 signal free throw, #21 delayed violation, #22 traveling; it has no shot clock signals). Describe the signal in words; never rely on the number alone.
+
+### 10-Second Backcourt Count (2026-27 module; same text in the 2025-26 written protocol)
+- **Use the shot clock** to administer the 10-second backcourt count (9-8).
+- The count **begins** when the ball touches or is legally touched by a player in the backcourt on a throw-in, or on **player control** on a defensive rebound, a frontcourt change of possession, or a jump ball secured in the backcourt.
+- If the ball in control of the offensive team does not gain frontcourt status **by the time the shot clock reads 25 seconds**, a 10-second violation has occurred.
+- **No visible shot clock** → the official uses a **silent, visible 10-second count.**
+- **After a time-out** the offensive team gets a **new** 10-second count and the shot clock does not change — e.g., a time-out in the backcourt with 27 on the shot clock: a new 10 seconds, or until the shot clock reads 17. Tell partners with the point-to-the-shot-clock signal (2023-24 mechanics; 2025-26 Situations 4, 33, 34).
+- **Offensive rebound secured in the backcourt** → a 20-second shot clock and a 10-second count from that possession (2025-26 Situation 2). *(Arithmetic, not quoted: with a 20-second reset the ten seconds run out when the shot clock reads 10.)*
+- **Shot clock off at the end of a half/period** → the count starts on team possession, the Trail keeps a silent visible count, and with 10 seconds or less on the game clock no backcourt violation can occur (see "Turn the Shot Clock OFF"). A visible backcourt count when the shot clock is off "is not the same as closely guarded" (Officiating Memorandum 2, 2025-26).
+
+### Timing Errors and Clock Awareness
+- The officials make the final decision when there is doubt as to whether a score was made within the shot clock period or whether a try for goal contacted the ring or flange.
+- An obvious mistake by the shot clock operator (failing to start, stop, set, or reset the shot clock) or a malfunction **may be corrected during the shot clock period in which it occurred, and only when the official has definite information** relative to the mistake or malfunction and the time involved.
+- **Module emphasis:** "GET IN THE HABIT OF CHECKING THE GAME CLOCK AND SHOT CLOCK WHENEVER A WHISTLE IS BLOWN (STOPPAGE IN PLAY) OR BASKET IS MADE." (MN preseason clinic: also check the shot clock during the live ball.)
+
+### U1's Pregame With the Shot Clock Operator — the 12 Items (MSHSL Officials Guide for Shot Clock Pre-Game with Table, 2025-26)
+After the coaches' conference the Referee pregames the scorer and timer, U1 pregames the shot clock operator, and U2 observes both teams on the court. U1 covers: **(1)** when to start — throw-in when legally touched; rebound, steal, or jump ball when a player gains possession; **(2)** the four reset scenarios — no reset, 20, 20 or time remaining (whichever is greater), 35; **(3)** when the unexpired time stays — ball deflected out of bounds and retained by the offense, a time-out, a double foul; **(4)** the common resets — unsuccessful try that hits the rim (reset when it hits the rim, start on player possession); single foul with a throw-in, and a kicked-ball violation (20 or above no reset, under 20 reset to 20 — the guide's shorthand, which fits the frontcourt; for a backcourt kick see Season Flags); single foul with free throws (set to 35; if the offense rebounds anywhere on the court, reset to 20); any change of team control; **(5)** held ball during team control — arrow to the defense resets, arrow to the offense no reset; **(6)** held ball off a shot that hits the rim or a free throw, no team control — arrow to the defense resets, arrow to the offense resets to 20; a shot that misses the rim with the arrow to the offense, no reset; **(7)** shut the shot clock off when the game clock is equal to or less than the shot clock period; **(8)** mercy rule — the shot clock continues; **(9)** the officials' signals for a violation, reset to 35, and reset to 20; **(10) assure that the shot clock has recall**; **(11)** test the resets to 35 and 20; **(12)** test the horn by running the shot clock down from 20 so the whole crew knows its sound.
+
+### Written Situations Worth Knowing (MSHSL Shot Clock Situations 2025-26 — CONFIRMED text, condensed)
+- **Sit. 14 — where the kick happened governs:** frontcourt pass kicked by the defense with 15 on the shot clock; the ball goes into the backcourt and out of bounds → throw-in at the nearest 28-foot mark **in the frontcourt, where the ball was kicked**; reset to **20**; the offense has 10 seconds to cross if its throw-in goes into the backcourt.
+- **Sit. 25 — off the rebound vs. off the out-of-bounds:** a shot rims out, no one gains possession, the ball is tipped into the backcourt and B1 bats it out of bounds → A's throw-in in its backcourt, shot clock **35** — "this is the offense's ball awarded in their backcourt off the out of bounds violation, not off the rebound. If it was off the rebound, the shot clock would be set to 20 seconds."
+- **Sit. 23 — lodged ball:** a try lodges between the rim and the backboard → arrow to the shooting team **20**; arrow to the other team **35**.
+- **Sit. 24:** intentional foul on a successful three-point try → two free throws and the ball at the nearest 28-foot mark; shot clock **20**.
+- **Sit. 35:** a time-out granted during a dead ball after the defense tipped the ball out of bounds resumes at the out-of-bounds spot, not at a designated spot.
 
 ---
 
@@ -543,10 +705,10 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 ### Pre-Game
 - Arrive on court 15 minutes before tip.
 - Space out across from table in typical pre-game positioning.
-- Referee leads pregame conference with head coaches and captains; then meet with table.
-- U1 meets with shot clock operator (standard protocol — review all 12 shot clock items).
+- **ALL officials meet with both head coaches and captains before the game** (Minnesota Mechanics Manual reminder, 2026-27 Rules Module). After the coaches' conference the Referee pregames the scorer and timer (MSHSL Officials Guide for Shot Clock Pre-Game, 2025-26).
+- U1 pregames the shot clock operator — the 12 items are listed in Section 3.
 - U2 observes both teams while U1 is at the table.
-- Bounce pass on all throw-ins. Trail handles throw-in administration.
+- **Bounce the ball to the thrower on ALL throw-ins. The LEAD administers throw-ins on the sideline below the free-throw line** (Minnesota Mechanics Manual reminders, 2026-27 Rules Module).
 - Review: throw-in spots, shot clock resets, mercy rule, restricted area arc, flopping protocol.
 
 ### Free Throw Administration (3-Person)
@@ -558,7 +720,7 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 ### Free Throw Protocols
 - If FT count announced wrong, blow whistle and correct before ball becomes live.
 - If free thrower loses ball while at disposal → violation.
-- Visible 10-second backcourt count when shot clock is off; use shot clock when it's operating.
+- 10-second backcourt count: use the shot clock when it is operating; with no visible shot clock use a silent, visible count; when the shot clock is off at the end of a half the count starts on team possession and the Trail keeps it (Section 3).
 
 ### Signaling & Communication
 - **Full timeout:** Open hands (NOTE: fists = double foul — do NOT use fists for timeout).
@@ -571,6 +733,7 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 - Correct your own calls (out-of-bounds reversals, etc.).
 - Tick marks on floor: use for fouls in backcourt or violations in frontcourt.
 - Midcourt inbound after technical foul (ball at division line opposite scorer's table).
+- **Basket interference / goaltending mechanic** (a Minnesota Mechanics Manual reminder in the 2026-27 Rules Module; steps from MSHSL "New Signals, Mechanics & Rule Clarifications 2025-26"): point to the basket for clarification (MSHSL Signal #22), then Signal #20 to indicate a "cylinder issue," then either count the score (Signal #25) or disallow the score (Signal #24). The same point-then-#20 sequence is used for a free throw that misses the rim. These are MSHSL chart numbers, not NFHS chart numbers (Section 3, Signals).
 
 ---
 
@@ -609,8 +772,12 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 - **Defensive flop, second offense (tech):** Stop game immediately. If shot is in air → wait for attempt to complete → penalize. Count basket if made.
 - **Offensive flop, shot is in air:** Wait for rebound before issuing warning. Continuation applies.
 - **Key:** Team control is lost on a shot attempt — wait for play sequence before blowing whistle.
-- **[through 2025-26]** If warning is first offense and you stop play immediately → possession was determined via the AP arrow (old Rule 6-4-4g).
-- **[2026-27 — 6-4-4g DELETED]** A faking-being-fouled warning **no longer produces an AP throw-in.** MN preseason clinic (Oct 2026): **always avoid invoking the possession arrow on a flop** — do not stop play to issue the warning; **wait until a team has possession or the ball is dead, then report it.** If you ever find yourself about to go to the arrow because of a flop warning, you stopped play too early.
+- **[2025-26 book wording]** Rule 6-4-4g listed an AP throw-in when "a warning is issued for faking being fouled when an offensive player fakes being fouled after a try has been released and the attempt is unsuccessful."
+- **[2026-27 — 6-4-4g DELETED; MSHSL Rules Module, CONFIRMED]** The "g" was leftover language ("this is not a rule change"). **Stop play when there is team control, a goal is scored, or another official stoppage occurs — then resume under the appropriate rule for that situation, not by the special AP provision.**
+  - **Offense flops while a shot is in process:** let it continue; as soon as anyone gets control, administer the flop warning (or the technical foul).
+  - **Defense flops while a shot is in process:** let the offense continue until the shot is made or they pull the ball out, then stop the game.
+  - **If you blow it dead BEFORE there is team control, you must go to the alternating-possession arrow (4-36-2c) — avoid this in practice.**
+  - MN preseason clinic (Oct 2026): always avoid invoking the possession arrow on a flop — wait until a team has possession or the ball is dead, then report it. If you are about to go to the arrow because of a flop warning, you stopped play too early.
 - **Inbound spot for flop warning:** Tick mark where ball last was (unless shot or pass was in the air).
 - **Shot clock reminder (clinic):** check the shot clock **during the live ball**, not only at the whistle — catch operator errors while they can still be corrected by definite knowledge.
 
@@ -630,6 +797,15 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 - **Flopping & the arrow:** never let a flop warning put you in an AP situation — wait for team possession or a dead ball to report (6-4-4g is deleted for 2026-27).
 - **Shot clock:** check it during the live ball.
 - **Key play discussed — alley-oop, pushed in the back:** if the pass was **not possessed** when the push occurred, the correct ruling is a **foul on the floor — no shot** (common foul; throw-in, or bonus free throws if the team-foul count has reached the bonus). If the ball **was possessed and a try started** and the foul is on the shot → **two free throws**. See Section 10 for the rule chain.
+
+**MSHSL 2026-27 Rules Module — presented by Jason Nickleby, MSHSL Director of Officials (also a Big Ten basketball/football official). My notes, uploaded Nov 2026. The rules content is filed in Sections 0–4, 6, 10 and 11; these are the lines I wrote for myself:**
+- **Flop + arrow:** "If we blow it dead prior to team control, we need to go to alternating possession arrow, but avoid this in practice." Offense flops with a shot in process → let it continue, administer as soon as anyone gets control. Defense flops with a shot in process → let the offense continue until the shot is made or they pull the ball out, then stop the game.
+- **Dead-ball technicals (8-6-4) in practice:** equal number against both teams in the same dead-ball period → they cancel out; unequal → treat the last technical foul as the only technical foul.
+- **Player on the floor:** "Player cannot go from being on 2 knees to being on 1 knee = travel." "Player can do 'sit ups' with the ball = not traveling."
+- **Clocks:** "GET IN THE HABIT OF CHECKING THE GAME CLOCK AND SHOT CLOCK WHENEVER A WHISTLE IS BLOWN (STOPPAGE IN PLAY) OR BASKET IS MADE."
+- **Coaches:** one official warning — at the next dead ball, "You have been warned," in the book with the time; the next issue is a technical. Profanity = automatic technical, no warning.
+- **Mechanics Manual reminders:** bounce the ball on all throw-ins; Lead administers sideline throw-ins below the free-throw line; ALL officials meet both head coaches/captains before the game; basket-interference/goaltending mechanics.
+- **Follow-ups I confirmed (Nov 10, 2026):** the coach warning is given at the next dead ball, not by killing a live play. Shot clock — defense kicks the ball in the backcourt: 19 or less → 20, 20 or more → 35; an offensive foul in the backcourt, or a held ball, that gives the other team a frontcourt throw-in → 20. With 3 technicals against 1 in the same dead ball, I believe free throws are shot for the unmatched technicals (Nickleby only covered the last-technical case). Nickleby did not mention technicals for illegal uniforms — I don't expect to see that or to penalize it. My rulebook screenshots are all from the 2025-26 book.
 
 ### 2025-26 Season
 
@@ -651,7 +827,7 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 
 **If player trips on other player lying on floor = blocking foul.** Player on floor not in legal guarding position.
 
-**Falling to ground while dribbling is NOT a travel.** Rolling on ground with ball (belly-to-back) IS a travel. Holding ball and going to ground IS travel. Dribbling and going to ground is NOT travel.
+**Falling to ground while dribbling is NOT a travel.** Rolling on ground with ball (belly-to-back) IS a travel. Holding ball and going to ground IS travel. Dribbling and going to ground is NOT travel. *[2026-27 layer: Rule 4-44-5c (NEW) permits a slide and/or roll caused by the player's momentum after gaining control on the floor — apply the "rolling" note above only to a roll that is NOT caused by momentum.]*
 
 **Illegal screen:** Screener pushes defender with two hands, extends legs outside shoulder width, or extends arms making contact = team control foul.
 
@@ -726,11 +902,20 @@ If asked what any of these say, answer **NOT IN MY KNOWLEDGE BASE** for the word
 15. **Not having U1 pregame the shot clock operator** → Mandatory every game since 2024-25 season.
 16. **Calling a shooting foul on an alley-oop before the ball is touched** → WRONG. No ball = no try (4-41-2). A push before the catch or tap is a common foul on the floor — throw-in or bonus, not two shots. Two shots only if a try or tap had started when the foul occurred.
 17. **Leaving 0.1 or 0.2 on the clock after a tipped throw-in under one minute (2026-27)** → WRONG. Rule 5-9-5: a legal inbounds touch after a throw-in or missed free throw in the last 59.9 seconds removes a minimum of 0.3. (Tenths display only.)
-18. **Going to the arrow after a flop warning (2026-27)** → WRONG. 6-4-4g is deleted. Report the warning at the next dead ball or team possession; never stop play in a way that creates an arrow situation.
-19. **Sequencing dead-ball technicals from both benches to decide who shoots first (2026-27)** → WRONG. Rule 8-6-4: all techs in the same dead-ball period are simultaneous. Equal → cancel, POI. Unequal → administer only the final unmatched one.
+18. **Stopping play for a flop warning before any team has control (2026-27)** → AVOID. 6-4-4g is deleted, but that only removed leftover language. Stop play when there is team control, after a made goal, or at another stoppage, and resume by the appropriate rule. Blow it dead with no team control and you must go to the AP arrow (4-36-2c) — the arrow is the consequence of the early whistle, not an option to choose.
+19. **Sequencing dead-ball technicals from both benches to decide who shoots first (2026-27)** → WRONG. Rule 8-6-4 (Rule 8 Section 6, Article 4 — not "10-6-4"): all technicals in the same dead-ball period are treated as committed at approximately the same time, and all are charged. Equal numbers → penalties cancel, POI. Unequal → play resumes as if the last committed single technical were the only foul.
 20. **Calling a travel on a player who sits up with the ball after gaining control on the floor** → WRONG. Sitting up is legal (4-44-5b, c; 2026-27 SITUATION 2). The travel is an attempt to rise to the feet while holding the ball — or lifting a knee to stand (SITUATION 3). Dribble first, then stand = legal.
 21. **Letting a partially tucked or rolled-under jersey play (2026-27 POE #1 / SITUATION 1)** → WRONG. Jerseys are worn as the manufacturer designed — tucked front AND back if designed to tuck; untucked if designed untucked. Direct the player to leave until corrected (3-3-4). In Minnesota remember Mod B: home = dark.
 22. **Putting a backcourt AP throw-in at the nearest out-of-bounds spot (2026-27 Rules Book Correction, 6-4-3)** → WRONG for 2026-27 (CONFIRMED). AP throw-ins — and 8-5-3 throw-ins after an intentional/flagrant foul — go to one of the four designated spots in the frontcourt OR backcourt; the backcourt "nearest spot" alternative was deleted.
+23. **Signaling a shot clock violation with anything but stop-clock + tapping the head** → WRONG. Violation = stop the clock, tap the head, directional signal, designate the spot. Reset = rolling motion of a pointed index finger above the head; reset to 20 = "20" with two hands; near expiration = point to the shot clock.
+24. **Ejecting the head coach on a second INDIRECT technical** → WRONG. Rule 10-6 Note: ejection = a single flagrant foul, the second DIRECT technical, or the THIRD technical of any combination. The FIRST technical of either kind costs the coaching box.
+25. **Making a Minnesota home team change out of black undershirts** → WRONG (2026-27 MSHSL module). Home undershirt = similar to the dark torso OR black. A WHITE undershirt under the home dark jersey is the one that is not legal.
+26. **Treating a dunker hanging on the rim as an airborne shooter (4-1-1 EXCEPTION, 2026-27)** → WRONG. Made dunk: later contact is ignored unless intentional or flagrant. Missed and live: common foul, bonus applies.
+27. **Moving the throw-in to a designated spot after a violation on a division-line throw-in (7-5-6c, 2026-27)** → WRONG. It stays at the division line opposite the table.
+28. **Giving a coach a second "official warning" — or killing a live play to give the first one** → WRONG (2026-27 MSHSL module). One warning, given at the next dead ball and recorded in the book with the time; the next issue is a technical; profanity gets no warning.
+29. **Calling goaltending on a throw-in pass (4-22-1 NOTE, 2026-27)** → WRONG. Goaltending does not apply to a ball released on a throw-in pass.
+30. **Letting a player on two knees with the ball come up to one knee** → WRONG. Traveling (module note; 4-44-5b; 2026-27 SITUATION 3). Sitting up from the back — and lying back down — is legal.
+31. **Starting the backcourt count on the throw-in touch when the shot clock is OFF at the end of a half (2026-27 MSHSL module)** → WRONG. The game clock starts on the touch; the 10-second count starts on TEAM POSSESSION (Trail, silent visible count). Possession gained with 10 seconds or less on the game clock = no backcourt violation can occur.
 
 ---
 
@@ -781,16 +966,21 @@ The decisive question is **whether a try or tap for goal had STARTED when the fo
 
 *Exam trap:* "airborne" is not the test. A player can be ten feet in the air with no ball and no try — that is a common foul. The clinic shorthand is **"not possessed = no shot; possessed and shooting = two."**
 
-### Traveling — Player on the Floor or on a Knee — Rule 4-44-5b, c (2026-27 NFHS Interpretations, SITUATIONS 2 & 3)
+### Traveling — Player on the Floor or on a Knee — Rule 4-44-5b, c (2026-27 NFHS Interpretations SITUATIONS 2 & 3; 2026-27 Rules Module)
 A player who **gains control of the ball while on the floor** (and is no longer sliding/rolling on momentum) may **pass, shoot, start a dribble, or request a time-out.**
-- **Flat on the back → sitting up while holding the ball: LEGAL.** Sitting up is not an attempt to stand (SITUATION 2).
-- **Attempting to rise to the feet while holding the ball: TRAVELING** (SITUATION 2).
-- **One or both knees on the floor:** may pass, try, call time-out, or start a dribble. **Lifting a knee to rise while holding the ball: TRAVELING.** If the player **starts a dribble first**, standing up and continuing the dribble is **LEGAL** (SITUATION 3).
-*Exam trap:* "dove on the floor and stood up with the ball" is a travel; "dove on the floor, sat up, then passed" is not. The test is an attempt to get to a **standing** position while holding the ball.
+- **Sliding/rolling on momentum: LEGAL (4-44-5c, NEW 2026-27).** "A player holding the ball after gaining control while on the floor, may slide and/or roll with the ball if it is caused by the player's momentum."
+- **Flat on the back → sitting up while holding the ball: LEGAL.** Sitting up is not an attempt to stand (SITUATION 2). 4.44.5 SITUATION (module): "A player holding the ball flat on their back may sit up without traveling. The player may also return to a position on their back."
+- **Attempting to stand up with the ball: TRAVELING.** 4-44-5b as presented: "A player holding the ball on the floor may not attempt to stand up with the ball" (also SITUATION 2).
+- **One or both knees on the floor:** may pass, try, call time-out, or start a dribble. **Lifting a knee to rise while holding the ball: TRAVELING** — including going from **two knees to one knee** (module note). If the player **starts a dribble first**, standing up and continuing the dribble is **LEGAL** (SITUATION 3).
+*Exam trap:* "dove on the floor and stood up with the ball" is a travel; "dove on the floor, sat up, then passed" is not. The test is an attempt to get to a **standing** position while holding the ball. 4-44-5c covers only a slide or roll **caused by momentum**.
 
 ### Airborne Shooter — Rule 4-1-1
 An airborne shooter is a player who **has released the ball on a try or tap for a goal, or has tapped the ball, and has not returned to the floor.**
 *Key consequence:* an airborne shooter is still considered to be in the act of shooting. A foul by an airborne shooter is a **player-control foul** (charged foul), so no free throws are awarded to the opponent unless the bonus applies for a different reason.
+
+**[2026-27 editorial — 4-1-1 EXCEPTION (NEW), module]:** "A player is not considered an airborne shooter when hanging on the rim after a dunk attempt."
+- **Dunk successful** → the ball becomes dead when it passes through the basket; any subsequent contact between the player who dunked and an opponent is **ignored unless ruled intentional or flagrant.**
+- **Dunk unsuccessful and the ball remains live** → any illegal contact between the player who attempted the dunk and an opponent is a **common foul, administered according to the bonus situation.**
 
 ### Continuous Motion — Rule 4-11
 - **4-11-1:** Continuous motion applies to a try or tap for field goals and free throws, but has **no significance unless a DEFENSIVE player fouls** during the interval that begins when the habitual throwing movement starts (or with the touching on a tap) and ends when the ball is clearly in flight.
@@ -798,6 +988,8 @@ An airborne shooter is a player who **has released the ball on a try or tap for 
 - **4-11-3:** Continuous motion does **NOT** apply if a **TEAMMATE** fouls after a try/tap starts and before the ball is in flight — **the ball becomes dead immediately** and the goal does not count.
 
 *Exam trap:* the defense-vs-teammate distinction is the whole rule. Defensive foul → continuation allowed. Teammate foul → ball dead at once.
+
+**[2026-27 editorial — 4.11.2 SITUATION, module]:** "Stepping or pivoting toward the basket is not required to be considered in the act of shooting." A player may step in a direction that creates space in order to attempt a try, which may be lateral or away from the basket.
 
 ### Incidental Contact — Rule 4-27
 Incidental contact is contact with an opponent which **is permitted and does not constitute a foul.**
@@ -822,27 +1014,46 @@ A fumble is the **accidental** loss of player control when the ball unintentiona
 - **4-22-2:** touching the ball **outside the cylinder** during a free-throw attempt.
 - **[2025-26]** Offensive goaltending is **eliminated** — only defensive players can commit it.
 - **[2025-26] 4-22-3:** once the ball contacts the **backboard**, it is automatically considered to be in downward flight.
+- **[2026-27 editorial — 4-22-1 NOTE (NEW), module]:** presented as "When a defensive player touches a thrown or tapped ball while it is in its downward flight entirely above the basket, has the possibility of entering the basket and is not touching the basket cylinder." **"Goaltending does not apply to a ball released on a throw-in pass."**
+- **[2026-27 editorial — 4-22-2, module]:** "Defensive players committing goaltending during a free throw is also a player technical foul (see 10-4-8)."
+
+### Head Coach's Rule — Rule 10-6 (verbatim text in Section 11)
+- **Coaching box:** by state association adoption the head coach may stand within the coaching box (Minnesota: 14 feet). **"The first technical foul charged directly or indirectly to the head coach results in loss of coaching-box privileges and the head coach shall remain seated for the remainder of the game,"** except to request a time-out or signal players to request one, to confer with the table about a time-out (5-8-4), to replace or remove a disqualified/injured player or a player directed to leave, and as in 10-5-4c, d (10-6-1b–e).
+- **Ejection (Note):** "A single flagrant foul, the second direct technical foul or the third technical (any combination of direct or indirect) charged to the head coach results in disqualification and ejection."
+- **Penalty:** two free throws plus the ball for a division-line throw-in; the foul is charged directly to the head coach. For Art. 1 the official may warn the head coach unless the offense is judged to be major.
+- **Other duties:** 15 seconds to replace or remove a disqualified/injured player when a substitute is available (Art. 2); shall not permit a team member to participate after disqualification (Art. 3), **while wearing an illegal uniform (Art. 4 — penalized when discovered)**, or to leave the bench area/court for an unauthorized reason (Art. 5); Arts. 4 and 5 carry only one technical regardless of the number of offenders.
+*Exam traps:* two indirect technicals do NOT eject the head coach — it takes two direct, or three of any kind. The coaching box is lost on the FIRST technical of either kind. "10-6-4" is the illegal-uniform article, not the dead-ball-technicals rule (that is 8-6-4). Minnesota's one-warning protocol with coaches is in Section 2.
 
 ### Coverage status of the formerly missing definitions
-Section 11 below now holds the full 2026 Rules Book text for **every** definition previously identified as missing:
+Section 11 below now holds the full 2025-26 Rules Book text (2026-27 changes annotated) for **every** definition previously identified as missing:
 - **Rule 4:** 4-24 (hands/arms), 4-34 (players/bench personnel), 4-35 (player location/status), 4-36 (point of interruption), 4-37 (rebounding), 4-39 (rule), 4-40 (screen), 4-41 (shooting/try/tap), 4-42 (throw-in/thrower/designated spot), 4-43 (time-out lengths, successive time-out)
 - **Rule 5:** 5-5 (length of quarter), 5-6 (beginning/ending quarter or extra period), 5-7 (extra period), 5-8 (time-out, stopping play), 5-11 (charged time-outs — allotment, durations, exceptions, excess, successive, simultaneous)
 - **Rule 6:** complete — 6-1 (live ball) through 6-7 (dead ball), including jump-ball administration and alternating possession
+- **Rule 8:** 8-6 (resuming play differences — Articles 1–3; the 2026-27 Article 4 is in Section 0)
+- **Rule 10:** 10-6 (head coach's rule — articles, PENALTY, and the ejection Note)
 
 All of the above are **CONFIRMED** sources. Cite them directly.
 
-⚠️ **SOURCE NOTE:** an earlier version of the project's rulebook file contained an unreliable "Rule 5 (continued)" block whose numbers contradicted the 2026 Rules Book (3-minute extra periods, five 60-second time-outs — both wrong). That block has been removed from the knowledge base, but if ANY retrieved text ever conflicts with Section 11, Section 11 is transcribed from the 2026 book and is AUTHORITATIVE — use it and say so.
+⚠️ **SOURCE NOTE:** an earlier version of the project's rulebook file contained an unreliable "Rule 5 (continued)" block whose numbers contradicted the Rules Book (3-minute extra periods, five 60-second time-outs — both wrong). That block has been removed from the knowledge base, but if ANY retrieved text ever conflicts with Section 11, Section 11 is transcribed from the 2025-26 Rules Book (with the 2026-27 changes annotated) and is AUTHORITATIVE — use it and say so.
 
 If a question turns on the precise wording of a rule not held here, answer **NOT IN MY KNOWLEDGE BASE** and tell the user to check the rulebook directly. Practical guidance elsewhere in this knowledge base may still be cited, but never present it as the rule's definitional text.
 
 ---
 
-## 11. FULL DEFINITIONS — FORMERLY MISSING SECTIONS (2026 NFHS RULES BOOK)
+## 11. FULL DEFINITIONS — FORMERLY MISSING SECTIONS (2025-26 NFHS RULES BOOK, 2026-27 CHANGES ANNOTATED)
 
-> Transcribed verbatim from the 2026 NFHS Basketball Rules Book to fill the
+> Transcribed verbatim from the 2025-26 NFHS Basketball Rules Book to fill the
 > placeholder stubs identified in Section 10. Cite these as **CONFIRMED**.
 > If any other retrieved source conflicts with this section, THIS SECTION IS
 > AUTHORITATIVE.
+>
+> **Edition note (CONFIRMED Nov 10, 2026):** every screenshot behind this
+> section came from the **2025-26** Rules Book; the 2026-27 book was not used.
+> The text therefore **predates the 2026-27 changes** — it still shows 6-4-4g,
+> "is ready" in 6-3-2, no NOTE under 4-40-3, and a three-article Rule 8-6.
+> Every 2026-27 change is layered in as a bracketed *[2026-27 ...]* annotation
+> at the affected article and in Section 0. **For the current season the
+> annotations govern wherever they differ from the text.**
 
 ## RULE 4 — DEFINITIONS
 
@@ -951,6 +1162,8 @@ c. The screener shall be stationary, except when both the screener and opponent 
 d. The screener shall stay within the screener's vertical plane with a stance approximately shoulder width apart.
 
 ART. 3 . . . When screening a stationary opponent from the front or side (within the visual field), the screener may be anywhere short of contact.
+
+*[2026-27 editorial — 4-40-3 NOTE (NEW), as presented in the rules module: "The visual field of a player being screened includes the player's forward vision and peripheral vision and extends horizontally from the ear."]*
 
 ART. 4 . . . When screening a stationary opponent from behind (outside the visual field), the screener shall allow the opponent one normal step backward without contact.
 
@@ -1150,9 +1363,13 @@ a. Move onto the center restraining circle (within 3 feet).
 
 b. Change position around the center restraining circle.
 
+*[2026-27 editorial — 6-3-2, as presented in the rules module: "When the official enters the center restraining circle" has replaced the former language "is ready" in Article 2. The complete 2026-27 sentence is not held verbatim.]*
+
 ART. 3 . . . Teammates may not occupy adjacent positions around the center restraining circle if an opponent indicates a desire for one of these positions before the official is ready to toss the ball.
 
 ART. 4 . . . The ball shall be tossed upward between the jumpers in a plane at right angles to the sidelines. The toss shall be to a height greater than either of them can jump so that it will drop between them.
+
+*[2026-27 editorial — 6-3-4 NOTE (NEW), as presented in the rules module: "Each jumper shall have both feet within their half of the center restraining circle until the jump-ball ends." "The restrictions end when the ball is touched by one or both jumpers." Quoted as presented; the Rules Book's exact NOTE is not held.]*
 
 ART. 5 . . . Until the tossed ball is touched by one or both jumpers, nonjumpers shall not:
 
@@ -1206,7 +1423,7 @@ f. The point of interruption cannot be determined as in Rule 4-36-2c.
 
 g. A warning is issued for faking being fouled when an offensive player fakes being fouled after a try has been released and the attempt is unsuccessful.
 
-*[2026-27 change: Article 4g above was DELETED from the 2026-27 Rules Book — a faking-being-fouled warning no longer results in an alternating-possession throw-in. The text is retained here as the 2025-26 book's wording. See Section 0 and Section 6.]*
+*[2026-27 change: Article 4g above was DELETED from the 2026-27 Rules Book. Per the 2026-27 rules presentation it was leftover language ("This is not a rule change; this was inadvertently left in the rule after the rule change in 2025-26"): after a faking-being-fouled warning, play resumes under the appropriate rule for the situation rather than by this special AP provision. Item f above (point of interruption cannot be determined, 4-36-2c) is unchanged — a whistle with no team control still goes to the arrow. The 2025-26 wording is retained here for the record. See Section 0 and Section 6.]*
 
 Note: When the alternating-possession procedure has not been established, the jump ball shall be in the center restraining circle between the two players involved in the previous action.
 
@@ -1259,6 +1476,50 @@ c. Article 7 occurs by any opponent of a player who has started a try or tap for
 d. Article 9 as in Rules 9-3-3 or 9-13-1, occurs by an opponent.
 
 Note: If A1's try or tap for field goal is legally touched in flight, the goal counts if made, if the period/quarter ends before or after the legal touching. If the touching is interference or goaltending by Team A, no points are scored. If Team B violates, the points are awarded — either two or three depending on whether it was a two or three-point try or tap for field goal.
+
+## RULE 8 — FREE THROW
+
+### SECTION 6 RESUMING PLAY DIFFERENCES (Rule 8-6)
+
+ART. 1 . . . If a free throw for a personal foul, other than intentional or flagrant, is unsuccessful, or if there is a multiple throw for a personal foul(s) and the last free throw is unsuccessful, the ball remains live.
+
+ART. 2 . . . If there is a multiple throw and both a single personal and single technical foul are involved, the tries shall be attempted in the order in which the related fouls occurred, and if the last try is for a single technical foul, or intentional or flagrant personal foul, the ball shall be put in play by a throw-in.
+
+ART. 3 . . . If a false double foul involves any type of single foul and any type of double or simultaneous foul, play is resumed with the penalty for only the single foul, as if the double or simultaneous foul had not occurred. (4-36)
+
+*[Articles 1–3 are transcribed from the 2025-26 Rules Book (screenshot taken Nov 10, 2026), which has three articles. **2026-27 adds ART. 4 (8-6-4a–d): technical fouls by both teams in the same dead-ball period.** Its text, as presented in the NFHS rules presentation, is in Section 0; it is not repeated here because it was not transcribed from a Rules Book page.]*
+
+## RULE 10 — FOULS AND PENALTIES
+
+### SECTION 6 HEAD COACH'S RULE (Rule 10-6)
+
+ART. 1 . . . The head coach shall remain seated on the team bench, except:
+
+a. By state association adoption, the head coach may stand within the designated coaching box described in Rule 1-13-2. The first technical foul charged directly or indirectly to the head coach results in loss of coaching-box privileges and the head coach shall remain seated for the remainder of the game, except as stated below in Rule 10-6-1b, c, d and e.
+
+b. The head coach may stand within the coaching box to request a time-out or signal players to request a time-out.
+
+c. The head coach may stand and/or leave the coaching box to confer with personnel at the scorer's table to request a time-out as in Rule 5-8-4.
+
+d. The head coach may stand within the coaching box to replace or remove a disqualified/injured player or player directed to leave the game.
+
+e. The head coach may stand as in Rule 10-5-4c, d.
+
+EXCEPTION: The head coach, and any number of assistant coaches, may enter the court in the situation where a fight may break out – has broken out – to prevent the situation from escalating.
+
+ART. 2 . . . The head coach shall replace or remove a disqualified/injured player, or player directed to leave the game, within 15 seconds when a substitute is available.
+
+ART. 3 . . . The head coach shall not permit a team member to participate after being removed from the game for disqualification.
+
+ART. 4 . . . The head coach shall not permit a team member to participate while wearing an illegal uniform. (3-4)
+
+ART. 5 . . . The head coach shall not permit team members to leave the bench area and/or playing court for an unauthorized reason.
+
+PENALTY: (Art. 1) The official may warn the head coach unless the offense is judged to be major, in which case a technical foul shall be ruled. (Section 6) Two free throws plus the ball for a division-line throw-in. The foul is charged directly to the head coach. (Arts. 3, 5) Penalized if discovered while being violated. (Art. 4) Penalized when discovered. (Arts. 4, 5) Only one technical foul is charged regardless of the number of offenders.
+
+Note: A single flagrant foul, the second direct technical foul or the third technical (any combination of direct or indirect) charged to the head coach results in disqualification and ejection. Ejected adult bench personnel shall leave the vicinity (out of sight and sound) of the playing area immediately and are prohibited from any further contact (direct or indirect) with the team during the remainder of the game. Failure to comply with the rules of ejection may result in the game being forfeited.
+
+*[Transcribed from the 2025-26 Rules Book (screenshots taken Nov 10, 2026). No change to Rule 10-6 appears in the 2026-27 NFHS rules changes; the 2026-27 revision of the Technical Foul Penalty Summary chart is not held.]*
 
 ---
 
@@ -1401,9 +1662,11 @@ what you say. These rules are absolute:
      numbering, or a specific sub-case is not. Say what you are unsure of.
    • **NOT IN MY KNOWLEDGE BASE** — say this plainly, do not guess, and tell
      the user to check the current NFHS Rules Book or ask their assignor.
-   Section 11 holds full 2026 text for the formerly missing definitions —
-   cite those as CONFIRMED. Section 10 lists what is still NOT held; if the
-   question turns on one of those, the answer is NOT IN MY KNOWLEDGE BASE.
+   Section 11 holds full 2025-26 Rules Book text for the formerly missing
+   definitions, with every 2026-27 change annotated in place — cite those as
+   CONFIRMED and apply the annotations. Section 10 lists what is still NOT
+   held; if the question turns on one of those, the answer is NOT IN MY
+   KNOWLEDGE BASE.
 
 4. TRUE/FALSE AND MULTIPLE-CHOICE QUESTIONS.
    Exam statements are frequently near-verbatim rule text, in which case the
