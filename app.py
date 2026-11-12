@@ -1,5 +1,24 @@
 """
 RefBuddy — Your Minnesota HS Basketball Referee Assistant & Film Coach
+Version 1.4.5 — Throw-in provisions (Rule 9-2); the thrower may recover a pass that touched another player
+
+Changes from v1.4.4:
+  - New Section 10 entry: Rule 9-2, Articles 1-11 (2023-24 Rules Book text),
+    Article 12 (2025-26), penalties, and a "legal — do not call these" list.
+    9-2-6 bars the thrower from touching the ball in the court only BEFORE it
+    touches or is touched by another player; after that the throw-in has
+    ended (4-42-5a) and the thrower may recover it — e.g., off a defender's
+    back. The app had called that a violation.
+  - Root cause fixed: two loose lines said a thrower may not be "first to
+    touch" the ball. The 2025-26 rule (9-2-12 / 9-3-4) is narrower — a thrower
+    who purposely and/or deceitfully DELAYS returning and is then first to
+    touch. Section 0 entry, Section 1 lines and the quick-reference row are
+    reworded to the NFHS summary.
+  - Correction: Section 1 cited "Rule 7-6-7" for throw-in violations. Rule 7
+    Section 6 has six articles; the list is Rule 9-2.
+  - 9-3-3 rule text added (as quoted in MSHSL Officiating Memorandum 2).
+  - Pitfall 39. No prompt, UI, or code changes.
+
 Version 1.4.4 — Ball out of bounds and the backboard (7-1-2, 4-4-5); multiple-choice guardrail
 
 Changes from v1.4.3:
@@ -285,6 +304,7 @@ CORE_KNOWLEDGE = """
 
 **[2023-24] Stepping Out of Bounds — Rule 9-3-3**
 - **New:** A player may step out of bounds without penalty unless: (a) they are the first to touch the ball after returning to court, or (b) they left the court to avoid a violation.
+- **Rule text (as quoted in MSHSL Officiating Memorandum 2, 2023-24):** "A player shall not step out of bounds under the player's own volition and then become the first player to touch the ball after returning to the playing court or to avoid a violation." The thrower is out of bounds legally, to make the throw-in — the thrower's return is covered by 9-2-12 / 9-3-4 (2025-26), not by this article.
 - **Why it matters:** Clarifies that incidental OOB stepping (e.g., player pushed OOB) is not automatically a violation. The violation triggers only if that player touches the ball first.
 
 ---
@@ -377,9 +397,10 @@ CORE_KNOWLEDGE = """
 - **MSHSL mechanics (New Signals, Mechanics & Rule Clarifications 2025-26 — "New Tick Mark Locations Added – Back Court"):** officials determine the designated spot by the three-point line in the frontcourt **or backcourt**: a stoppage on or within the three-point line → the nearest point on the end line, three feet outside the lane line; a stoppage outside the three-point line → the nearest sideline at the 28-foot line (Rule 7-5-3,4).
 
 **[2025-26] Thrower Delay OOB — Now a Violation — Rules 9-2-12 & 9-3-4 (NEW)**
-- **Old:** Thrower who stepped out of bounds to deceive and then touched ball = technical foul.
-- **New:** This is now a VIOLATION (turnover), not a technical foul.
-- **Why it matters:** Lesser penalty, easier to enforce consistently. Player cannot step out of bounds as a thrower to deceive and be first to touch the ball back in bounds.
+- **Old (10-4-2, through 2024-25):** a player technical foul for purposely and/or deceitfully delaying returning after legally being out of bounds.
+- **New:** a VIOLATION (turnover) when a thrower purposely and/or deceitfully DELAYS RETURNING inbounds after legally being out of bounds and then becomes the first player to touch the ball on re-entering the court. (NFHS 2025-26 PowerPoint correction: 9-3-4 was "previously in rule 10-4-2 as it pertained to a thrower delay.")
+- **What it does NOT prohibit:** a thrower who returns promptly may play the ball as soon as the throw-in has ended — including recovering a pass that first touched another player (9-2-6). Full Rule 9-2 list: Section 10.
+- **Why it matters:** Lesser penalty, easier to enforce consistently.
 
 **[2025-26] Backboard Contact Technical — Rule 10-4-4b**
 - **New:** Players may not illegally contact the backboard or ring in ways that create unfair advantage or interfere with a scoring attempt. Technical foul.
@@ -522,7 +543,7 @@ CORE_KNOWLEDGE = """
 | 4-22-3 | 2025-26 | Ball touching backboard = automatically on downward flight |
 | 4-6-1a/b | 2025-26 | Backboard slap causing vibration = basket interference |
 | 4-34-1 | 2025-26 | Players become bench personnel during time-outs |
-| 9-2-12, 9-3-4 | 2025-26 | Thrower delay OOB = violation (was technical foul) |
+| 9-2-12, 9-3-4 | 2025-26 | Thrower who purposely/deceitfully DELAYS returning inbounds and is then first to touch = violation (was a player technical, 10-4-2). A prompt return is legal |
 | 10-4-4b | 2025-26 | Backboard/ring contact creating unfair advantage = technical foul |
 | 5-9-5 | 2026-27 | NEW: last 59.9 sec — min 0.3 sec runs off on legal inbounds touch after throw-in or missed FT (tenths display only) |
 | 5-10-2 NOTE | 2026-27 | NEW: official's visible or silent count = definite knowledge to correct a clock error |
@@ -617,8 +638,8 @@ CORE_KNOWLEDGE = """
   - **Inside 3-pt line** (stoppage occurred inside 3-pt line or on 3-pt line) → end line, 3 feet outside lane line (nearest to stoppage).
   - **Outside 3-pt line** (stoppage occurred outside arc) → 28-foot sideline mark nearest to stoppage.
   - These apply when team retains/gains possession in frontcourt due to violation, common foul (pre-bonus), or stoppages other than OOB.
-- **Throw-in violations (Rule 7-6-7):** Leaves spot, 5-second count, passes through basket without touching player, steps on/over boundary before released, etc.
-- **Thrower delay OOB [2025-26 NEW Rule 9-2-12 & 9-3-4]:** Purposely stepping OOB as thrower then being first to touch ball in bounds = VIOLATION (was technical foul).
+- **Throw-in violations:** the list is Rule 9-2 (the Rule 9 line below; every article in Section 10).
+- **Thrower delay OOB [2025-26 NEW Rule 9-2-12 & 9-3-4]:** a thrower who purposely and/or deceitfully DELAYS RETURNING inbounds after legally being out of bounds and is then the first to touch the ball = VIOLATION (was a player technical foul). A thrower who returns promptly may play the ball once the throw-in has ended.
 - **Wrong team throw-in correction (Rule 7-6-6):** Can correct before first dead ball / change of possession.
 
 ### Rule 8 — Free Throw
@@ -629,7 +650,7 @@ CORE_KNOWLEDGE = """
 - **Technical foul free throws:** 2 FTs, no lane players, ball inbounded at division line opposite scorer's table after last FT.
 
 ### Rule 9 — Violations and Penalties
-- **Throw-in violations (Rule 9-2):** 5-second count, leave designated spot, enter court before released, thrower-in contacted (PENALTY: intentional foul on contact with thrower-in), ball passed through basket directly.
+- **Throw-in provisions (Rule 9-2 — every article in Section 10):** thrower leaves the designated spot before the release (9-2-1); pass not directly into the court, or out of bounds untouched (9-2-2); teammate touches the ball on the out-of-bounds side of the plane (9-2-3); five seconds (9-2-4); thrower carries the ball onto the court (9-2-5); **the thrown ball touches the thrower in the court BEFORE it touches or is touched by another player (9-2-6) — AFTER it has touched another player the thrower may play it**; ball enters the basket untouched (9-2-7); opponent breaks the boundary plane before the release (9-2-10: delay warning, then technical; touching the ball = technical; contacting the thrower = intentional foul); teammate out of bounds on a designated-spot throw-in (9-2-11); thrower purposely/deceitfully delays returning and is first to touch (9-2-12, 2025-26).
 - **Out of bounds (Rule 9-3):** Ball awarded to opponents. Player may step OOB without penalty unless first to touch ball on return or left court to avoid violation (Rule 9-3-3).
 - **Traveling (Rule 9-4):** Pivot foot lifted and replaced, two steps without dribble, jumping with ball and not releasing before touching floor.
 - **Illegal dribble (Rule 9-5):** Dribble with two hands, carry/palm, dribble a second time after dribble ends (double dribble).
@@ -1043,6 +1064,7 @@ After the coaches' conference the Referee pregames the scorer and timer, U1 preg
 36. **Technical foul on the player who doesn't give you the ball at the whistle (since 2024-25)** → WRONG for the first delay. 4-47-5: team warning for delay; any later delay of any of the five kinds = TEAM technical (10-2-1g).
 37. **Calling basket interference for touching only the net, or a bench technical for a pregame dunk (since 2024-25)** → WRONG. Net only, ball not affected = legal (4-6-1 EXCEPTION). Dunking a dead ball = TEAM technical and the coach keeps the box (10-2-7); equal pregame administrative/team/bench technicals offset — no free throws, jump ball.
 38. **Ruling the ball out of bounds because it touched the TOP (or a side, or the bottom) of the backboard** → WRONG. The front faces and edges of the backboard are treated as the floor inbounds (4-4-5) — play on. Out of bounds at the backboard = its BACK, its SUPPORTS, or a ball that PASSES OVER a rectangular backboard (7-1-2). On an exam list, the top of a rectangular backboard is the false option.
+39. **Calling a throw-in violation because the thrower was first to touch a pass that had already touched another player** → WRONG. 9-2-6 bars the thrower from touching the ball in the court only BEFORE it touches or is touched by another player. Off a defender's (or a teammate's) back, then recovered inbounds by the thrower = LEGAL; the throw-in ended at that first touch (4-42-5a). The thrower violation is purposely or deceitfully DELAYING the return and then being first to touch (9-2-12).
 
 ---
 
@@ -1199,6 +1221,34 @@ A fumble is the **accidental** loss of player control when the ball unintentiona
 **At the backboard — OUT:** its BACK, its SUPPORTS, and a ball that PASSES OVER a rectangular backboard. **IN:** the front face and every edge — top, sides, bottom. Touching the top edge is not the same as passing over.
 
 *Exam trap:* a list question on what makes the ball out of bounds that offers the top of a rectangular backboard (or a side, or the bottom) as one choice. That choice is FALSE. A player who is out of bounds: yes. Any object outside a boundary: yes. The top of the backboard: no — so the answer is the first two only, never "all of the above."
+
+### Throw-In Provisions — Rule 9-2 (What the Thrower May and May Not Do)
+
+> Source: 2023-24 Rules Book text from the project's rulebook file — CONFIRMED for Articles 1–11 (Articles 3, 6 and 11 and the NOTE cross-checked against independent quotations; 9-2-11 is also cited in MSHSL Officiating Memorandum 2). Later edits are flagged where they apply; anything marked "not held" is NOT IN MY KNOWLEDGE BASE.
+
+**Rule 9-2 — the list:**
+- **ART. 1** The thrower shall not leave the designated throw-in spot until the ball has been released on a throw-in pass.
+- **ART. 2** The ball shall be passed by the thrower directly into the court from out-of-bounds so it touches or is touched by another player (inbounds or out of bounds) on the court before going out of bounds untouched.
+- **ART. 3** The thrown ball shall not be touched by a teammate of the thrower while the ball is on the out-of-bounds side of the throw-in boundary-line plane, except as in Rule 7-5-7.
+- **ART. 4** Once the throw-in starts, the ball shall be released on a pass directly into the court before five seconds have elapsed.
+- **ART. 5** The thrower shall not carry the ball onto the court.
+- **ART. 6** **The thrown ball shall not touch the thrower in the court before it touches or is touched by another player.**
+- **ART. 7** The thrown ball shall not enter the basket before it touches or is touched by another player.
+- **ART. 8** The thrown ball shall not become lodged between the backboard and ring or come to rest on the flange before it touches or is touched by another player.
+- **ART. 9** The thrower shall not be replaced by a teammate after the ball is at the thrower's disposal, except as in Rule 7-5-7.
+- **ART. 10** The opponent(s) of the thrower shall not have any body part through the inbounds side of the throw-in boundary-line plane until the ball has been released on a throw-in pass. NOTE: The thrower may penetrate the plane provided the thrower does not touch the inbounds area or a player inbounds before the ball is released on the throw-in pass. The opponent in this situation may legally touch or grasp the ball.
+- **ART. 11** No teammate of the thrower shall be out of bounds after a designated-spot throw-in begins.
+- **ART. 12 (NEW 2025-26, with 9-3-4):** a violation when a thrower purposely and/or deceitfully delays returning inbounds after legally being out of bounds and then becomes the first player to touch the ball on re-entering the court. (This is the NFHS summary of the change; the article's own wording is not held. Through 2024-25 it was a player technical foul under 10-4-2: "Purposely and/or deceitfully delay returning after legally being out of bounds.")
+- **PENALTIES (Art. 10):** (1) the first violation of the plane by an opponent = team warning for delay (one delay warning per team per game), and it does not cost the throwing team the opportunity to move along the end line when applicable; (2) second or additional violations = technical foul to the offending team (10-2-1c); (3) reaching through the plane and touching or dislodging the ball = technical foul on the offender, no warning required (10-4-10); (4) contacting the thrower = intentional personal foul, no warning required. *(2024-25 added 9-2-10 NOTE 2 and edited PENALTIES 1, and 2026-27 edited PENALTIES 1 again — those edits are not held.)*
+- **PENALTY (Section 2):** the ball becomes dead when the violation or technical foul occurs; after a violation the opponents' throw-in is at the ORIGINAL throw-in spot (restored for 2026-27 — Section 0 — and moved to a designated spot if the original spot is not one).
+
+**LEGAL — do not call these:**
+- **The thrower is the next to touch the ball AFTER it has touched another player.** Article 6 bars the thrower from touching the ball in the court only BEFORE it touches or is touched by another player. Once it has touched any other player — teammate or opponent — the throw-in has ended (4-42-5a, Section 11) and the thrower, back inbounds, may play it. **Throwing the ball off the back of a player on the court and then recovering it inbounds is LEGAL.** The thrower must be back inbounds before touching it (9-3-2: a player shall not be out of bounds when touching the ball after it has been released on a throw-in pass).
+- **Moving after the release.** Article 1 holds the thrower to the designated spot only UNTIL the ball is released; after that the thrower may move along the end line or come onto the court.
+- **Setting a screen after returning to the court.** Nothing in Rule 9-2 addresses it; a screen is judged by Rule 4-40.
+- **Returning promptly and getting the ball back** — a pass straight back from a teammate, for example. Only a thrower who PURPOSELY OR DECEITFULLY DELAYS returning and is then first to touch the ball violates (Article 12). Rule 9-3-3 covers a player who steps out "under the player's own volition"; the thrower is out of bounds legally, to make the throw-in.
+
+*Exam trap:* a question asking what the player inbounding the ball may NOT do — pick the item that is on the Rule 9-2 list. Purposely and/or deceitfully delaying returning after legally being out of bounds: prohibited (Article 12). Throwing the ball off another player's back and recovering it inbounds, moving along the end line after the release, setting a screen after returning: all legal.
 
 ### Coverage status of the formerly missing definitions
 Section 11 below now holds the full 2025-26 Rules Book text (2026-27 changes annotated) for **every** definition previously identified as missing:
